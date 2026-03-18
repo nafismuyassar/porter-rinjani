@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Status Booking — Porter Rinjani</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+            colors: {
+              forest: "#1B3A2D",
+              tan: "#C4A882",
+              mist: "#F7F6F3",
+              smoke: "#EFEFEC",
+              ink: "#1A1A1A",
+              mid: "#6B6B6B",
+              light: "#A8A8A4",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #f7f6f3;
+        color: #1a1a1a;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ddd;
+      }
+      #modal-bg {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+      }
+      #modal-bg.open {
+        display: flex;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      #modal-box {
+        animation: slideUp 0.25s ease;
+      }
+      .tl-dot::after {
+        content: "";
+        position: absolute;
+        left: 11px;
+        top: 28px;
+        bottom: -16px;
+        width: 1px;
+        background: #efefec;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav
+      class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+    >
+      <div
+        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+      >
+        <a
+          href="index.html"
+          class="text-[17px] font-semibold text-ink tracking-tight"
+          >Porter <span class="font-light text-mid">Rinjani</span></a
+        >
+        <div class="flex items-center gap-2">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors px-3 py-2"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors px-3 py-2"
+            >Paket</a
+          >
+          <a
+            href="booking.html"
+            class="text-[12px] font-semibold text-forest hover:text-forest/70 transition-colors px-3 py-2"
+            >+ Booking Baru</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest"
+          >
+            R
+          </div>
+          <span class="text-[13px] font-medium text-ink">Rina Kusuma</span>
+          <div class="w-px h-4 bg-smoke ml-1"></div>
+          <a
+            href="login.html"
+            class="text-[12px] font-medium text-mid hover:text-red-400 transition-colors"
+            >Keluar</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="bg-white border-b border-smoke pt-10 pb-10 px-8">
+      <div class="max-w-[1280px] mx-auto flex items-end justify-between">
+        <div>
+          <p
+            class="text-[11px] font-semibold tracking-[0.24em] uppercase text-tan mb-3"
+          >
+            Dashboard
+          </p>
+          <h1
+            class="text-[clamp(30px,4vw,44px)] font-light text-ink"
+            style="letter-spacing: -0.8px"
+          >
+            Halo, <span class="italic">Rina</span> 👋
+          </h1>
+          <p class="text-[14px] font-light text-mid mt-2">
+            Pantau semua reservasi pendakian Anda secara real-time.
+          </p>
+        </div>
+        <a
+          href="booking.html"
+          class="bg-forest text-white text-[13px] font-semibold px-7 py-3 hover:bg-forest/85 transition-colors mb-1"
+          >+ Booking Baru</a
+        >
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div
+      class="max-w-[1280px] mx-auto px-8 py-10 grid grid-cols-[1fr_300px] gap-8 items-start"
+    >
+      <!-- BOOKING LIST -->
+      <div>
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-[14px] font-semibold text-ink">Riwayat Booking</h2>
+          <select
+            onchange="filterBK(this.value)"
+            class="border border-smoke bg-white text-[12px] font-light px-3 py-2 appearance-none pr-7"
+            style="
+              background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
+              background-repeat: no-repeat;
+              background-position: right 8px center;
+            "
+          >
+            <option value="all">Semua Status</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="pending">Pending</option>
+            <option value="done">Selesai</option>
+          </select>
+        </div>
+
+        <div class="space-y-4" id="bk-list">
+          <!-- BK-0042 Confirmed -->
+          <div
+            class="bcard bg-white border border-smoke overflow-hidden"
+            data-st="confirmed"
+          >
+            <div
+              class="flex items-center justify-between px-6 py-4 bg-white border-b border-smoke"
+            >
+              <div>
+                <div class="text-[14px] font-semibold text-ink">
+                  #BK-0042 · Paket Deluxe 3D2N
+                </div>
+                <div class="text-[11px] font-light text-light mt-0.5">
+                  Dipesan 10 Mar 2025
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-forest/8 text-forest border border-forest/15 px-3 py-1.5"
+                >✓ Confirmed</span
+              >
+            </div>
+            <div class="p-6">
+              <div class="grid grid-cols-3 border border-smoke mb-6">
+                <div class="p-4 border-r border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Tanggal Naik
+                  </div>
+                  <div class="text-[14px] font-semibold text-ink">
+                    15 Apr 2025
+                  </div>
+                </div>
+                <div class="p-4 border-r border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Peserta
+                  </div>
+                  <div class="text-[14px] font-semibold text-ink">3 orang</div>
+                </div>
+                <div class="p-4">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Rute
+                  </div>
+                  <div class="text-[14px] font-semibold text-ink">
+                    Smb → Snr
+                  </div>
+                </div>
+                <div class="p-4 border-r border-smoke border-t border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Total
+                  </div>
+                  <div class="text-[14px] font-semibold text-ink">
+                    Rp 4.200.000
+                  </div>
+                </div>
+                <div class="p-4 border-r border-smoke border-t border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Sudah Dibayar
+                  </div>
+                  <div class="text-[14px] font-semibold text-forest">
+                    Rp 2.100.000
+                  </div>
+                </div>
+                <div class="p-4 border-t border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Sisa
+                  </div>
+                  <div class="text-[14px] font-semibold text-amber-500">
+                    Rp 2.100.000
+                  </div>
+                </div>
+              </div>
+              <!-- Timeline -->
+              <div class="mb-6">
+                <p
+                  class="text-[10px] font-semibold tracking-[0.18em] uppercase text-light mb-4"
+                >
+                  Progress
+                </p>
+                <div class="space-y-0">
+                  <div class="tl-dot relative flex gap-4 pb-5">
+                    <div
+                      class="w-[26px] h-[26px] rounded-full bg-forest/10 border-2 border-forest/25 flex items-center justify-center flex-shrink-0 mt-0.5 z-10"
+                    >
+                      <span class="text-forest text-[11px] font-bold">✓</span>
+                    </div>
+                    <div class="pt-0.5">
+                      <div class="text-[13px] font-semibold text-ink">
+                        Booking diterima
+                      </div>
+                      <div class="text-[11px] font-light text-light mt-0.5">
+                        10 Mar 2025 · 14.32 WIB
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tl-dot relative flex gap-4 pb-5">
+                    <div
+                      class="w-[26px] h-[26px] rounded-full bg-forest/10 border-2 border-forest/25 flex items-center justify-center flex-shrink-0 mt-0.5 z-10"
+                    >
+                      <span class="text-forest text-[11px] font-bold">✓</span>
+                    </div>
+                    <div class="pt-0.5">
+                      <div class="text-[13px] font-semibold text-ink">
+                        Pembayaran DP dikonfirmasi
+                      </div>
+                      <div class="text-[11px] font-light text-light mt-0.5">
+                        10 Mar 2025 · 15.10 WIB
+                      </div>
+                    </div>
+                  </div>
+                  <div class="relative flex gap-4 pb-5">
+                    <div
+                      class="tl-dot w-[26px] h-[26px] rounded-full bg-forest text-white border-2 border-forest flex items-center justify-center flex-shrink-0 mt-0.5 z-10"
+                    >
+                      <span class="text-[10px] font-bold">→</span>
+                    </div>
+                    <div class="pt-0.5">
+                      <div class="text-[13px] font-semibold text-forest">
+                        Menunggu pelunasan
+                      </div>
+                      <div
+                        class="text-[11px] font-medium text-amber-500 mt-0.5"
+                      >
+                        Batas: 12 April 2025
+                      </div>
+                    </div>
+                  </div>
+                  <div class="relative flex gap-4 pb-5">
+                    <div
+                      class="tl-dot w-[26px] h-[26px] rounded-full bg-smoke border-2 border-smoke flex items-center justify-center flex-shrink-0 mt-0.5 z-10"
+                    >
+                      <span class="text-light text-[10px] font-bold">4</span>
+                    </div>
+                    <div class="pt-0.5">
+                      <div class="text-[13px] font-light text-light">
+                        Proses pendakian
+                      </div>
+                      <div class="text-[11px] font-light text-light mt-0.5">
+                        15 Apr 2025
+                      </div>
+                    </div>
+                  </div>
+                  <div class="relative flex gap-4">
+                    <div
+                      class="w-[26px] h-[26px] rounded-full bg-smoke border-2 border-smoke flex items-center justify-center flex-shrink-0 mt-0.5"
+                    >
+                      <span class="text-light text-[10px] font-bold">5</span>
+                    </div>
+                    <div class="pt-0.5">
+                      <div class="text-[13px] font-light text-light">
+                        Selesai
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Actions -->
+              <div class="flex gap-3 flex-wrap">
+                <button
+                  onclick="openModal('bayar')"
+                  class="bg-amber-500 text-white text-[12px] font-semibold px-6 py-2.5 hover:bg-amber-600 transition-colors"
+                >
+                  Bayar Sisa
+                </button>
+                <button
+                  class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                >
+                  Lihat Detail
+                </button>
+                <a
+                  href="https://wa.me/628123456789"
+                  target="_blank"
+                  class="flex items-center gap-1.5 bg-[#25D366] text-white text-[12px] font-semibold px-5 py-2.5 hover:bg-[#1fbd5c] transition-colors"
+                  >💬 Tim</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- BK-0038 Pending -->
+          <div
+            class="bcard bg-white border border-smoke overflow-hidden"
+            data-st="pending"
+          >
+            <div
+              class="flex items-center justify-between px-6 py-4 bg-white border-b border-smoke"
+            >
+              <div>
+                <div class="text-[14px] font-semibold text-ink">
+                  #BK-0038 · Paket Standard 3D2N
+                </div>
+                <div class="text-[11px] font-light text-light mt-0.5">
+                  Dipesan 5 Jan 2025
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-amber-50 text-amber-600 border border-amber-200 px-3 py-1.5"
+                >⏳ Pending</span
+              >
+            </div>
+            <div class="p-6">
+              <div class="grid grid-cols-3 border border-smoke mb-5">
+                <div class="p-4 border-r border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Tanggal Naik
+                  </div>
+                  <div class="text-[14px] font-semibold">20 Jan 2025</div>
+                </div>
+                <div class="p-4 border-r border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Peserta
+                  </div>
+                  <div class="text-[14px] font-semibold">2 orang</div>
+                </div>
+                <div class="p-4">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Total
+                  </div>
+                  <div class="text-[14px] font-semibold">Rp 1.800.000</div>
+                </div>
+              </div>
+              <div class="bg-blue-50 border border-blue-100 p-4 mb-5">
+                <p class="text-[13px] font-light text-blue-600 leading-[1.75]">
+                  ℹ Booking sedang ditinjau admin. Konfirmasi akan dikirim via
+                  WhatsApp & email dalam <strong>1×24 jam</strong>.
+                </p>
+              </div>
+              <div class="flex gap-3">
+                <button
+                  class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                >
+                  Lihat Detail
+                </button>
+                <button
+                  onclick="
+                    if (confirm('Batalkan booking ini?'))
+                      this.closest('.bcard').remove();
+                  "
+                  class="bg-red-50 border border-red-100 text-red-400 text-[12px] font-medium px-6 py-2.5 hover:bg-red-100 transition-all"
+                >
+                  Batalkan
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- BK-0031 Done -->
+          <div
+            class="bcard bg-white border border-smoke overflow-hidden"
+            data-st="done"
+          >
+            <div
+              class="flex items-center justify-between px-6 py-4 bg-white border-b border-smoke"
+            >
+              <div>
+                <div class="text-[14px] font-semibold text-ink">
+                  #BK-0031 · Paket Sharing 3D2N
+                </div>
+                <div class="text-[11px] font-light text-light mt-0.5">
+                  Dipesan 5 Nov 2024
+                </div>
+              </div>
+              <span
+                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-smoke text-mid border border-smoke px-3 py-1.5"
+                >✓ Selesai</span
+              >
+            </div>
+            <div class="p-6">
+              <div class="grid grid-cols-3 border border-smoke mb-5">
+                <div class="p-4 border-r border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Tanggal Naik
+                  </div>
+                  <div class="text-[14px] font-semibold">10 Nov 2024</div>
+                </div>
+                <div class="p-4 border-r border-smoke">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Peserta
+                  </div>
+                  <div class="text-[14px] font-semibold">1 orang</div>
+                </div>
+                <div class="p-4">
+                  <div
+                    class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
+                  >
+                    Total Dibayar
+                  </div>
+                  <div class="text-[14px] font-semibold text-forest">
+                    Rp 600.000
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-3">
+                <button
+                  class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                >
+                  Lihat Detail
+                </button>
+                <button
+                  onclick="openModal('ulasan')"
+                  class="bg-forest/8 border border-forest/15 text-forest text-[12px] font-medium px-6 py-2.5 hover:bg-forest/12 transition-all"
+                >
+                  ⭐ Beri Ulasan
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="space-y-5 sticky top-[88px]">
+        <!-- Stats -->
+        <div class="bg-white border border-smoke p-6">
+          <h3
+            class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-5"
+          >
+            Ringkasan Aktivitas
+          </h3>
+          <div class="space-y-3">
+            <div class="flex justify-between py-3 border-b border-smoke">
+              <span class="text-[13px] font-light text-mid">Total Booking</span
+              ><span class="text-[20px] font-light text-ink">3</span>
+            </div>
+            <div class="flex justify-between py-3 border-b border-smoke">
+              <span class="text-[13px] font-light text-mid">Confirmed</span
+              ><span class="text-[20px] font-light text-forest">1</span>
+            </div>
+            <div class="flex justify-between py-3 border-b border-smoke">
+              <span class="text-[13px] font-light text-mid">Pending</span
+              ><span class="text-[20px] font-light text-amber-500">1</span>
+            </div>
+            <div class="flex justify-between py-3">
+              <span class="text-[13px] font-light text-mid">Selesai</span
+              ><span class="text-[20px] font-light text-mid">1</span>
+            </div>
+          </div>
+        </div>
+        <!-- Sisa bayar -->
+        <div class="bg-forest/6 border border-forest/15 p-6">
+          <h3
+            class="text-[10px] font-semibold tracking-[0.2em] uppercase text-forest/60 mb-3"
+          >
+            Sisa Pembayaran
+          </h3>
+          <p class="text-[12px] font-light text-mid mb-3 leading-[1.75]">
+            Booking <strong>#BK-0042</strong> perlu dilunasi sebelum 12 April
+            2025
+          </p>
+          <div
+            class="text-[28px] font-light text-forest mb-4"
+            style="letter-spacing: -0.5px"
+          >
+            Rp 2.100.000
+          </div>
+          <button
+            onclick="openModal('bayar')"
+            class="w-full bg-forest text-white text-[12px] font-semibold py-3 hover:bg-forest/85 transition-colors"
+          >
+            Bayar Sekarang
+          </button>
+        </div>
+        <!-- New booking -->
+        <div class="bg-white border border-smoke p-6">
+          <h3
+            class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-3"
+          >
+            Rencanakan Lagi
+          </h3>
+          <p class="text-[13px] font-light text-mid mb-4 leading-[1.7]">
+            Rencanakan pendakian Rinjani berikutnya bersama kami!
+          </p>
+          <a
+            href="booking.html"
+            class="block w-full text-center bg-ink text-white text-[12px] font-semibold py-3 hover:bg-ink/85 transition-colors"
+            >+ Booking Baru</a
+          >
+        </div>
+        <!-- Profil -->
+        <div class="bg-white border border-smoke p-6">
+          <h3
+            class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-4"
+          >
+            Profil Saya
+          </h3>
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-11 h-11 rounded-full bg-forest/10 border-2 border-forest/15 flex items-center justify-center text-[14px] font-bold text-forest"
+            >
+              R
+            </div>
+            <div>
+              <div class="text-[14px] font-semibold text-ink">Rina Kusuma</div>
+              <div class="text-[12px] font-light text-mid">rina@email.com</div>
+            </div>
+          </div>
+          <div class="space-y-2 text-[12px] font-light text-mid">
+            <div>📱 08123456789</div>
+            <div>📍 Jakarta, Indonesia</div>
+          </div>
+          <button
+            class="mt-4 w-full border border-smoke text-mid text-[12px] font-medium py-2 hover:bg-mist transition-all"
+          >
+            Edit Profil
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal-bg" onclick="if (event.target === this) closeMdl();">
+      <div id="modal-box" class="bg-white w-full max-w-[420px] mx-4">
+        <!-- Bayar -->
+        <div id="m-bayar" class="p-8">
+          <div class="flex justify-between items-center mb-6">
+            <h3
+              class="text-[20px] font-semibold text-ink"
+              style="letter-spacing: -0.3px"
+            >
+              Bayar Sisa
+            </h3>
+            <button
+              onclick="closeMdl()"
+              class="text-light hover:text-mid text-2xl font-light transition-colors"
+            >
+              ×
+            </button>
+          </div>
+          <div class="bg-mist p-5 mb-5">
+            <div class="text-[12px] font-light text-mid mb-1">
+              #BK-0042 · Paket Deluxe 3D2N
+            </div>
+            <div
+              class="text-[28px] font-light text-forest"
+              style="letter-spacing: -0.5px"
+            >
+              Rp 2.100.000
+            </div>
+            <div class="text-[11px] font-light text-light mt-1">
+              Batas pelunasan: 12 April 2025
+            </div>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              >Rekening Tujuan</label
+            >
+            <select
+              class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
+              style="
+                background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
+                background-repeat: no-repeat;
+                background-position: right 14px center;
+              "
+            >
+              <option>BCA — 1234567890 (Porter Rinjani)</option>
+              <option>BRI — 0987654321 (Porter Rinjani)</option>
+            </select>
+          </div>
+          <div class="mb-5">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              >Upload Bukti Transfer</label
+            >
+            <div
+              class="border-2 border-dashed border-smoke p-6 text-center cursor-pointer hover:border-forest hover:bg-forest/3 transition-all"
+            >
+              <div class="text-2xl mb-2 opacity-30">📎</div>
+              <p class="text-[12px] font-light text-mid">
+                Klik untuk upload bukti transfer
+              </p>
+              <p class="text-[10px] text-light mt-1">
+                JPG, PNG, PDF · Maks. 5 MB
+              </p>
+            </div>
+          </div>
+          <button
+            class="w-full bg-forest text-white text-[13px] font-semibold py-3.5 hover:bg-forest/85 transition-colors"
+          >
+            Kirim Bukti Pembayaran
+          </button>
+        </div>
+        <!-- Ulasan -->
+        <div id="m-ulasan" class="p-8 hidden">
+          <div class="flex justify-between items-center mb-5">
+            <h3
+              class="text-[20px] font-semibold text-ink"
+              style="letter-spacing: -0.3px"
+            >
+              Beri Ulasan
+            </h3>
+            <button
+              onclick="closeMdl()"
+              class="text-light hover:text-mid text-2xl font-light transition-colors"
+            >
+              ×
+            </button>
+          </div>
+          <div class="text-[12px] font-light text-mid mb-6">
+            #BK-0031 · Paket Sharing 3D2N · Nov 2024
+          </div>
+          <div class="mb-5">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-3"
+              >Rating *</label
+            >
+            <div class="flex gap-2" id="stars">
+              <button
+                class="star text-[28px] text-smoke hover:text-tan transition-colors"
+                onclick="setStar(1)"
+              >
+                ★
+              </button>
+              <button
+                class="star text-[28px] text-smoke hover:text-tan transition-colors"
+                onclick="setStar(2)"
+              >
+                ★
+              </button>
+              <button
+                class="star text-[28px] text-smoke hover:text-tan transition-colors"
+                onclick="setStar(3)"
+              >
+                ★
+              </button>
+              <button
+                class="star text-[28px] text-smoke hover:text-tan transition-colors"
+                onclick="setStar(4)"
+              >
+                ★
+              </button>
+              <button
+                class="star text-[28px] text-smoke hover:text-tan transition-colors"
+                onclick="setStar(5)"
+              >
+                ★
+              </button>
+            </div>
+            <p id="star-lbl" class="text-[12px] font-light text-light mt-1.5">
+              — Pilih rating
+            </p>
+          </div>
+          <div class="mb-5">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              >Ceritakan Pengalaman Anda *</label
+            >
+            <textarea
+              rows="4"
+              class="w-full px-4 py-3 border border-smoke text-[14px] font-light resize-none"
+              placeholder="Ceritakan pengalaman pendakian Anda..."
+            ></textarea>
+          </div>
+          <button
+            class="w-full bg-forest text-white text-[13px] font-semibold py-3.5 hover:bg-forest/85 transition-colors"
+          >
+            Kirim Ulasan
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <a
+      href="https://wa.me/628123456789"
+      target="_blank"
+      class="fixed bottom-7 right-7 z-50 w-[52px] h-[52px] rounded-full bg-[#25D366] flex items-center justify-center text-[22px] shadow-lg hover:scale-110 transition-all"
+      >💬</a
+    >
+
+    <script>
+      function filterBK(v) {
+        document.querySelectorAll(".bcard").forEach((c) => {
+          c.style.display =
+            v === "all" || c.dataset.st === v ? "block" : "none";
+        });
+      }
+      function openModal(t) {
+        document.getElementById("m-bayar").classList.add("hidden");
+        document.getElementById("m-ulasan").classList.add("hidden");
+        document.getElementById("m-" + t).classList.remove("hidden");
+        document.getElementById("modal-bg").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMdl() {
+        document.getElementById("modal-bg").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMdl();
+      });
+      const starLbls = [
+        "",
+        "Sangat Buruk",
+        "Buruk",
+        "Cukup",
+        "Baik",
+        "Sangat Baik",
+      ];
+      function setStar(n) {
+        document.querySelectorAll(".star").forEach((s, i) => {
+          s.style.color = i < n ? "#C4A882" : "#EFEFEC";
+        });
+        document.getElementById("star-lbl").textContent = starLbls[n] || "";
+      }
+    </script>
+  </body>
+</html>

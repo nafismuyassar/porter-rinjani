@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Kontak — Porter Rinjani</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+            colors: {
+              forest: "#1B3A2D",
+              tan: "#C4A882",
+              mist: "#F7F6F3",
+              smoke: "#EFEFEC",
+              ink: "#1A1A1A",
+              mid: "#6B6B6B",
+              light: "#A8A8A4",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #fff;
+        color: #1a1a1a;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ddd;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #1b3a2d !important;
+        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
+      }
+      .card-hover {
+        transition:
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.07);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav
+      class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+    >
+      <div
+        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+      >
+        <a href="index.html" class="text-[17px] font-semibold text-ink"
+          >Porter <span class="font-light text-mid">Rinjani</span></a
+        >
+        <div class="flex items-center gap-9">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-semibold text-ink border-b-2 border-ink pb-0.5"
+            >Kontak</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
+          >
+            R
+          </div>
+          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+            >Rina Kusuma</a
+          >
+          <a
+            href="status.html"
+            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="relative bg-forest overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-[#0f2219] to-[#1B3A2D]/80"
+      ></div>
+      <div class="relative z-10 max-w-[1280px] mx-auto px-8 pt-14 pb-16">
+        <p
+          class="text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
+        >
+          Kontak & Bantuan
+        </p>
+        <h1
+          class="text-[clamp(38px,5.5vw,64px)] font-light text-white leading-[1.08] mb-5"
+          style="letter-spacing: -1.2px"
+        >
+          Ada yang bisa<br /><span class="italic text-white/45"
+            >kami bantu?</span
+          >
+        </h1>
+        <p
+          class="text-[15px] font-light text-white/40 max-w-[400px] leading-[1.85]"
+        >
+          Tim kami siap membantu Anda kapanpun. Hubungi via WhatsApp untuk
+          respons tercepat.
+        </p>
+      </div>
+    </div>
+
+    <!-- QUICK CONTACT BANNER (customer priority) -->
+    <div class="bg-[#25D366]">
+      <div
+        class="max-w-[1280px] mx-auto px-8 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <span class="text-white text-xl">💬</span>
+          <div>
+            <p class="text-white font-semibold text-[13px]">
+              WhatsApp Priority — Khusus Member
+            </p>
+            <p class="text-white/80 text-[12px] font-light">
+              Sebagai member, pesan Anda diprioritaskan. Respons dalam 15 menit
+              (jam kerja).
+            </p>
+          </div>
+        </div>
+        <a
+          href="https://wa.me/628123456789?text=Halo%2C%20saya%20Rina%20(member)%20ingin%20bertanya..."
+          target="_blank"
+          class="bg-white text-[#25D366] text-[12px] font-bold px-6 py-2.5 hover:bg-green-50 transition-colors flex-shrink-0"
+          >Chat Sekarang →</a
+        >
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div
+      class="max-w-[1280px] mx-auto px-8 py-14 grid grid-cols-[1fr_420px] gap-10"
+    >
+      <!-- FORM PESAN -->
+      <div>
+        <p
+          class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-2"
+        >
+          Kirim Pesan
+        </p>
+        <h2
+          class="text-[28px] font-light text-ink mb-7"
+          style="letter-spacing: -0.4px"
+        >
+          Hubungi <span class="italic">tim kami</span>
+        </h2>
+
+        <!-- Member info pre-filled -->
+        <div
+          class="bg-forest/5 border border-forest/15 p-4 mb-6 flex items-center gap-3"
+        >
+          <div
+            class="w-8 h-8 rounded-full bg-forest/15 flex items-center justify-center text-[11px] font-bold text-forest flex-shrink-0"
+          >
+            R
+          </div>
+          <div>
+            <p class="text-[12px] font-semibold text-forest">
+              Data Anda sudah terisi otomatis
+            </p>
+            <p class="text-[11px] font-light text-forest/60">
+              Login sebagai Rina Kusuma · rina@email.com · 08123456789
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 mb-5">
+          <div>
+            <label
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+              >Nama *</label
+            >
+            <input
+              type="text"
+              value="Rina Kusuma"
+              class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-mist"
+              readonly
+            />
+          </div>
+          <div>
+            <label
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+              >Email *</label
+            >
+            <input
+              type="email"
+              value="rina@email.com"
+              class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-mist"
+              readonly
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-5 mb-5">
+          <div>
+            <label
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+              >No. WhatsApp *</label
+            >
+            <input
+              type="tel"
+              value="08123456789"
+              class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-mist"
+              readonly
+            />
+          </div>
+          <div>
+            <label
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+              >Topik *</label
+            >
+            <select
+              id="topik"
+              class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
+              style="
+                background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
+                background-repeat: no-repeat;
+                background-position: right 14px center;
+              "
+            >
+              <option value="">-- Pilih topik --</option>
+              <option value="booking">Pertanyaan Booking</option>
+              <option value="pembayaran">Pembayaran / DP</option>
+              <option value="rute">Konsultasi Rute</option>
+              <option value="reschedule">Reschedule Tanggal</option>
+              <option value="pembatalan">Pembatalan</option>
+              <option value="invoice">Invoice / Dokumen</option>
+              <option value="lainnya">Lainnya</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Booking reference (auto-populated for member) -->
+        <div class="mb-5">
+          <label
+            class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+            >Booking Terkait
+            <span class="font-normal text-light/60">(opsional)</span></label
+          >
+          <select
+            class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
+            style="
+              background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
+              background-repeat: no-repeat;
+              background-position: right 14px center;
+            "
+          >
+            <option value="">Tidak ada / tidak terkait booking</option>
+            <option value="BK-0043">
+              #BK-0043 — Paket Deluxe 3D2N · 15 Apr 2025 (Aktif)
+            </option>
+            <option value="BK-0031">
+              #BK-0031 — Paket Standard 4D3N · 12 Jan 2025 (Selesai)
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-6">
+          <label
+            class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+            >Pesan *</label
+          >
+          <textarea
+            rows="5"
+            id="pesan"
+            placeholder="Tuliskan pertanyaan atau kendala Anda di sini..."
+            class="w-full px-4 py-3 border border-smoke text-[14px] font-light resize-none"
+          ></textarea>
+        </div>
+
+        <div id="form-err" class="hidden text-[13px] text-red-400 mb-4">
+          ⚠ Pilih topik dan isi pesan terlebih dahulu.
+        </div>
+        <div
+          id="form-ok"
+          class="hidden bg-green-50 border border-green-200 p-4 mb-4 text-[13px] font-medium text-green-700"
+        >
+          ✅ Pesan terkirim! Tim kami akan membalas dalam 1×24 jam via email &
+          WhatsApp.
+        </div>
+
+        <button
+          onclick="sendMsg()"
+          class="bg-forest text-white text-[13px] font-semibold px-10 py-3.5 hover:bg-forest/85 transition-colors"
+        >
+          Kirim Pesan →
+        </button>
+      </div>
+
+      <!-- SIDEBAR INFO -->
+      <div class="space-y-5">
+        <!-- Quick contact cards -->
+        <div>
+          <p
+            class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-4"
+          >
+            Hubungi Langsung
+          </p>
+          <div class="space-y-3">
+            <a
+              href="https://wa.me/628123456789"
+              target="_blank"
+              class="flex items-center gap-4 bg-[#25D366]/8 border border-[#25D366]/20 p-4 card-hover group"
+            >
+              <div
+                class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center text-white text-[18px] flex-shrink-0"
+              >
+                💬
+              </div>
+              <div class="flex-1">
+                <div
+                  class="text-[13px] font-semibold text-ink group-hover:text-forest transition-colors"
+                >
+                  WhatsApp
+                </div>
+                <div class="text-[12px] font-light text-mid">
+                  +62 812-3456-789
+                </div>
+                <div class="text-[10px] font-medium text-green-600 mt-0.5">
+                  ● Online · Respons ~15 menit
+                </div>
+              </div>
+              <span class="text-light text-[12px]">→</span>
+            </a>
+            <a
+              href="mailto:hello@porterrinjani.com"
+              class="flex items-center gap-4 bg-mist border border-smoke p-4 card-hover group"
+            >
+              <div
+                class="w-10 h-10 bg-forest/8 flex items-center justify-center text-[18px] flex-shrink-0"
+              >
+                ✉️
+              </div>
+              <div class="flex-1">
+                <div
+                  class="text-[13px] font-semibold text-ink group-hover:text-forest transition-colors"
+                >
+                  Email
+                </div>
+                <div class="text-[12px] font-light text-mid">
+                  hello@porterrinjani.com
+                </div>
+                <div class="text-[10px] font-light text-light mt-0.5">
+                  Respons 1×24 jam
+                </div>
+              </div>
+              <span class="text-light text-[12px]">→</span>
+            </a>
+            <div
+              class="flex items-center gap-4 bg-mist border border-smoke p-4"
+            >
+              <div
+                class="w-10 h-10 bg-forest/8 flex items-center justify-center text-[18px] flex-shrink-0"
+              >
+                📍
+              </div>
+              <div>
+                <div class="text-[13px] font-semibold text-ink">
+                  Lokasi Kantor
+                </div>
+                <div class="text-[12px] font-light text-mid">
+                  Sembalun Lawang, Lombok Timur
+                </div>
+                <div class="text-[10px] font-light text-light mt-0.5">
+                  NTB, Indonesia
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jam operasional -->
+        <div class="bg-white border border-smoke p-6">
+          <p
+            class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-4"
+          >
+            Jam Operasional
+          </p>
+          <div class="space-y-2.5 text-[13px]">
+            <div class="flex justify-between">
+              <span class="font-light text-mid">Senin – Jumat</span
+              ><span class="font-medium text-ink">08.00 – 20.00 WITA</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-light text-mid">Sabtu</span
+              ><span class="font-medium text-ink">08.00 – 17.00 WITA</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-light text-mid">Minggu</span
+              ><span class="font-medium text-amber-500"
+                >Terbatas / WA only</span
+              >
+            </div>
+          </div>
+          <div class="mt-4 pt-4 border-t border-smoke">
+            <p class="text-[11px] font-light text-light">
+              Untuk kedaruratan di lapangan (kondisi darurat saat mendaki),
+              hubungi nomor WA kami 24/7.
+            </p>
+          </div>
+        </div>
+
+        <!-- Booking status shortcut -->
+        <div class="bg-forest p-6">
+          <p
+            class="text-[11px] font-semibold tracking-[.18em] uppercase text-white/30 mb-3"
+          >
+            Booking Anda
+          </p>
+          <h4
+            class="text-[18px] font-light text-white mb-2"
+            style="letter-spacing: -0.3px"
+          >
+            Cek status <span class="italic text-white/50">real-time</span>
+          </h4>
+          <p class="text-[12px] font-light text-white/40 leading-[1.8] mb-5">
+            Pantau verifikasi DP, konfirmasi admin, dan unduh invoice PDF
+            kapanpun.
+          </p>
+          <a
+            href="status.html"
+            class="block text-center bg-white text-ink text-[12px] font-semibold py-3 hover:bg-white/90 transition-colors"
+            >Lihat Status Booking →</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-smoke py-10 px-8">
+      <div
+        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-6"
+      >
+        <div class="text-[17px] font-semibold text-ink">
+          Porter <span class="font-light text-mid">Rinjani</span>
+        </div>
+        <div class="flex gap-8">
+          <a
+            href="index.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Galeri</a
+          >
+        </div>
+        <p class="text-[12px] font-light text-light">© 2025 Porter Rinjani</p>
+      </div>
+    </footer>
+    <a
+      href="https://wa.me/628123456789"
+      target="_blank"
+      class="fixed bottom-7 right-7 z-50 w-[52px] h-[52px] rounded-full bg-[#25D366] flex items-center justify-center text-[22px] shadow-lg shadow-green-500/25 hover:scale-110 transition-all"
+      >💬</a
+    >
+
+    <script>
+      function sendMsg() {
+        const t = document.getElementById("topik").value;
+        const p = document.getElementById("pesan").value.trim();
+        if (!t || !p) {
+          document.getElementById("form-err").classList.remove("hidden");
+          return;
+        }
+        document.getElementById("form-err").classList.add("hidden");
+        document.getElementById("form-ok").classList.remove("hidden");
+        document.getElementById("pesan").value = "";
+      }
+    </script>
+  </body>
+</html>

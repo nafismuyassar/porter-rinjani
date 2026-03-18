@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Masuk — Porter Rinjani</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+            colors: {
+              forest: "#1B3A2D",
+              tan: "#C4A882",
+              mist: "#F7F6F3",
+              smoke: "#EFEFEC",
+              ink: "#1A1A1A",
+              mid: "#6B6B6B",
+              light: "#A8A8A4",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #fff;
+        color: #1a1a1a;
+        min-height: 100vh;
+      }
+      input:focus {
+        outline: none;
+        border-color: #1b3a2d !important;
+        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20%,
+        60% {
+          transform: translateX(-5px);
+        }
+        40%,
+        80% {
+          transform: translateX(5px);
+        }
+      }
+      .shake {
+        animation: shake 0.35s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid grid-cols-2 min-h-screen">
+      <!-- LEFT — Visual -->
+      <div
+        class="relative bg-forest flex flex-col justify-between p-14 overflow-hidden"
+      >
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-[#0f2219] to-[#1B3A2D]/80"
+        ></div>
+        <!-- Logo -->
+        <div class="relative z-10">
+          <a href="index.html" class="text-[18px] font-semibold text-white"
+            >Porter <span class="font-light text-white/50">Rinjani</span></a
+          >
+        </div>
+        <!-- Content -->
+        <div class="relative z-10 my-auto py-10">
+          <p
+            class="text-[11px] font-semibold tracking-[0.22em] uppercase text-white/30 mb-5"
+          >
+            Selamat datang kembali
+          </p>
+          <h2
+            class="text-[clamp(32px,4vw,48px)] font-light text-white leading-[1.1] mb-5"
+            style="letter-spacing: -0.8px"
+          >
+            Masuk untuk<br />
+            <span class="italic text-white/45">kelola booking Anda</span>
+          </h2>
+          <p
+            class="text-[14px] font-light text-white/40 leading-[1.85] max-w-[320px] mb-10"
+          >
+            Pantau status pemesanan, konfirmasi pembayaran, dan rencanakan
+            pendakian berikutnya.
+          </p>
+          <div class="space-y-4">
+            <div
+              class="flex items-center gap-4 text-[13px] font-light text-white/40"
+            >
+              <div
+                class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0"
+              >
+                <span class="text-white/50 text-[10px]">✓</span>
+              </div>
+              Lihat & kelola status booking
+            </div>
+            <div
+              class="flex items-center gap-4 text-[13px] font-light text-white/40"
+            >
+              <div
+                class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0"
+              >
+                <span class="text-white/50 text-[10px]">✓</span>
+              </div>
+              Notifikasi konfirmasi real-time
+            </div>
+            <div
+              class="flex items-center gap-4 text-[13px] font-light text-white/40"
+            >
+              <div
+                class="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0"
+              >
+                <span class="text-white/50 text-[10px]">✓</span>
+              </div>
+              Riwayat pendakian lengkap
+            </div>
+          </div>
+        </div>
+        <!-- Testimonial -->
+        <div class="relative z-10 border-t border-white/8 pt-6">
+          <p
+            class="text-[14px] font-light italic text-white/40 leading-[1.7] mb-4"
+          >
+            "Booking di Porter Rinjani sangat mudah dan tim-nya selalu
+            responsif. Recommended!"
+          </p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center text-[11px] font-semibold text-white"
+            >
+              R
+            </div>
+            <div>
+              <div class="text-[12px] font-medium text-white/50">
+                Rina Kusuma
+              </div>
+              <div class="text-[11px] font-light text-white/25">
+                Paket Deluxe · Maret 2025
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — Form -->
+      <div class="flex items-center justify-center bg-white px-14 py-12">
+        <div class="w-full max-w-[380px]">
+          <a
+            href="index.html"
+            class="text-[17px] font-semibold text-ink block mb-10"
+            >Porter <span class="font-light text-mid">Rinjani</span></a
+          >
+          <h2
+            class="text-[26px] font-semibold text-ink mb-1.5"
+            style="letter-spacing: -0.4px"
+          >
+            Masuk
+          </h2>
+          <p class="text-[13px] font-light text-mid mb-8">
+            Belum punya akun?
+            <a
+              href="daftar.html"
+              class="text-forest font-semibold hover:underline underline-offset-2"
+              >Daftar gratis →</a
+            >
+          </p>
+
+          <!-- Error -->
+          <div
+            id="err"
+            class="hidden bg-red-50 border border-red-100 text-red-500 text-[13px] font-light px-4 py-3 mb-5"
+          >
+            Email atau password tidak sesuai.
+          </div>
+
+          <!-- Google -->
+          <button
+            class="w-full flex items-center justify-center gap-3 border border-smoke py-3.5 text-[13px] font-medium text-mid hover:bg-mist hover:border-mid transition-all mb-1"
+          >
+            <span>🔵</span> Masuk dengan Google
+          </button>
+          <div class="flex items-center gap-4 my-5 text-[12px] text-light">
+            <div class="flex-1 h-px bg-smoke"></div>
+            atau
+            <div class="flex-1 h-px bg-smoke"></div>
+          </div>
+
+          <form id="form" onsubmit="doLogin(event)">
+            <div class="mb-4">
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >Email</label
+              >
+              <input
+                id="email"
+                type="email"
+                value="rina@email.com"
+                placeholder="email@domain.com"
+                class="w-full px-4 py-3 border border-smoke text-[14px] font-light placeholder-light transition-all"
+              />
+            </div>
+            <div class="mb-2">
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >Password</label
+              >
+              <div class="relative">
+                <input
+                  id="pw"
+                  type="password"
+                  value="password123"
+                  placeholder="••••••••"
+                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light placeholder-light transition-all pr-12"
+                />
+                <button
+                  type="button"
+                  onclick="togglePw()"
+                  id="eye"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-light hover:text-mid transition-colors text-[15px]"
+                >
+                  👁
+                </button>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-7 mt-3">
+              <label
+                class="flex items-center gap-2 text-[12px] font-light text-mid cursor-pointer"
+              >
+                <input type="checkbox" class="accent-forest w-3.5 h-3.5" />
+                Ingat saya
+              </label>
+              <button
+                type="button"
+                class="text-[12px] font-light text-mid hover:text-ink transition-colors"
+              >
+                Lupa password?
+              </button>
+            </div>
+            <button
+              id="sbtn"
+              type="submit"
+              class="w-full bg-forest text-white text-[13px] font-semibold py-3.5 hover:bg-forest/85 transition-colors"
+            >
+              Masuk
+            </button>
+          </form>
+
+          <!-- Demo hint -->
+          <div class="mt-6 p-4 bg-mist border border-smoke">
+            <p
+              class="text-[10px] font-semibold tracking-[0.14em] uppercase text-light mb-2"
+            >
+              Demo Login
+            </p>
+            <p class="text-[12px] font-light text-mid mb-1">
+              Customer:
+              <span class="font-medium text-ink"
+                >rina@email.com / password123</span
+              >
+            </p>
+            <p class="text-[12px] font-light text-mid">
+              Admin:
+              <a
+                href="admin-dashboard.html"
+                class="font-medium text-forest hover:underline"
+                >klik di sini →</a
+              >
+            </p>
+          </div>
+
+          <p class="text-center text-[12px] font-light text-mid mt-5">
+            Belum punya akun?
+            <a
+              href="daftar.html"
+              class="text-forest font-semibold hover:underline underline-offset-2"
+              >Daftar sekarang</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function togglePw() {
+        const i = document.getElementById("pw"),
+          e = document.getElementById("eye");
+        if (i.type === "password") {
+          i.type = "text";
+          e.textContent = "🙈";
+        } else {
+          i.type = "password";
+          e.textContent = "👁";
+        }
+      }
+      function doLogin(e) {
+        e.preventDefault();
+        const em = document.getElementById("email").value.trim(),
+          pw = document.getElementById("pw").value,
+          err = document.getElementById("err"),
+          btn = document.getElementById("sbtn");
+        if (!em || !pw) return;
+        btn.textContent = "Memproses...";
+        btn.disabled = true;
+        err.classList.add("hidden");
+        setTimeout(() => {
+          if (em === "rina@email.com" && pw === "password123") {
+            window.location.href = "status.html";
+          } else if (em === "admin@porterrinjani.com") {
+            window.location.href = "admin-dashboard.html";
+          } else {
+            err.classList.remove("hidden");
+            document.getElementById("form").classList.add("shake");
+            setTimeout(
+              () => document.getElementById("form").classList.remove("shake"),
+              400,
+            );
+            btn.textContent = "Masuk";
+            btn.disabled = false;
+          }
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

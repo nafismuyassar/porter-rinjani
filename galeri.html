@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Galeri — Porter Rinjani</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+            colors: {
+              forest: "#1B3A2D",
+              tan: "#C4A882",
+              mist: "#F7F6F3",
+              smoke: "#EFEFEC",
+              ink: "#1A1A1A",
+              mid: "#6B6B6B",
+              light: "#A8A8A4",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #fff;
+        color: #1a1a1a;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ddd;
+      }
+      .chip-on {
+        background: #1a1a1a !important;
+        color: #fff !important;
+        border-color: #1a1a1a !important;
+      }
+      .gi {
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+      }
+      .gi-img {
+        transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .gi:hover .gi-img {
+        transform: scale(1.05);
+      }
+      .gi-ov {
+        position: absolute;
+        inset: 0;
+        background: rgba(27, 58, 45, 0.55);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .gi:hover .gi-ov {
+        opacity: 1;
+      }
+      /* Lightbox */
+      #lb {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      #lb.open {
+        display: flex;
+      }
+      /* Upload zone */
+      .dz {
+        border: 1.5px dashed #efefec;
+        transition: all 0.2s;
+        cursor: pointer;
+      }
+      .dz:hover,
+      .dz.drag {
+        border-color: #1b3a2d;
+        background: #f0f5f2;
+      }
+      /* Tag badge */
+      .my-photo-badge {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: #1b3a2d;
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 3px 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav
+      class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+    >
+      <div
+        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+      >
+        <a href="index.html" class="text-[17px] font-semibold text-ink"
+          >Porter <span class="font-light text-mid">Rinjani</span></a
+        >
+        <div class="flex items-center gap-9">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-semibold text-ink border-b-2 border-ink pb-0.5"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Kontak</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
+          >
+            R
+          </div>
+          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+            >Rina Kusuma</a
+          >
+          <a
+            href="status.html"
+            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="relative bg-forest overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-[#0f2219] to-[#1B3A2D]/80"
+      ></div>
+      <div class="relative z-10 max-w-[1280px] mx-auto px-8 pt-14 pb-16">
+        <p
+          class="text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
+        >
+          Galeri Foto
+        </p>
+        <h1
+          class="text-[clamp(38px,5.5vw,64px)] font-light text-white leading-[1.08] mb-5"
+          style="letter-spacing: -1.2px"
+        >
+          Momen dari<br /><span class="italic text-white/45">alam Rinjani</span>
+        </h1>
+        <p
+          class="text-[15px] font-light text-white/40 max-w-[400px] leading-[1.85]"
+        >
+          Dokumentasi perjalanan nyata dari para pendaki bersama tim Porter
+          Rinjani.
+        </p>
+      </div>
+    </div>
+
+    <!-- UPLOAD ZONE (customer-exclusive) -->
+    <div class="bg-mist border-b border-smoke">
+      <div class="max-w-[1280px] mx-auto px-8 py-6">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <p
+              class="text-[11px] font-semibold tracking-[.18em] uppercase text-forest mb-1"
+            >
+              ✨ Fitur Eksklusif Member
+            </p>
+            <p class="text-[13px] font-light text-mid">
+              Bagikan foto pendakian Anda — akan tampil di galeri komunitas
+              Porter Rinjani!
+            </p>
+          </div>
+          <button
+            onclick="document.getElementById('up-fi').click()"
+            class="bg-forest text-white text-[12px] font-semibold px-6 py-2.5 hover:bg-forest/85 transition-colors flex-shrink-0"
+          >
+            + Upload Foto Anda
+          </button>
+        </div>
+        <div
+          id="up-dz"
+          class="dz p-5 flex items-center gap-4"
+          onclick="document.getElementById('up-fi').click()"
+          ondragover="
+            event.preventDefault();
+            this.classList.add('drag');
+          "
+          ondragleave="this.classList.remove('drag')"
+          ondrop="hDrop(event)"
+        >
+          <div class="text-2xl opacity-30">📎</div>
+          <div>
+            <p class="text-[13px] font-medium text-mid">
+              Drag & drop foto ke sini, atau klik untuk pilih file
+            </p>
+            <p class="text-[11px] font-light text-light mt-0.5">
+              JPG, PNG · Maks. 10 MB · Landscape lebih bagus
+            </p>
+          </div>
+        </div>
+        <input
+          type="file"
+          id="up-fi"
+          accept=".jpg,.jpeg,.png"
+          class="hidden"
+          multiple
+          onchange="hUpload(this)"
+        />
+        <div id="up-preview" class="mt-3 flex gap-3 flex-wrap hidden"></div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div
+      class="sticky top-[68px] z-40 bg-white/97 backdrop-blur border-b border-smoke"
+    >
+      <div
+        class="max-w-[1280px] mx-auto px-8 py-3.5 flex items-center gap-2 flex-wrap"
+      >
+        <span
+          class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mr-1"
+          >Filter</span
+        >
+        <button
+          onclick="fg(this, 'all')"
+          class="gchip chip-on text-[11px] font-medium px-4 py-2 border transition-all"
+        >
+          Semua
+        </button>
+        <button
+          onclick="fg(this, 'my')"
+          class="gchip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          📸 Foto Saya
+        </button>
+        <button
+          onclick="fg(this, 'puncak')"
+          class="gchip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Puncak
+        </button>
+        <button
+          onclick="fg(this, 'danau')"
+          class="gchip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Danau
+        </button>
+        <button
+          onclick="fg(this, 'camp')"
+          class="gchip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Camp
+        </button>
+        <button
+          onclick="fg(this, 'tim')"
+          class="gchip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Tim Porter
+        </button>
+        <button
+          onclick="fg(this, 'torean')"
+          class="gchip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Torean
+        </button>
+      </div>
+    </div>
+
+    <!-- GALLERY GRID -->
+    <div class="max-w-[1280px] mx-auto px-8 py-10" id="gallery-wrap">
+      <div class="columns-3 gap-4 space-y-4" id="gallery">
+        <!-- Foto milik user sendiri -->
+        <div class="gi gitem break-inside-avoid relative" data-g="my puncak">
+          <div class="my-photo-badge">Foto Saya</div>
+          <div
+            class="gi-img h-[280px] bg-gradient-to-br from-forest/15 to-forest/5 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Foto Puncak — Jan 2025 ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Pendakian Jan 2025
+              </p>
+              <p class="text-white/60 text-[11px]">Paket Standard · 4D3N</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="danau">
+          <div
+            class="gi-img h-[220px] bg-gradient-to-br from-blue-900/20 to-blue-900/5 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Danau Segara Anak ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Segara Anak
+              </p>
+              <p class="text-white/60 text-[11px]">Danau Kawah Rinjani</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="camp">
+          <div
+            class="gi-img h-[260px] bg-gradient-to-br from-forest/12 to-forest/3 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Camp Plawangan ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Camp Plawangan
+              </p>
+              <p class="text-white/60 text-[11px]">2.639 mdpl</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="puncak">
+          <div
+            class="gi-img h-[300px] bg-gradient-to-br from-tan/15 to-tan/5 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Sunrise dari Puncak ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Sunrise Puncak
+              </p>
+              <p class="text-white/60 text-[11px]">3.726 mdpl</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="tim">
+          <div
+            class="gi-img h-[200px] bg-gradient-to-br from-forest/10 to-forest/2 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Tim Porter Rinjani ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Tim Porter Kami
+              </p>
+              <p class="text-white/60 text-[11px]">
+                Profesional & berpengalaman
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="torean">
+          <div
+            class="gi-img h-[240px] bg-gradient-to-br from-blue-800/15 to-blue-800/5 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Air Terjun Torean ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Air Terjun Torean
+              </p>
+              <p class="text-white/60 text-[11px]">Jalur Torean</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="camp">
+          <div
+            class="gi-img h-[220px] bg-gradient-to-br from-forest/8 to-forest/2 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Makan Malam di Camp ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Makan Malam Camp
+              </p>
+              <p class="text-white/60 text-[11px]">Masakan chef kami</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="danau">
+          <div
+            class="gi-img h-[280px] bg-gradient-to-br from-blue-900/10 to-blue-900/3 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Sumber Air Panas ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">Aik Kalak</p>
+              <p class="text-white/60 text-[11px]">Sumber air panas alami</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="puncak">
+          <div
+            class="gi-img h-[200px] bg-gradient-to-br from-tan/10 to-tan/3 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Jalur Summit Attack ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Summit Attack
+              </p>
+              <p class="text-white/60 text-[11px]">Dini hari menuju puncak</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="tim">
+          <div
+            class="gi-img h-[250px] bg-gradient-to-br from-forest/12 to-forest/4 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Briefing Porter ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Briefing Pre-Trek
+              </p>
+              <p class="text-white/60 text-[11px]">Pos Sembalun</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="torean">
+          <div
+            class="gi-img h-[230px] bg-gradient-to-br from-forest/8 to-forest/2 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Jembatan Torean ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">
+                Jembatan Gantung
+              </p>
+              <p class="text-white/60 text-[11px]">Jalur Torean</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gi gitem break-inside-avoid" data-g="camp puncak">
+          <div
+            class="gi-img h-[260px] bg-gradient-to-br from-tan/12 to-tan/4 flex items-center justify-center text-light text-sm italic"
+          >
+            [ Milky Way dari Camp ]
+          </div>
+          <div class="gi-ov">
+            <div class="text-center">
+              <p class="text-white text-[14px] font-semibold mb-1">Milky Way</p>
+              <p class="text-white/60 text-[11px]">Langit malam Rinjani</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state untuk filter "my" kalau tidak ada -->
+      <div id="empty-my" class="hidden text-center py-20">
+        <div class="text-4xl mb-4 opacity-20">📷</div>
+        <p class="text-[15px] font-light text-mid mb-2">
+          Belum ada foto dari Anda
+        </p>
+        <p class="text-[13px] font-light text-light mb-6">
+          Upload foto pendakian Anda dan bagikan ke komunitas!
+        </p>
+        <button
+          onclick="document.getElementById('up-fi').click()"
+          class="bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
+        >
+          + Upload Foto Pertama
+        </button>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="lb" onclick="closeLB()">
+      <div
+        class="relative max-w-[900px] w-full mx-4"
+        onclick="event.stopPropagation()"
+      >
+        <div
+          id="lb-img"
+          class="w-full bg-gradient-to-br from-forest/20 to-forest/5 flex items-center justify-center text-white/30 italic text-sm"
+          style="height: 520px"
+        >
+          [ Preview Foto ]
+        </div>
+        <div class="bg-black/60 p-5 flex justify-between items-end">
+          <div>
+            <p class="text-white font-semibold text-[14px]" id="lb-title">
+              Judul
+            </p>
+            <p class="text-white/50 text-[12px]" id="lb-sub">Sub</p>
+          </div>
+          <button
+            onclick="closeLB()"
+            class="text-white/50 hover:text-white text-[13px] font-medium"
+          >
+            Tutup ✕
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-smoke py-10 px-8">
+      <div
+        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-6"
+      >
+        <div class="text-[17px] font-semibold text-ink">
+          Porter <span class="font-light text-mid">Rinjani</span>
+        </div>
+        <div class="flex gap-8">
+          <a
+            href="index.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Galeri</a
+          >
+        </div>
+        <p class="text-[12px] font-light text-light">© 2025 Porter Rinjani</p>
+      </div>
+    </footer>
+    <a
+      href="https://wa.me/628123456789"
+      target="_blank"
+      class="fixed bottom-7 right-7 z-50 w-[52px] h-[52px] rounded-full bg-[#25D366] flex items-center justify-center text-[22px] shadow-lg shadow-green-500/25 hover:scale-110 transition-all"
+      >💬</a
+    >
+
+    <script>
+      // Gallery filter
+      function fg(el, g) {
+        document.querySelectorAll(".gchip").forEach((c) => {
+          c.classList.remove("chip-on");
+          c.classList.add("border-smoke", "text-mid");
+        });
+        el.classList.add("chip-on");
+        el.classList.remove("border-smoke", "text-mid");
+        const items = document.querySelectorAll(".gitem");
+        let visible = 0;
+        items.forEach((i) => {
+          const show = g === "all" || i.dataset.g.split(" ").includes(g);
+          i.style.display = show ? "block" : "none";
+          if (show) visible++;
+        });
+        document
+          .getElementById("empty-my")
+          .classList.toggle("hidden", !(g === "my" && visible === 0));
+      }
+      // Lightbox
+      document.querySelectorAll(".gi").forEach((i) => {
+        i.addEventListener("click", () => {
+          const t = i.querySelector(".gi-ov p:first-child")?.textContent || "";
+          const s = i.querySelector(".gi-ov p:last-child")?.textContent || "";
+          document.getElementById("lb-title").textContent = t;
+          document.getElementById("lb-sub").textContent = s;
+          document.getElementById("lb").classList.add("open");
+        });
+      });
+      function closeLB() {
+        document.getElementById("lb").classList.remove("open");
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLB();
+      });
+      // Upload
+      function hUpload(inp) {
+        if (inp.files.length) showPrev([...inp.files]);
+      }
+      function hDrop(e) {
+        e.preventDefault();
+        document.getElementById("up-dz").classList.remove("drag");
+        if (e.dataTransfer.files.length) showPrev([...e.dataTransfer.files]);
+      }
+      function showPrev(files) {
+        const wrap = document.getElementById("up-preview");
+        wrap.classList.remove("hidden");
+        wrap.innerHTML = "";
+        files.forEach((f) => {
+          const r = new FileReader();
+          r.onload = (ev) => {
+            const d = document.createElement("div");
+            d.className = "relative";
+            d.innerHTML = `<img src="${ev.target.result}" class="w-20 h-20 object-cover border border-smoke" /><div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"><span class="text-white text-[10px] font-medium">✓ Siap</span></div>`;
+            wrap.appendChild(d);
+          };
+          r.readAsDataURL(f);
+        });
+      }
+    </script>
+  </body>
+</html>

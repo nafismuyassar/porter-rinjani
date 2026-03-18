@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paket & Harga — Porter Rinjani</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+            colors: {
+              forest: "#1B3A2D",
+              tan: "#C4A882",
+              mist: "#F7F6F3",
+              smoke: "#EFEFEC",
+              ink: "#1A1A1A",
+              mid: "#6B6B6B",
+              light: "#A8A8A4",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #fff;
+        color: #1a1a1a;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ddd;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #1b3a2d !important;
+        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
+      }
+      .chip-on {
+        background: #1a1a1a !important;
+        color: #fff !important;
+        border-color: #1a1a1a !important;
+      }
+      .lift {
+        transition:
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+      }
+      .faq-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+      }
+      .faq-body.open {
+        max-height: 300px;
+      }
+      /* calculator */
+      input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 4px;
+        background: #efefec;
+        border-radius: 2px;
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #1b3a2d;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav
+      class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+    >
+      <div
+        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+      >
+        <a href="index.html" class="text-[17px] font-semibold text-ink"
+          >Porter <span class="font-light text-mid">Rinjani</span></a
+        >
+        <div class="flex items-center gap-9">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-semibold text-ink border-b-2 border-ink pb-0.5"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Kontak</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
+          >
+            R
+          </div>
+          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+            >Rina Kusuma</a
+          >
+          <a
+            href="status.html"
+            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="relative bg-forest overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-[#0f2219] to-[#1B3A2D]/80"
+      ></div>
+      <div class="relative z-10 max-w-[1280px] mx-auto px-8 pt-14 pb-18">
+        <nav class="text-[11px] font-light text-white/30 mb-8 flex gap-2">
+          <a href="index.html" class="hover:text-white/55">Beranda</a
+          ><span>/</span><span class="text-white/50">Paket & Harga</span>
+        </nav>
+        <p
+          class="text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
+        >
+          Paket & Harga
+        </p>
+        <h1
+          class="text-[clamp(38px,5.5vw,68px)] font-light text-white leading-[1.08] mb-5"
+          style="letter-spacing: -1.2px"
+        >
+          Temukan paket<br /><span class="italic text-white/45"
+            >yang sempurna</span
+          >
+        </h1>
+        <p
+          class="text-[15px] font-light text-white/40 max-w-[380px] leading-[1.85]"
+        >
+          Tiga pilihan dirancang untuk setiap jenis pendaki — dari pemula hingga
+          berpengalaman.
+        </p>
+      </div>
+    </div>
+
+    <!-- PRICE CALCULATOR -->
+    <div class="bg-mist border-b border-smoke">
+      <div class="max-w-[1280px] mx-auto px-8 py-8">
+        <div class="bg-white border border-smoke p-7">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p
+                class="text-[11px] font-semibold tracking-[.2em] uppercase text-tan mb-1"
+              >
+                Kalkulator Harga
+              </p>
+              <h3
+                class="text-[18px] font-semibold text-ink"
+                style="letter-spacing: -0.3px"
+              >
+                Hitung estimasi biaya pendakian Anda
+              </h3>
+            </div>
+            <div class="text-right">
+              <div
+                class="text-[28px] font-light text-forest"
+                id="calc-total"
+                style="letter-spacing: -0.5px"
+              >
+                Rp 4.200.000
+              </div>
+              <div class="text-[11px] font-light text-mid" id="calc-sub">
+                3 orang × Rp 1.400.000
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-6">
+            <div>
+              <label
+                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                >Paket</label
+              >
+              <select
+                id="c-pkt"
+                onchange="calc()"
+                class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
+                style="
+                  background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
+                  background-repeat: no-repeat;
+                  background-position: right 14px center;
+                "
+              >
+                <option value="deluxe">Paket Deluxe</option>
+                <option value="standard">Paket Standard</option>
+                <option value="sharing">Paket Sharing</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                >Jumlah Peserta</label
+              >
+              <div class="flex items-center border border-smoke">
+                <button
+                  onclick="chPax(-1)"
+                  class="px-4 py-3 text-mid hover:bg-mist text-lg font-light"
+                >
+                  −
+                </button>
+                <span
+                  id="c-pax"
+                  class="flex-1 text-center text-[16px] font-semibold text-ink"
+                  >3</span
+                >
+                <button
+                  onclick="chPax(1)"
+                  class="px-4 py-3 text-mid hover:bg-mist text-lg font-light"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                >DP Minimum (20%)</label
+              >
+              <div class="border border-smoke px-4 py-3 bg-mist">
+                <div class="text-[16px] font-semibold text-forest" id="calc-dp">
+                  Rp 840.000
+                </div>
+                <div class="text-[11px] font-light text-light mt-0.5">
+                  dibayar sekarang
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-5 flex justify-end">
+            <a
+              href="booking.html"
+              id="calc-cta"
+              class="bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
+              >Booking Paket Deluxe →</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FILTER BAR -->
+    <div
+      class="sticky top-[68px] z-40 bg-white/97 backdrop-blur border-b border-smoke"
+    >
+      <div
+        class="max-w-[1280px] mx-auto px-8 py-3.5 flex items-center gap-2 flex-wrap"
+      >
+        <span
+          class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mr-1"
+          >Tipe</span
+        >
+        <button
+          onclick="ft(this, 'all')"
+          class="chip chip-on text-[11px] font-medium px-4 py-2 border transition-all"
+        >
+          Semua
+        </button>
+        <button
+          onclick="ft(this, 'deluxe')"
+          class="chip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Deluxe
+        </button>
+        <button
+          onclick="ft(this, 'standard')"
+          class="chip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Standard
+        </button>
+        <button
+          onclick="ft(this, 'sharing')"
+          class="chip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          Sharing
+        </button>
+        <div class="w-px h-5 bg-smoke mx-2"></div>
+        <span
+          class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mr-1"
+          >Durasi</span
+        >
+        <button
+          onclick="fd(this, 'all')"
+          class="dur chip-on text-[11px] font-medium px-4 py-2 border transition-all"
+        >
+          Semua
+        </button>
+        <button
+          onclick="fd(this, '2d1n')"
+          class="dur text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          2D1N
+        </button>
+        <button
+          onclick="fd(this, '3d2n')"
+          class="dur text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          3D2N
+        </button>
+        <button
+          onclick="fd(this, '4d3n')"
+          class="dur text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
+        >
+          4D3N
+        </button>
+      </div>
+    </div>
+
+    <!-- PAKET CARDS -->
+    <div class="max-w-[1280px] mx-auto px-8 py-14">
+      <div class="grid grid-cols-3 gap-6">
+        <!-- DELUXE -->
+        <div
+          class="pcard bg-white border border-smoke lift overflow-hidden"
+          data-t="deluxe"
+          data-d="2d1n 3d2n 4d3n"
+        >
+          <div
+            class="relative h-[200px] bg-gradient-to-br from-forest/10 to-forest/5 flex items-center justify-center text-light italic text-sm"
+          >
+            <div class="text-center">
+              <div class="text-[48px] opacity-10 mb-2">⭐</div>
+              [ Foto Paket Deluxe ]
+            </div>
+            <div class="absolute top-3 right-3">
+              <span
+                class="text-[10px] font-semibold tracking-[.12em] uppercase bg-tan text-white px-3 py-1.5"
+                >Terpopuler</span
+              >
+            </div>
+            <div class="absolute bottom-3 left-3 flex gap-1.5">
+              <span
+                class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
+                >2D1N</span
+              >
+              <span
+                class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
+                >3D2N</span
+              >
+              <span
+                class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
+                >4D3N</span
+              >
+            </div>
+          </div>
+          <div class="p-7">
+            <span
+              class="text-[10px] font-semibold tracking-[.2em] uppercase text-light block mb-3"
+              >Deluxe</span
+            >
+            <h3
+              class="text-[22px] font-medium text-ink mb-2"
+              style="letter-spacing: -0.3px"
+            >
+              Paket Deluxe
+            </h3>
+            <p class="text-[13px] font-light text-mid leading-[1.8] mb-5">
+              Pengalaman mendaki paling lengkap — semua kebutuhan terpenuhi
+              tanpa kejutan biaya.
+            </p>
+            <ul class="space-y-2.5 mb-6">
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Porter personal (maks. 15 kg)
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Cook / chef berpengalaman
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Tenda deluxe 4 musim
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Makan 3× sehari + snack
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Sleeping bag & matras
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Transportasi PP Lombok
+              </li>
+              <li class="flex gap-3 text-[13px] font-medium text-forest">
+                <span
+                  class="w-1 h-1 rounded-full bg-forest mt-[7px] flex-shrink-0"
+                ></span
+                >Nol biaya tambahan jika tidak summit
+              </li>
+            </ul>
+            <div class="bg-mist p-4 mb-5">
+              <p
+                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
+              >
+                Harga per orang
+              </p>
+              <div class="space-y-2">
+                <div
+                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
+                >
+                  <span class="font-light text-mid">1–2 orang</span
+                  ><span class="font-semibold text-ink">Rp 1.750.000</span>
+                </div>
+                <div
+                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
+                >
+                  <span class="font-light text-mid">3–5 orang</span
+                  ><span class="font-semibold text-ink">Rp 1.400.000</span>
+                </div>
+                <div class="flex justify-between text-[13px] py-1.5">
+                  <span class="font-light text-mid">6–10 orang</span
+                  ><span class="font-semibold text-ink">Rp 1.250.000</span>
+                </div>
+              </div>
+            </div>
+            <a
+              href="booking.html"
+              class="block w-full text-center bg-forest text-white text-[12px] font-semibold tracking-[.06em] py-4 hover:bg-forest/85 transition-colors"
+              >Booking Sekarang</a
+            >
+          </div>
+        </div>
+
+        <!-- STANDARD -->
+        <div
+          class="pcard bg-white border border-smoke lift overflow-hidden"
+          data-t="standard"
+          data-d="2d1n 3d2n 4d3n"
+        >
+          <div
+            class="h-[200px] bg-gradient-to-br from-mid/8 to-mid/3 flex items-center justify-center text-light italic text-sm"
+          >
+            <div class="text-center">
+              <div class="text-[48px] opacity-10 mb-2">🎒</div>
+              [ Foto Paket Standard ]
+            </div>
+          </div>
+          <div class="p-7">
+            <span
+              class="text-[10px] font-semibold tracking-[.2em] uppercase text-light block mb-3"
+              >Standard</span
+            >
+            <h3
+              class="text-[22px] font-medium text-ink mb-2"
+              style="letter-spacing: -0.3px"
+            >
+              Paket Standard
+            </h3>
+            <p class="text-[13px] font-light text-mid leading-[1.8] mb-5">
+              Paket lengkap dengan layanan essensial pendakian. Pilihan terbaik
+              untuk grup.
+            </p>
+            <ul class="space-y-2.5 mb-6">
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Porter bersama (maks. 12 kg)
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Tenda dome standard
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Makan 2× sehari
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Sleeping bag & P3K dasar
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Transportasi PP Lombok
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-red-400">
+                <span
+                  class="w-1 h-1 rounded-full bg-red-300 mt-[7px] flex-shrink-0"
+                ></span
+                >Ada biaya tambahan jika tidak summit
+              </li>
+            </ul>
+            <div class="bg-mist p-4 mb-5">
+              <p
+                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
+              >
+                Harga per orang
+              </p>
+              <div class="space-y-2">
+                <div
+                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
+                >
+                  <span class="font-light text-mid">1–2 orang</span
+                  ><span class="font-semibold text-ink">Rp 1.100.000</span>
+                </div>
+                <div
+                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
+                >
+                  <span class="font-light text-mid">3–5 orang</span
+                  ><span class="font-semibold text-ink">Rp 900.000</span>
+                </div>
+                <div class="flex justify-between text-[13px] py-1.5">
+                  <span class="font-light text-mid">6–10 orang</span
+                  ><span class="font-semibold text-ink">Rp 750.000</span>
+                </div>
+              </div>
+            </div>
+            <a
+              href="booking.html"
+              class="block w-full text-center border-2 border-ink text-ink text-[12px] font-semibold tracking-[.06em] py-4 hover:bg-ink hover:text-white transition-all"
+              >Booking Sekarang</a
+            >
+          </div>
+        </div>
+
+        <!-- SHARING -->
+        <div
+          class="pcard bg-white border border-smoke lift overflow-hidden"
+          data-t="sharing"
+          data-d="3d2n 4d3n"
+        >
+          <div
+            class="h-[200px] bg-gradient-to-br from-tan/10 to-tan/3 flex items-center justify-center text-light italic text-sm"
+          >
+            <div class="text-center">
+              <div class="text-[48px] opacity-10 mb-2">👥</div>
+              [ Foto Paket Sharing ]
+            </div>
+          </div>
+          <div class="p-7">
+            <span
+              class="text-[10px] font-semibold tracking-[.2em] uppercase text-light block mb-3"
+              >Sharing</span
+            >
+            <h3
+              class="text-[22px] font-medium text-ink mb-2"
+              style="letter-spacing: -0.3px"
+            >
+              Paket Sharing
+            </h3>
+            <p class="text-[13px] font-light text-mid leading-[1.8] mb-5">
+              Bergabung dengan grup lain. Cocok untuk solo traveler atau yang
+              ingin berhemat.
+            </p>
+            <ul class="space-y-2.5 mb-6">
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Bergabung grup (max 10 orang)
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Porter bersama
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Tenda bersama
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Makan 2× sehari
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Transportasi PP Lombok
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-red-400">
+                <span
+                  class="w-1 h-1 rounded-full bg-red-300 mt-[7px] flex-shrink-0"
+                ></span
+                >Ada biaya tambahan jika tidak summit
+              </li>
+            </ul>
+            <div class="bg-mist p-4 mb-5">
+              <p
+                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
+              >
+                Harga per orang
+              </p>
+              <div class="py-2 flex justify-between text-[13px]">
+                <span class="font-light text-mid">Semua grup</span
+                ><span class="font-semibold text-ink">Rp 600.000</span>
+              </div>
+              <p class="text-[11px] font-light text-light mt-1">
+                Harga tetap, tidak tergantung jumlah
+              </p>
+            </div>
+            <a
+              href="booking.html"
+              class="block w-full text-center border border-smoke text-mid text-[12px] font-semibold tracking-[.06em] py-4 hover:border-ink hover:text-ink transition-all"
+              >Booking Sekarang</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="max-w-[1280px] mx-auto px-8 pb-14">
+      <div class="border border-smoke overflow-hidden">
+        <div class="bg-mist px-8 py-5 border-b border-smoke">
+          <h3 class="text-[16px] font-semibold text-ink">Perbandingan Paket</h3>
+        </div>
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-smoke">
+              <th
+                class="py-4 px-6 text-left text-[11px] font-semibold tracking-[.12em] uppercase text-light w-[40%]"
+              >
+                Fasilitas
+              </th>
+              <th
+                class="py-4 px-4 text-center text-[11px] font-semibold tracking-[.12em] uppercase text-forest"
+              >
+                Deluxe
+              </th>
+              <th
+                class="py-4 px-4 text-center text-[11px] font-semibold tracking-[.12em] uppercase text-ink"
+              >
+                Standard
+              </th>
+              <th
+                class="py-4 px-4 text-center text-[11px] font-semibold tracking-[.12em] uppercase text-tan"
+              >
+                Sharing
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-smoke">
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Porter personal
+              </td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-mid"
+              >
+                Bersama
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-mid"
+              >
+                Bersama
+              </td>
+            </tr>
+            <tr class="bg-mist/50">
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Chef / masak
+              </td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-red-400 text-[16px]">
+                ✕
+              </td>
+              <td class="py-3.5 px-4 text-center text-red-400 text-[16px]">
+                ✕
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">Tenda</td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
+              >
+                Deluxe 4 musim
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
+              >
+                Dome standard
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
+              >
+                Bersama
+              </td>
+            </tr>
+            <tr class="bg-mist/50">
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">Makan</td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
+              >
+                3× + snack
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
+              >
+                2×
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
+              >
+                2×
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Sleeping bag
+              </td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-red-400 text-[16px]">
+                ✕
+              </td>
+            </tr>
+            <tr class="bg-mist/50">
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Transportasi PP
+              </td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Biaya tambahan jika tidak summit
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
+              >
+                Tidak ada ✓
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-red-400"
+              >
+                Ada
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-red-400"
+              >
+                Ada
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FAQ + CTA -->
+    <div
+      class="max-w-[1280px] mx-auto px-8 pb-20 grid grid-cols-[1fr_380px] gap-6"
+    >
+      <div class="bg-white border border-smoke p-10">
+        <p
+          class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-3"
+        >
+          FAQ
+        </p>
+        <h2
+          class="text-[24px] font-light text-ink mb-8"
+          style="letter-spacing: -0.4px"
+        >
+          Pertanyaan yang <span class="italic">sering ditanyakan</span>
+        </h2>
+        <div class="space-y-0">
+          <div class="border-b border-smoke">
+            <button
+              class="w-full flex justify-between items-center py-5 text-left"
+              onclick="tFaq(this)"
+            >
+              <span class="text-[14px] font-medium text-ink"
+                >Apa itu biaya tambahan jika tidak summit?</span
+              ><span
+                class="fq text-light text-2xl font-light ml-4 flex-shrink-0 transition-transform"
+                >+</span
+              >
+            </button>
+            <div class="faq-body">
+              <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
+                Untuk paket Standard dan Sharing, jika tidak sampai puncak
+                karena cuaca/kondisi fisik, ada biaya kompensasi untuk porter.
+                Paket Deluxe tidak dikenakan biaya tambahan apapun.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-smoke">
+            <button
+              class="w-full flex justify-between items-center py-5 text-left"
+              onclick="tFaq(this)"
+            >
+              <span class="text-[14px] font-medium text-ink"
+                >Berapa lama konfirmasi booking?</span
+              ><span
+                class="fq text-light text-2xl font-light ml-4 flex-shrink-0"
+                >+</span
+              >
+            </button>
+            <div class="faq-body">
+              <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
+                Setelah upload bukti DP, admin verifikasi dalam 1×24 jam.
+                Konfirmasi dikirim via WhatsApp & email beserta invoice PDF.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-smoke">
+            <button
+              class="w-full flex justify-between items-center py-5 text-left"
+              onclick="tFaq(this)"
+            >
+              <span class="text-[14px] font-medium text-ink"
+                >Bagaimana cara pembayaran?</span
+              ><span
+                class="fq text-light text-2xl font-light ml-4 flex-shrink-0"
+                >+</span
+              >
+            </button>
+            <div class="faq-body">
+              <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
+                Transfer bank (BCA/BRI/Mandiri). Bisa DP minimum 20%, sisa
+                dilunasi sebelum keberangkatan. Upload bukti di halaman booking.
+              </p>
+            </div>
+          </div>
+          <div>
+            <button
+              class="w-full flex justify-between items-center py-5 text-left"
+              onclick="tFaq(this)"
+            >
+              <span class="text-[14px] font-medium text-ink"
+                >Apakah DP bisa dikembalikan jika batal?</span
+              ><span
+                class="fq text-light text-2xl font-light ml-4 flex-shrink-0"
+                >+</span
+              >
+            </button>
+            <div class="faq-body">
+              <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
+                DP yang telah dibayarkan tidak dapat dikembalikan setelah
+                booking dikonfirmasi admin. Segera hubungi kami via WA jika
+                ingin membatalkan sebelum konfirmasi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-forest flex flex-col justify-between p-10">
+        <div>
+          <p
+            class="text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
+          >
+            Masih ragu?
+          </p>
+          <h3
+            class="text-[26px] font-light text-white leading-[1.15] mb-4"
+            style="letter-spacing: -0.5px"
+          >
+            Konsultasi gratis
+            <span class="italic text-white/45">via WhatsApp</span>
+          </h3>
+          <p class="text-[13px] font-light text-white/40 leading-[1.85]">
+            Tim kami siap bantu Anda memilih paket yang tepat sesuai kondisi
+            fisik, anggaran, dan tujuan pendakian.
+          </p>
+        </div>
+        <div class="space-y-3 mt-10">
+          <a
+            href="https://wa.me/628123456789"
+            target="_blank"
+            class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white text-[12px] font-semibold py-4 hover:bg-[#1fbd5c] transition-colors"
+            >💬 Chat WhatsApp</a
+          >
+          <a
+            href="booking.html"
+            class="flex items-center justify-center w-full border border-white/15 text-white/45 text-[12px] font-medium py-3.5 hover:bg-white/8 hover:text-white/70 transition-all"
+            >Langsung Booking →</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-smoke py-10 px-8">
+      <div
+        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-6"
+      >
+        <div class="text-[17px] font-semibold text-ink">
+          Porter <span class="font-light text-mid">Rinjani</span>
+        </div>
+        <div class="flex gap-8">
+          <a
+            href="index.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Galeri</a
+          >
+        </div>
+        <p class="text-[12px] font-light text-light">© 2025 Porter Rinjani</p>
+      </div>
+    </footer>
+
+    <a
+      href="https://wa.me/628123456789"
+      target="_blank"
+      class="fixed bottom-7 right-7 z-50 w-[52px] h-[52px] rounded-full bg-[#25D366] flex items-center justify-center text-[22px] shadow-lg shadow-green-500/25 hover:scale-110 transition-all"
+      >💬</a
+    >
+
+    <script>
+      const HR = {
+        deluxe: [
+          { max: 2, p: 1750000 },
+          { max: 5, p: 1400000 },
+          { max: 99, p: 1250000 },
+        ],
+        standard: [
+          { max: 2, p: 1100000 },
+          { max: 5, p: 900000 },
+          { max: 99, p: 750000 },
+        ],
+        sharing: [{ max: 99, p: 600000 }],
+      };
+      let cpax = 3;
+      function gP(k, n) {
+        return (HR[k] || HR.standard).find((r) => n <= r.max)?.p || 600000;
+      }
+      function rp(n) {
+        return "Rp " + n.toLocaleString("id-ID");
+      }
+      function calc() {
+        const k = document.getElementById("c-pkt").value;
+        const hpp = gP(k, cpax),
+          sub = hpp * cpax,
+          dp = Math.round(sub * 0.2);
+        document.getElementById("calc-total").textContent = rp(sub);
+        document.getElementById("calc-sub").textContent =
+          cpax + " orang × " + rp(hpp);
+        document.getElementById("calc-dp").textContent = rp(dp);
+        const nm = k.charAt(0).toUpperCase() + k.slice(1);
+        document.getElementById("calc-cta").textContent =
+          "Booking Paket " + nm + " →";
+      }
+      function chPax(d) {
+        cpax = Math.max(1, Math.min(20, cpax + d));
+        document.getElementById("c-pax").textContent = cpax;
+        calc();
+      }
+      function ft(el, t) {
+        document.querySelectorAll(".chip").forEach((c) => {
+          c.classList.remove("chip-on");
+          c.classList.add("border-smoke", "text-mid");
+        });
+        el.classList.add("chip-on");
+        el.classList.remove("border-smoke", "text-mid");
+        document.querySelectorAll(".pcard").forEach((c) => {
+          c.style.display = t === "all" || c.dataset.t === t ? "block" : "none";
+        });
+      }
+      function fd(el, d) {
+        document.querySelectorAll(".dur").forEach((c) => {
+          c.classList.remove("chip-on");
+          c.classList.add("border-smoke", "text-mid");
+        });
+        el.classList.add("chip-on");
+        el.classList.remove("border-smoke", "text-mid");
+        document.querySelectorAll(".pcard").forEach((c) => {
+          c.style.display =
+            d === "all" || c.dataset.d.includes(d) ? "block" : "none";
+        });
+      }
+      function tFaq(btn) {
+        const b = btn.nextElementSibling,
+          i = btn.querySelector(".fq"),
+          op = b.classList.contains("open");
+        document
+          .querySelectorAll(".faq-body")
+          .forEach((x) => x.classList.remove("open"));
+        document.querySelectorAll(".fq").forEach((x) => (x.textContent = "+"));
+        if (!op) {
+          b.classList.add("open");
+          i.textContent = "×";
+        }
+      }
+    </script>
+  </body>
+</html>

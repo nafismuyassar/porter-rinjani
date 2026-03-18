@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Saya — Porter Rinjani</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+            colors: {
+              forest: "#1B3A2D",
+              tan: "#C4A882",
+              mist: "#F7F6F3",
+              smoke: "#EFEFEC",
+              ink: "#1A1A1A",
+              mid: "#6B6B6B",
+              light: "#A8A8A4",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #f7f6f3;
+        color: #1a1a1a;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #ddd;
+      }
+      .card-hover {
+        transition:
+          transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .card-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+      }
+      .menu-item {
+        transition: all 0.18s;
+      }
+      .menu-item:hover {
+        background: #f0f5f2;
+        color: #1b3a2d;
+      }
+      .menu-item.active {
+        background: #f0f5f2;
+        color: #1b3a2d;
+        font-weight: 600;
+      }
+      @keyframes fadeup {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fu {
+        opacity: 0;
+        animation: fadeup 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .d1 {
+        animation-delay: 0.05s;
+      }
+      .d2 {
+        animation-delay: 0.12s;
+      }
+      .d3 {
+        animation-delay: 0.2s;
+      }
+      .d4 {
+        animation-delay: 0.28s;
+      }
+      .d5 {
+        animation-delay: 0.36s;
+      }
+      /* Avatar ring */
+      .avatar-ring {
+        box-shadow:
+          0 0 0 3px #fff,
+          0 0 0 5px rgba(27, 58, 45, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav
+      class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+    >
+      <div
+        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+      >
+        <a href="index.html" class="text-[17px] font-semibold text-ink"
+          >Porter <span class="font-light text-mid">Rinjani</span></a
+        >
+        <div class="flex items-center gap-9">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Kontak</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
+          >
+            R
+          </div>
+          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+            >Rina Kusuma</a
+          >
+          <a
+            href="status.html"
+            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="max-w-[1280px] mx-auto px-8 py-10">
+      <div class="grid grid-cols-[280px_1fr] gap-7 items-start">
+        <!-- ═══ SIDEBAR KIRI ═══ -->
+        <div class="space-y-4">
+          <!-- Profile card -->
+          <div class="bg-white border border-smoke p-7 text-center fu d1">
+            <!-- Avatar -->
+            <div class="relative inline-block mb-4">
+              <div
+                class="w-20 h-20 rounded-full bg-gradient-to-br from-forest to-forest/60 flex items-center justify-center text-[28px] font-bold text-white avatar-ring mx-auto"
+              >
+                R
+              </div>
+              <button
+                onclick="window.location = 'edit-profil.html'"
+                class="absolute -bottom-1 -right-1 w-6 h-6 bg-forest rounded-full flex items-center justify-center text-white text-[11px] hover:bg-forest/80 transition-colors"
+                title="Edit foto"
+              >
+                ✏
+              </button>
+            </div>
+            <h2 class="text-[17px] font-semibold text-ink mb-0.5">
+              Rina Kusuma
+            </h2>
+            <p class="text-[12px] font-light text-mid mb-1">rina@email.com</p>
+            <p class="text-[11px] font-light text-light mb-4">
+              Member sejak Januari 2024
+            </p>
+            <!-- Member badge -->
+            <div
+              class="inline-flex items-center gap-1.5 bg-forest/8 border border-forest/15 px-3 py-1.5 mb-5"
+            >
+              <span
+                class="text-[10px] font-bold text-forest tracking-[.1em] uppercase"
+                >Member Aktif</span
+              >
+            </div>
+            <a
+              href="edit-profil.html"
+              class="block w-full text-center border border-smoke text-mid text-[12px] font-medium py-2.5 hover:bg-mist transition-colors"
+              >Edit Profil</a
+            >
+          </div>
+
+          <!-- Statistik -->
+          <div class="bg-white border border-smoke p-5 fu d2">
+            <p
+              class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-4"
+            >
+              Statistik Pendakian
+            </p>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-[13px] font-light text-mid"
+                  >Total Pendakian</span
+                >
+                <span class="text-[18px] font-semibold text-forest">2×</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-[13px] font-light text-mid"
+                  >Puncak Dicapai</span
+                >
+                <span class="text-[18px] font-semibold text-forest">1×</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-[13px] font-light text-mid"
+                  >Total Hari di Trek</span
+                >
+                <span class="text-[18px] font-semibold text-forest"
+                  >7 hari</span
+                >
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-[13px] font-light text-mid"
+                  >Total Pengeluaran</span
+                >
+                <span class="text-[15px] font-semibold text-ink"
+                  >Rp 7.800.000</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigasi -->
+          <div class="bg-white border border-smoke overflow-hidden fu d3">
+            <p
+              class="text-[10px] font-semibold tracking-[.18em] uppercase text-light px-5 pt-5 pb-3"
+            >
+              Menu Akun
+            </p>
+            <div class="divide-y divide-smoke">
+              <a
+                href="profil.html"
+                class="menu-item active flex items-center gap-3 px-5 py-3.5 text-[13px]"
+              >
+                <span class="w-5 text-center text-[15px]">👤</span> Profil Saya
+              </a>
+              <a
+                href="status.html"
+                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-mid"
+              >
+                <span class="w-5 text-center text-[15px]">📋</span> Riwayat
+                Booking
+              </a>
+              <a
+                href="edit-profil.html"
+                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-mid"
+              >
+                <span class="w-5 text-center text-[15px]">✏️</span> Edit Profil
+              </a>
+              <a
+                href="kontak.html"
+                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-mid"
+              >
+                <span class="w-5 text-center text-[15px]">💬</span> Bantuan
+              </a>
+              <a
+                href="#"
+                onclick="return confirm('Yakin ingin keluar?');"
+                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-red-400 hover:bg-red-50 hover:text-red-500"
+              >
+                <span class="w-5 text-center text-[15px]">🚪</span> Keluar
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ KONTEN UTAMA ═══ -->
+        <div class="space-y-6">
+          <!-- Info pribadi -->
+          <div class="bg-white border border-smoke p-8 fu d1">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <p
+                  class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-1"
+                >
+                  Informasi Pribadi
+                </p>
+                <h3
+                  class="text-[20px] font-light text-ink"
+                  style="letter-spacing: -0.3px"
+                >
+                  Data <span class="italic">akun Anda</span>
+                </h3>
+              </div>
+              <a
+                href="edit-profil.html"
+                class="flex items-center gap-2 border border-smoke text-mid text-[12px] font-medium px-5 py-2.5 hover:bg-mist hover:text-ink transition-all"
+              >
+                ✏️ Edit
+              </a>
+            </div>
+            <div class="grid grid-cols-2 gap-x-10 gap-y-5">
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  Nama Lengkap
+                </p>
+                <p class="text-[14px] font-medium text-ink">Rina Kusuma</p>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  Email
+                </p>
+                <p class="text-[14px] font-medium text-ink">rina@email.com</p>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  No. WhatsApp
+                </p>
+                <p class="text-[14px] font-medium text-ink">08123456789</p>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  Tanggal Lahir
+                </p>
+                <p class="text-[14px] font-medium text-ink">12 Maret 1995</p>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  Kota Asal
+                </p>
+                <p class="text-[14px] font-medium text-ink">Jakarta Selatan</p>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  No. Identitas (KTP/Passport)
+                </p>
+                <p class="text-[14px] font-medium text-ink">3171•••••••••••</p>
+              </div>
+            </div>
+
+            <!-- Info kesehatan -->
+            <div class="mt-7 pt-7 border-t border-smoke">
+              <p
+                class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-4"
+              >
+                Informasi Kesehatan
+              </p>
+              <div class="grid grid-cols-3 gap-5">
+                <div>
+                  <p
+                    class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                  >
+                    Golongan Darah
+                  </p>
+                  <p class="text-[14px] font-medium text-ink">A+</p>
+                </div>
+                <div>
+                  <p
+                    class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                  >
+                    Alergi
+                  </p>
+                  <p class="text-[14px] font-medium text-ink">Tidak ada</p>
+                </div>
+                <div>
+                  <p
+                    class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                  >
+                    Kondisi Khusus
+                  </p>
+                  <p class="text-[14px] font-medium text-ink">—</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kontak darurat -->
+            <div class="mt-7 pt-7 border-t border-smoke">
+              <div class="flex items-center justify-between mb-4">
+                <p
+                  class="text-[11px] font-semibold tracking-[.18em] uppercase text-light"
+                >
+                  Kontak Darurat
+                </p>
+                <span
+                  class="text-[10px] font-medium text-amber-600 bg-amber-50 border border-amber-200 px-2.5 py-1"
+                  >⚠️ Wajib diisi</span
+                >
+              </div>
+              <div class="grid grid-cols-3 gap-5">
+                <div>
+                  <p
+                    class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                  >
+                    Nama
+                  </p>
+                  <p class="text-[14px] font-medium text-ink">Budi Kusuma</p>
+                </div>
+                <div>
+                  <p
+                    class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                  >
+                    Hubungan
+                  </p>
+                  <p class="text-[14px] font-medium text-ink">
+                    Saudara laki-laki
+                  </p>
+                </div>
+                <div>
+                  <p
+                    class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                  >
+                    No. Telepon
+                  </p>
+                  <p class="text-[14px] font-medium text-ink">08198765432</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Riwayat booking -->
+          <div class="bg-white border border-smoke p-8 fu d2">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <p
+                  class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-1"
+                >
+                  Riwayat Booking
+                </p>
+                <h3
+                  class="text-[20px] font-light text-ink"
+                  style="letter-spacing: -0.3px"
+                >
+                  Semua <span class="italic">pendakian Anda</span>
+                </h3>
+              </div>
+              <a
+                href="status.html"
+                class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+                >Lihat semua →</a
+              >
+            </div>
+
+            <div class="space-y-4">
+              <!-- Booking aktif -->
+              <div
+                class="border border-forest/20 bg-forest/3 p-5 flex items-start justify-between gap-4"
+              >
+                <div class="flex items-start gap-4 flex-1">
+                  <div
+                    class="w-10 h-10 bg-forest/10 flex-shrink-0 flex items-center justify-center text-forest font-bold text-[13px]"
+                  >
+                    D
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-[13px] font-semibold text-ink"
+                        >Paket Deluxe · 3D2N</span
+                      >
+                      <span
+                        class="text-[10px] font-semibold bg-amber-100 text-amber-700 px-2 py-0.5"
+                        >Menunggu Konfirmasi</span
+                      >
+                    </div>
+                    <p class="text-[12px] font-light text-mid">
+                      15 April 2025 · 3 peserta · Sembalun ke Senaru
+                    </p>
+                    <div class="flex items-center gap-4 mt-2 text-[12px]">
+                      <span class="font-light text-light"
+                        >Total:
+                        <span class="font-medium text-ink"
+                          >Rp 4.200.000</span
+                        ></span
+                      >
+                      <span class="font-light text-light"
+                        >DP:
+                        <span class="font-semibold text-forest"
+                          >Rp 840.000 ✓</span
+                        ></span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="detail-booking.html"
+                  class="flex-shrink-0 text-[12px] font-semibold text-forest border border-forest/20 px-4 py-2 hover:bg-forest hover:text-white transition-all"
+                  >#BK-0043</a
+                >
+              </div>
+
+              <!-- Booking selesai -->
+              <div
+                class="border border-smoke p-5 flex items-start justify-between gap-4"
+              >
+                <div class="flex items-start gap-4 flex-1">
+                  <div
+                    class="w-10 h-10 bg-mist flex-shrink-0 flex items-center justify-center text-mid font-bold text-[13px]"
+                  >
+                    S
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-[13px] font-semibold text-ink"
+                        >Paket Standard · 4D3N</span
+                      >
+                      <span
+                        class="text-[10px] font-semibold bg-green-100 text-green-700 px-2 py-0.5"
+                        >Selesai</span
+                      >
+                    </div>
+                    <p class="text-[12px] font-light text-mid">
+                      12 Januari 2025 · 4 peserta · Sembalun ke Senaru
+                    </p>
+                    <div class="flex items-center gap-4 mt-2 text-[12px]">
+                      <span class="font-light text-light"
+                        >Total:
+                        <span class="font-medium text-ink"
+                          >Rp 3.600.000</span
+                        ></span
+                      >
+                      <span class="font-light text-light">Lunas ✓</span>
+                    </div>
+                  </div>
+                </div>
+                <a
+                  href="detail-booking.html"
+                  class="flex-shrink-0 text-[12px] font-medium text-mid border border-smoke px-4 py-2 hover:bg-mist transition-all"
+                  >#BK-0031</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Keamanan akun -->
+          <div class="bg-white border border-smoke p-8 fu d3">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <p
+                  class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-1"
+                >
+                  Keamanan
+                </p>
+                <h3
+                  class="text-[20px] font-light text-ink"
+                  style="letter-spacing: -0.3px"
+                >
+                  Keamanan <span class="italic">akun</span>
+                </h3>
+              </div>
+            </div>
+            <div class="space-y-0 divide-y divide-smoke">
+              <div class="py-4 flex items-center justify-between">
+                <div>
+                  <p class="text-[13px] font-medium text-ink">Password</p>
+                  <p class="text-[12px] font-light text-light">
+                    Terakhir diubah 3 bulan lalu
+                  </p>
+                </div>
+                <a
+                  href="edit-profil.html#password"
+                  class="text-[12px] font-medium text-mid border border-smoke px-4 py-2 hover:bg-mist transition-colors"
+                  >Ubah Password</a
+                >
+              </div>
+              <div class="py-4 flex items-center justify-between">
+                <div>
+                  <p class="text-[13px] font-medium text-ink">
+                    Notifikasi Email
+                  </p>
+                  <p class="text-[12px] font-light text-light">
+                    Konfirmasi booking & invoice
+                  </p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" checked class="sr-only peer" />
+                  <div
+                    class="w-10 h-5 bg-smoke peer-checked:bg-forest rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-4 after:h-4 after:rounded-full after:transition-all peer-checked:after:translate-x-5"
+                  ></div>
+                </label>
+              </div>
+              <div class="py-4 flex items-center justify-between">
+                <div>
+                  <p class="text-[13px] font-medium text-ink">
+                    Notifikasi WhatsApp
+                  </p>
+                  <p class="text-[12px] font-light text-light">
+                    Update status & pengingat keberangkatan
+                  </p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" checked class="sr-only peer" />
+                  <div
+                    class="w-10 h-5 bg-smoke peer-checked:bg-forest rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-4 after:h-4 after:rounded-full after:transition-all peer-checked:after:translate-x-5"
+                  ></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-smoke py-8 px-8 mt-4">
+      <div
+        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-4"
+      >
+        <div class="text-[17px] font-semibold text-ink">
+          Porter <span class="font-light text-mid">Rinjani</span>
+        </div>
+        <p class="text-[12px] font-light text-light">© 2025 Porter Rinjani</p>
+      </div>
+    </footer>
+    <a
+      href="https://wa.me/628123456789"
+      target="_blank"
+      class="fixed bottom-7 right-7 z-50 w-[52px] h-[52px] rounded-full bg-[#25D366] flex items-center justify-center text-[22px] shadow-lg shadow-green-500/25 hover:scale-110 transition-all"
+      >💬</a
+    >
+  </body>
+</html>
