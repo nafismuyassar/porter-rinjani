@@ -50,7 +50,7 @@
         background: #ddd;
       }
 
-      /* PRINT STYLES */
+      /* Area cetak / Simpan PDF */
       @media print {
         body {
           background: #fff !important;
@@ -58,77 +58,62 @@
         .no-print {
           display: none !important;
         }
-        .invoice-wrap {
+        .invoice-card {
           box-shadow: none !important;
           border: none !important;
-          max-width: 100% !important;
-          padding: 0 !important;
-        }
-        .print-page {
-          background: #fff !important;
-          padding: 32px !important;
         }
         @page {
-          margin: 16mm;
+          margin: 14mm;
           size: A4;
         }
       }
     </style>
   </head>
   <body>
-    <!-- TOP BAR (no print) -->
     <div
-      class="no-print sticky top-0 z-50 h-[64px] bg-white border-b border-smoke flex items-center px-8 justify-between"
+      class="no-print sticky top-0 z-50 h-[60px] bg-white border-b border-smoke flex items-center px-6 justify-between"
     >
-      <a
-        href="status.html"
-        class="text-[12px] font-medium text-mid hover:text-ink transition-colors flex items-center gap-1.5"
-        >← Kembali ke Status</a
+      <button
+        onclick="history.back()"
+        class="flex items-center gap-1.5 text-[12px] font-medium text-mid hover:text-ink transition-colors"
       >
-      <div class="text-[17px] font-semibold text-ink">
+        ← Kembali
+      </button>
+      <div class="text-[16px] font-semibold text-ink">
         Porter <span class="font-light text-mid">Rinjani</span>
+        <span class="text-[12px] font-light text-light ml-1">— Invoice</span>
       </div>
-      <div class="flex gap-3">
+      <div class="flex gap-2">
         <button
           onclick="window.print()"
-          class="flex items-center gap-2 bg-forest text-white text-[12px] font-semibold px-5 py-2.5 hover:bg-forest/85 transition-colors"
+          class="flex items-center gap-1.5 bg-forest text-white text-[12px] font-semibold px-5 py-2 hover:bg-forest/85 transition-colors"
         >
-          🖨 Print / Simpan PDF
-        </button>
-        <button
-          onclick="downloadPDF()"
-          class="flex items-center gap-2 border border-smoke text-mid text-[12px] font-medium px-5 py-2.5 hover:bg-mist transition-all"
-        >
-          ⬇ Download PDF
+          🖨 Cetak / Simpan PDF
         </button>
       </div>
     </div>
 
-    <!-- INVOICE WRAPPER -->
-    <div class="max-w-[820px] mx-auto px-5 py-10 no-print-outer">
+    <div class="max-w-[800px] mx-auto px-5 py-8">
       <div
-        class="invoice-wrap bg-white shadow-sm border border-smoke"
+        class="invoice-card bg-white shadow-sm border border-smoke"
         id="invoice"
       >
-        <!-- HEADER -->
-        <div class="print-page p-10 border-b border-smoke">
+        <div class="p-10 border-b border-smoke">
           <div class="flex items-start justify-between mb-8">
-            <!-- Brand -->
             <div>
               <div class="text-[22px] font-semibold text-ink mb-1">
                 Porter <span class="font-light text-mid">Rinjani</span>
               </div>
-              <div class="text-[12px] font-light text-mid mt-2 space-y-1">
+              <div class="text-[12px] font-light text-mid space-y-1 mt-2">
                 <div>Desa Sembalun Lawang, Kecamatan Sembalun</div>
                 <div>Lombok Timur, Nusa Tenggara Barat 83662</div>
                 <div>📱 +62 812-3456-789</div>
                 <div>✉️ info@porterrinjani.com</div>
               </div>
             </div>
-            <!-- Invoice number & status -->
             <div class="text-right">
               <div
-                class="text-[11px] font-semibold tracking-[0.22em] uppercase text-light mb-2"
+                class="text-[10px] font-semibold tracking-[0.22em] uppercase text-light mb-2"
               >
                 Invoice
               </div>
@@ -139,22 +124,21 @@
                 #BK-0042
               </div>
               <div
-                class="inline-flex items-center gap-1.5 bg-forest/8 text-forest border border-forest/15 text-[11px] font-bold tracking-[0.1em] uppercase px-3 py-1.5 mt-2"
+                class="inline-flex items-center gap-1.5 bg-forest/8 text-forest border border-forest/15 text-[11px] font-bold tracking-[0.1em] uppercase px-3 py-1.5 mt-1"
               >
                 ✓ Booking Confirmed
               </div>
             </div>
           </div>
 
-          <!-- Dates row -->
-          <div class="grid grid-cols-3 gap-0 border border-smoke">
+          <div class="grid grid-cols-3 border border-smoke">
             <div class="p-4 border-r border-smoke">
               <div
                 class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
               >
-                Tanggal Invoice
+                Tanggal Booking
               </div>
-              <div class="text-[14px] font-medium text-ink">10 Maret 2025</div>
+              <div class="text-[13px] font-medium text-ink">10 Maret 2025</div>
             </div>
             <div class="p-4 border-r border-smoke">
               <div
@@ -162,7 +146,7 @@
               >
                 Tanggal Pendakian
               </div>
-              <div class="text-[14px] font-semibold text-forest">
+              <div class="text-[13px] font-semibold text-forest">
                 15 April 2025
               </div>
             </div>
@@ -172,26 +156,25 @@
               >
                 Batas Pelunasan
               </div>
-              <div class="text-[14px] font-semibold text-amber-500">
+              <div class="text-[13px] font-semibold text-amber-500">
                 12 April 2025
               </div>
             </div>
           </div>
         </div>
 
-        <!-- CUSTOMER INFO -->
         <div class="p-10 border-b border-smoke">
-          <div class="grid grid-cols-2 gap-12">
+          <div class="grid grid-cols-2 gap-10">
             <div>
               <div
                 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-4"
               >
                 Tagihan Kepada
               </div>
-              <div class="text-[16px] font-semibold text-ink mb-1">
+              <div class="text-[15px] font-semibold text-ink mb-1">
                 Rina Kusuma
               </div>
-              <div class="text-[13px] font-light text-mid space-y-1">
+              <div class="text-[12px] font-light text-mid space-y-1">
                 <div>rina@email.com</div>
                 <div>+62 812-3456-789</div>
                 <div>Jakarta, Indonesia</div>
@@ -203,31 +186,33 @@
               >
                 Detail Pendakian
               </div>
-              <div class="space-y-2 text-[13px]">
+              <div class="space-y-1.5 text-[13px]">
                 <div class="flex gap-3">
-                  <span class="font-light text-mid w-28 flex-shrink-0"
+                  <span class="font-light text-mid w-24 flex-shrink-0"
                     >Paket</span
                   ><span class="font-semibold text-ink">Paket Deluxe</span>
                 </div>
                 <div class="flex gap-3">
-                  <span class="font-light text-mid w-28 flex-shrink-0"
+                  <span class="font-light text-mid w-24 flex-shrink-0"
                     >Program</span
                   ><span class="font-medium text-ink"
-                    >3D2N — Sembalun ke Senaru</span
+                    >3D2N — Lake & Hot Spring</span
                   >
                 </div>
                 <div class="flex gap-3">
-                  <span class="font-light text-mid w-28 flex-shrink-0"
+                  <span class="font-light text-mid w-24 flex-shrink-0"
                     >Rute</span
-                  ><span class="font-medium text-ink">Sembalun → Senaru</span>
+                  ><span class="font-medium text-ink"
+                    >Via Sembalun → Senaru</span
+                  >
                 </div>
                 <div class="flex gap-3">
-                  <span class="font-light text-mid w-28 flex-shrink-0"
+                  <span class="font-light text-mid w-24 flex-shrink-0"
                     >Peserta</span
                   ><span class="font-medium text-ink">3 orang</span>
                 </div>
                 <div class="flex gap-3">
-                  <span class="font-light text-mid w-28 flex-shrink-0"
+                  <span class="font-light text-mid w-24 flex-shrink-0"
                     >Titik Jemput</span
                   ><span class="font-medium text-ink"
                     >Bandara Lombok (BIL)</span
@@ -236,9 +221,21 @@
               </div>
             </div>
           </div>
+
+          <div class="mt-5 p-4 bg-forest/5 border border-forest/15">
+            <p class="text-[11px] font-semibold text-forest mb-1">
+              🗺️ Via Sembalun → Senaru (One Way)
+            </p>
+            <p class="text-[12px] font-light text-mid leading-[1.7]">
+              Dimulai Pos Sembalun Lawang, melalui Kawah Rim, Danau Segara Anak
+              & Hot Spring, turun via Senaru. Jemput di BIL sebelum pendakian,
+              antar ke tujuan setelah selesai —
+              <strong class="text-ink">tanpa biaya tambahan</strong> (Paket
+              Deluxe).
+            </p>
+          </div>
         </div>
 
-        <!-- LINE ITEMS -->
         <div class="p-10 border-b border-smoke">
           <div
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-5"
@@ -254,69 +251,70 @@
                   Deskripsi
                 </th>
                 <th
-                  class="text-center py-3 text-[10px] font-bold tracking-[0.14em] uppercase text-light"
+                  class="text-center py-3 text-[10px] font-bold tracking-[0.14em] uppercase text-light w-16"
                 >
                   Qty
                 </th>
                 <th
-                  class="text-right py-3 text-[10px] font-bold tracking-[0.14em] uppercase text-light"
+                  class="text-right py-3 text-[10px] font-bold tracking-[0.14em] uppercase text-light w-24"
                 >
-                  Harga Satuan
+                  Satuan
                 </th>
                 <th
-                  class="text-right py-3 text-[10px] font-bold tracking-[0.14em] uppercase text-light"
+                  class="text-right py-3 text-[10px] font-bold tracking-[0.14em] uppercase text-light w-24"
                 >
                   Subtotal
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-smoke">
+            <tbody>
               <tr>
                 <td class="py-4">
-                  <div class="text-[14px] font-semibold text-ink mb-1">
-                    Paket Deluxe 3D2N
+                  <div class="text-[13px] font-semibold text-ink mb-1">
+                    Paket Deluxe 3D2N — Lake & Hot Spring
                   </div>
-                  <div class="text-[12px] font-light text-mid">
-                    Sembalun → Senaru · 15–17 April 2025
+                  <div class="text-[11px] font-light text-mid">
+                    Via Sembalun → Senaru · 15–17 April 2025
                   </div>
                   <div class="text-[11px] font-light text-light mt-1">
-                    Termasuk: porter personal, chef, tenda deluxe, makan 3×/hari
-                    + snack, sleeping bag, transportasi PP
+                    Porter 1:1 · Hotel AC+air panas · Makan malam hotel ·
+                    Guide+tiket air terjun · Makanan lengkap+buah+3L air/hari ·
+                    Matras 8cm+bantal · Sleeping bag premium · Tenda · Kursi,
+                    meja, toilet tent · Tiket & asuransi TNGR · Transport PP ·
+                    Nol biaya tambahan
                   </div>
                 </td>
                 <td class="py-4 text-center text-[13px] font-medium text-ink">
                   3 org
                 </td>
                 <td class="py-4 text-right text-[13px] font-light text-mid">
-                  Rp 1.400.000
+                  USD 280
                 </td>
                 <td class="py-4 text-right text-[14px] font-semibold text-ink">
-                  Rp 4.200.000
+                  USD 840
                 </td>
               </tr>
             </tbody>
           </table>
 
-          <!-- Totals -->
-          <div class="mt-6 ml-auto max-w-[320px] space-y-2.5">
+          <div class="mt-5 ml-auto max-w-[280px] space-y-2">
             <div class="flex justify-between text-[13px] py-1.5">
-              <span class="font-light text-mid">Subtotal</span>
-              <span class="font-medium text-ink">Rp 4.200.000</span>
+              <span class="font-light text-mid">Subtotal</span
+              ><span class="font-medium text-ink">USD 840</span>
             </div>
             <div class="flex justify-between text-[13px] py-1.5">
-              <span class="font-light text-mid">Diskon</span>
-              <span class="font-medium text-forest">— Rp 0</span>
+              <span class="font-light text-mid">Diskon</span
+              ><span class="font-medium text-forest">— USD 0</span>
             </div>
             <div
-              class="flex justify-between text-[13px] py-1.5 border-t border-smoke pt-3 mt-1"
+              class="flex justify-between text-[14px] font-bold py-2 border-t border-smoke mt-1"
             >
-              <span class="font-bold text-ink text-[15px]">TOTAL</span>
-              <span class="font-bold text-ink text-[18px]">Rp 4.200.000</span>
+              <span class="text-ink">TOTAL</span
+              ><span class="text-ink">USD 840</span>
             </div>
           </div>
         </div>
 
-        <!-- PAYMENT STATUS -->
         <div class="p-10 border-b border-smoke">
           <div
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-5"
@@ -324,7 +322,6 @@
             Status Pembayaran
           </div>
           <div class="space-y-3">
-            <!-- DP Paid -->
             <div
               class="flex items-center justify-between p-4 bg-forest/5 border border-forest/15"
             >
@@ -336,18 +333,15 @@
                 </div>
                 <div>
                   <div class="text-[13px] font-semibold text-ink">
-                    DP 20% — Lunas
+                    DP 30% — Dikonfirmasi
                   </div>
                   <div class="text-[11px] font-light text-mid">
                     Dibayar 10 Mar 2025 · via BCA
                   </div>
                 </div>
               </div>
-              <div class="text-[16px] font-semibold text-forest">
-                Rp 840.000
-              </div>
+              <div class="text-[16px] font-semibold text-forest">USD 252</div>
             </div>
-            <!-- Sisa -->
             <div
               class="flex items-center justify-between p-4 bg-amber-50 border border-amber-200"
             >
@@ -367,12 +361,11 @@
                 </div>
               </div>
               <div class="text-[16px] font-semibold text-amber-600">
-                Rp 3.360.000
+                USD 588
               </div>
             </div>
           </div>
 
-          <!-- Payment info -->
           <div class="mt-5 p-4 bg-mist border border-smoke">
             <div
               class="text-[10px] font-semibold tracking-[0.14em] uppercase text-light mb-3"
@@ -399,69 +392,57 @@
           </div>
         </div>
 
-        <!-- TERMS & KEBIJAKAN DP HANGUS -->
         <div class="p-10 border-b border-smoke">
           <div
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-4"
           >
             Syarat & Ketentuan
           </div>
-          <div
-            class="space-y-2.5 text-[12px] font-light text-mid leading-[1.85]"
-          >
+          <div class="space-y-2 text-[12px] font-light text-mid leading-[1.85]">
             <div class="flex gap-2.5">
-              <span class="flex-shrink-0 font-semibold text-ink">1.</span
-              >Pembayaran DP yang telah dilakukan
-              <strong class="text-ink"
-                >tidak dapat dikembalikan (hangus)</strong
-              >
-              apabila customer membatalkan atau tidak jadi berangkat setelah
-              booking dikonfirmasi admin, dengan alasan apapun.
+              <span class="flex-shrink-0 font-semibold text-ink">1.</span>DP
+              yang telah dibayarkan
+              <strong class="text-ink">tidak dapat dikembalikan</strong> apabila
+              customer membatalkan setelah booking dikonfirmasi admin.
             </div>
             <div class="flex gap-2.5">
               <span class="flex-shrink-0 font-semibold text-ink">2.</span
-              >Pelunasan sisa pembayaran wajib dilakukan paling lambat
-              <strong class="text-ink">3 hari (H-3)</strong> sebelum tanggal
-              keberangkatan. Kegagalan melunasi tepat waktu dapat mengakibatkan
-              pembatalan otomatis dan DP hangus.
+              >Pelunasan wajib dilakukan paling lambat
+              <strong class="text-ink">H-3</strong> sebelum keberangkatan.
+              Kegagalan melunasi dapat mengakibatkan pembatalan otomatis dan DP
+              hangus.
             </div>
             <div class="flex gap-2.5">
               <span class="flex-shrink-0 font-semibold text-ink">3.</span
               >Ketidakhadiran pada hari keberangkatan tanpa pemberitahuan
-              terlebih dahulu mengakibatkan DP hangus 100%.
+              mengakibatkan DP hangus 100%.
             </div>
             <div class="flex gap-2.5">
-              <span class="flex-shrink-0 font-semibold text-ink">4.</span
-              >Pembatalan yang dilakukan sebelum konfirmasi admin belum
-              mengakibatkan DP hangus — hubungi kami segera via WhatsApp.
+              <span class="flex-shrink-0 font-semibold text-ink">4.</span>Porter
+              Rinjani berhak membatalkan pendakian karena alasan keselamatan.
+              Pembayaran dikembalikan penuh atau dijadwalkan ulang.
             </div>
             <div class="flex gap-2.5">
-              <span class="flex-shrink-0 font-semibold text-ink">5.</span>Porter
-              Rinjani berhak membatalkan pendakian karena alasan keselamatan
-              (cuaca ekstrem, bencana, dll). Dalam kondisi ini, pembayaran akan
-              dikembalikan penuh atau dijadwalkan ulang sesuai kesepakatan.
-            </div>
-            <div class="flex gap-2.5">
-              <span class="flex-shrink-0 font-semibold text-ink">6.</span>Untuk
-              paket Standard dan Sharing: dapat dikenakan biaya tambahan apabila
-              pendakian tidak berhasil mencapai puncak karena kondisi fisik
-              peserta.
+              <span class="flex-shrink-0 font-semibold text-ink">5.</span>Paket
+              <strong class="text-ink">Standard/Sharing</strong>: ada biaya
+              tambahan jika kembali sebelum program selesai. Paket
+              <strong class="text-ink">Deluxe</strong>: bebas biaya tambahan
+              apapun.
             </div>
           </div>
         </div>
 
-        <!-- FOOTER INVOICE -->
         <div class="p-10 flex items-center justify-between">
           <div>
             <div class="text-[13px] font-semibold text-ink mb-1">
               Terima kasih telah mempercayai Porter Rinjani!
             </div>
             <div class="text-[12px] font-light text-mid">
-              Ada pertanyaan? Hubungi kami di
+              Ada pertanyaan?
               <a href="mailto:info@porterrinjani.com" class="text-forest"
                 >info@porterrinjani.com</a
               >
-              atau
+              ·
               <a href="https://wa.me/628123456789" class="text-forest"
                 >WhatsApp</a
               >
@@ -473,7 +454,7 @@
             >
               Diterbitkan oleh
             </div>
-            <div class="text-[14px] font-semibold text-ink">Porter Rinjani</div>
+            <div class="text-[13px] font-semibold text-ink">Porter Rinjani</div>
             <div class="text-[11px] font-light text-mid">
               Sembalun Lawang, Lombok
             </div>
@@ -482,37 +463,28 @@
       </div>
     </div>
 
-    <!-- ACTION BAR BOTTOM (no print) -->
-    <div
-      class="no-print max-w-[820px] mx-auto px-5 pb-10 flex gap-3 justify-center mt-4"
-    >
-      <button
-        onclick="window.print()"
-        class="flex items-center gap-2 bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
-      >
-        🖨 Print / Simpan PDF
-      </button>
-      <a
-        href="status.html"
-        class="flex items-center border border-smoke text-mid text-[13px] font-medium px-8 py-3.5 hover:bg-mist transition-all"
-      >
-        ← Kembali ke Status
-      </a>
-      <a
-        href="https://wa.me/628123456789"
-        target="_blank"
-        class="flex items-center gap-2 bg-[#25D366] text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-[#1fbd5c] transition-colors"
-      >
-        💬 Hubungi Kami
-      </a>
+    <div class="no-print max-w-[800px] mx-auto px-5 pb-10">
+      <div class="flex gap-3 justify-center flex-wrap">
+        <button
+          onclick="window.print()"
+          class="flex items-center gap-2 bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
+        >
+          🖨 Cetak / Simpan PDF
+        </button>
+        <a
+          href="index.html"
+          class="flex items-center border border-smoke text-mid text-[13px] font-medium px-8 py-3.5 hover:bg-mist transition-all"
+        >
+          ← Kembali ke Beranda
+        </a>
+        <a
+          href="https://wa.me/628123456789"
+          target="_blank"
+          class="flex items-center gap-2 bg-[#25D366] text-white text-[13px] font-semibold px-6 py-3.5 hover:bg-[#1fbd5c] transition-colors"
+        >
+          💬 WhatsApp
+        </a>
+      </div>
     </div>
-
-    <script>
-      function downloadPDF() {
-        // Trigger browser print dialog — user can "Save as PDF"
-        window.print();
-      }
-      // Keyboard shortcut Ctrl+P already works natively
-    </script>
   </body>
 </html>
