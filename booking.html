@@ -2,8 +2,8 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Form Booking — Porter Rinjani</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking — Porter Rinjani</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
       rel="stylesheet"
@@ -43,76 +43,118 @@
         background: #f7f6f3;
         color: #1a1a1a;
       }
-      input:focus,
-      select:focus,
-      textarea:focus {
-        outline: none;
-        border-color: #1b3a2d !important;
-        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
-      }
       ::-webkit-scrollbar {
         width: 4px;
       }
       ::-webkit-scrollbar-thumb {
         background: #ddd;
       }
-      .step-done .sn {
-        background: #1b3a2d !important;
-        border-color: #1b3a2d !important;
-        color: #fff !important;
+      input,
+      select,
+      textarea {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #efefec;
+        background: #fff;
+        font-size: 14px;
+        font-weight: 300;
+        color: #1a1a1a;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        -webkit-appearance: none;
+        appearance: none;
       }
-      .step-active .sn {
-        background: #1a1a1a !important;
-        border-color: #1a1a1a !important;
-        color: #fff !important;
-      }
-      .step-active .sl {
-        color: #1a1a1a !important;
-        font-weight: 600 !important;
-      }
-      .sc {
-        display: none;
-      }
-      .sc.active {
-        display: block;
-      }
-      @keyframes fi {
-        from {
-          opacity: 0;
-          transform: translateY(8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .sc.active {
-        animation: fi 0.3s ease;
-      }
-      .psel {
-        border: 1.5px solid #efefec;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .psel:hover {
-        border-color: #6b6b6b;
-      }
-      .psel.on {
-        border-color: #1b3a2d !important;
-        background: #f0f5f2 !important;
-      }
-      .psel.on .pn {
-        color: #1b3a2d;
-      }
-      .dz {
-        border: 1.5px dashed #efefec;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .dz:hover,
-      .dz.drag {
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
         border-color: #1b3a2d;
-        background: #f0f5f2;
+        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
+      }
+      select {
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23A8A8A4' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+      }
+      .pkg-card,
+      .rute-card,
+      .dp-opt {
+        border: 2px solid #efefec;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .pkg-card {
+        padding: 18px;
+      }
+      .rute-card {
+        padding: 13px 15px;
+      }
+      .dp-opt {
+        padding: 13px 15px;
+      }
+      .pkg-card:hover,
+      .rute-card:hover,
+      .dp-opt:hover {
+        border-color: #1b3a2d;
+      }
+      .pkg-card.sel,
+      .rute-card.sel,
+      .dp-opt.sel {
+        border-color: #1b3a2d;
+        background: #f0f4f2;
+      }
+      .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid #efefec;
+        flex-shrink: 0;
+        transition: all 0.2s;
+      }
+      .pdot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 2px solid #efefec;
+        flex-shrink: 0;
+        margin-top: 3px;
+        transition: all 0.2s;
+      }
+      .sel .dot,
+      .sel .pdot {
+        background: #1b3a2d;
+        border-color: #1b3a2d;
+      }
+      .step-line {
+        height: 2px;
+        background: #efefec;
+        flex: 1;
+      }
+      .step-line.done {
+        background: #1b3a2d;
+      }
+      .drop-zone {
+        border: 2px dashed #efefec;
+        padding: 26px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .drop-zone:hover,
+      .drop-zone.dg {
+        border-color: #1b3a2d;
+        background: #f0f4f2;
+      }
+      .srow {
+        display: flex;
+        justify-content: space-between;
+        padding: 9px 0;
+        font-size: 13px;
+      }
+      .srow + .srow {
+        border-top: 1px solid #efefec;
       }
       input[type="range"] {
         -webkit-appearance: none;
@@ -121,24 +163,28 @@
         background: #efefec;
         border-radius: 2px;
         outline: none;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+      }
+      input[type="range"]:focus {
+        border-color: transparent;
+        box-shadow: none;
       }
       input[type="range"]::-webkit-slider-thumb {
         -webkit-appearance: none;
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
         background: #1b3a2d;
         cursor: pointer;
-        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.15);
-      }
-      .dpbtn {
-        transition: all 0.2s;
       }
     </style>
   </head>
   <body>
+    <!-- NAV -->
     <nav
-      class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+      class="sticky top-0 z-50 h-[68px] bg-white border-b border-smoke flex items-center"
     >
       <div
         class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
@@ -146,1061 +192,1272 @@
         <a href="index.html" class="text-[17px] font-semibold text-ink"
           >Porter <span class="font-light text-mid">Rinjani</span></a
         >
-        <a
-          href="paket.html"
-          class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
-          >← Kembali ke Paket</a
-        >
+        <div class="flex items-center gap-9">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Kontak</a
+          >
+        </div>
         <div class="flex items-center gap-3">
           <div
-            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest"
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
           >
             R
           </div>
-          <span class="text-[13px] font-medium text-ink">Rina Kusuma</span>
+          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+            >Rina Kusuma</a
+          >
           <a
             href="status.html"
-            class="ml-2 text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
             >Status Booking</a
           >
         </div>
       </div>
     </nav>
 
-    <!-- STEPS -->
-    <div class="bg-white border-b border-smoke px-8 py-4">
-      <div class="max-w-[880px] mx-auto flex items-center gap-2">
-        <div class="step flex items-center gap-2.5 step-done" id="s1">
-          <div
-            class="sn w-6 h-6 rounded-full border-2 border-smoke bg-white flex items-center justify-center text-[11px] font-bold text-light transition-all"
-          >
-            ✓
+    <!-- HERO -->
+    <div class="bg-forest">
+      <div class="max-w-[1280px] mx-auto px-8 py-10">
+        <nav class="text-[11px] font-light text-white/30 mb-5 flex gap-2">
+          <a href="index.html" class="hover:text-white/55">Beranda</a
+          ><span>/</span>
+          <a href="paket.html" class="hover:text-white/55">Paket</a
+          ><span>/</span>
+          <span class="text-white/50">Booking</span>
+        </nav>
+        <h1
+          class="text-[clamp(26px,4vw,44px)] font-light text-white mb-2"
+          style="letter-spacing: -0.8px"
+        >
+          Form Booking Pendakian
+        </h1>
+        <p class="text-[14px] font-light text-white/40">
+          Isi data lengkap. Konfirmasi dikirim via WhatsApp dalam 1×24 jam.
+        </p>
+      </div>
+    </div>
+
+    <!-- STEP INDICATOR -->
+    <div class="bg-white border-b border-smoke sticky top-[68px] z-40">
+      <div class="max-w-[1280px] mx-auto px-8 py-4">
+        <div class="flex items-center gap-2 max-w-[560px]">
+          <div class="flex items-center gap-2">
+            <div
+              class="w-7 h-7 rounded-full bg-forest text-white flex items-center justify-center text-[11px] font-bold"
+              id="sd1"
+            >
+              1
+            </div>
+            <span class="text-[12px] font-semibold text-ink hidden sm:block"
+              >Pilih Paket</span
+            >
           </div>
-          <span
-            class="sl text-[11px] font-medium tracking-[.06em] uppercase text-light transition-all"
-            >Pilih Paket</span
-          >
-        </div>
-        <div class="flex-1 h-px bg-smoke max-w-[48px]"></div>
-        <div class="step flex items-center gap-2.5 step-active" id="s2">
-          <div
-            class="sn w-6 h-6 rounded-full border-2 border-smoke bg-white flex items-center justify-center text-[11px] font-bold text-light transition-all"
-          >
-            2
+          <div class="step-line done" id="l1"></div>
+          <div class="flex items-center gap-2">
+            <div
+              class="w-7 h-7 rounded-full bg-smoke text-mid flex items-center justify-center text-[11px] font-bold"
+              id="sd2"
+            >
+              2
+            </div>
+            <span
+              class="text-[12px] font-medium text-mid hidden sm:block"
+              id="sl2"
+              >Data Peserta</span
+            >
           </div>
-          <span
-            class="sl text-[11px] font-medium tracking-[.06em] uppercase text-light transition-all"
-            >Data Peserta</span
-          >
-        </div>
-        <div class="flex-1 h-px bg-smoke max-w-[48px]"></div>
-        <div class="step flex items-center gap-2.5" id="s3">
-          <div
-            class="sn w-6 h-6 rounded-full border-2 border-smoke bg-white flex items-center justify-center text-[11px] font-bold text-light transition-all"
-          >
-            3
+          <div class="step-line" id="l2"></div>
+          <div class="flex items-center gap-2">
+            <div
+              class="w-7 h-7 rounded-full bg-smoke text-mid flex items-center justify-center text-[11px] font-bold"
+              id="sd3"
+            >
+              3
+            </div>
+            <span
+              class="text-[12px] font-medium text-mid hidden sm:block"
+              id="sl3"
+              >Pembayaran</span
+            >
           </div>
-          <span
-            class="sl text-[11px] font-medium tracking-[.06em] uppercase text-light transition-all"
-            >Pembayaran</span
-          >
-        </div>
-        <div class="flex-1 h-px bg-smoke max-w-[48px]"></div>
-        <div class="step flex items-center gap-2.5" id="s4">
-          <div
-            class="sn w-6 h-6 rounded-full border-2 border-smoke bg-white flex items-center justify-center text-[11px] font-bold text-light transition-all"
-          >
-            4
+          <div class="step-line" id="l3"></div>
+          <div class="flex items-center gap-2">
+            <div
+              class="w-7 h-7 rounded-full bg-smoke text-mid flex items-center justify-center text-[11px] font-bold"
+              id="sd4"
+            >
+              4
+            </div>
+            <span
+              class="text-[12px] font-medium text-mid hidden sm:block"
+              id="sl4"
+              >Konfirmasi</span
+            >
           </div>
-          <span
-            class="sl text-[11px] font-medium tracking-[.06em] uppercase text-light transition-all"
-            >Konfirmasi</span
-          >
         </div>
       </div>
     </div>
 
-    <div class="flex min-h-[calc(100vh-136px)]">
-      <div class="flex-1 bg-white border-r border-smoke">
-        <!-- STEP 1 -->
-        <div id="sc1" class="sc px-10 py-10">
-          <p
-            class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-2"
-          >
-            Langkah 1
-          </p>
-          <h2
-            class="text-[26px] font-light text-ink mb-7"
-            style="letter-spacing: -0.4px"
-          >
-            Pilih <span class="italic">paket pendakian</span>
-          </h2>
-          <div class="grid grid-cols-3 gap-4 mb-8">
-            <div
-              class="psel on p-5 bg-white"
-              onclick="selP(this, 'Deluxe', '1250000')"
-            >
-              <div
-                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-2"
+    <div class="max-w-[1280px] mx-auto px-8 py-10">
+      <div class="grid grid-cols-[1fr_360px] gap-8 items-start">
+        <!-- ═══ FORM ═══ -->
+        <div>
+          <!-- STEP 1 -->
+          <div id="step1">
+            <div class="bg-white border border-smoke p-8 mb-6">
+              <p
+                class="text-[11px] font-semibold tracking-[.2em] uppercase text-tan mb-1"
               >
-                Deluxe
-              </div>
-              <h4 class="pn text-[16px] font-semibold text-forest mb-1">
-                Paket Deluxe
-              </h4>
-              <p class="text-[12px] font-light text-mid mb-3">
-                Porter personal, chef, tenda deluxe, 3× makan
+                Langkah 1
               </p>
-              <div class="text-[20px] font-light text-ink">
-                Rp 1.250.000<span class="text-[12px] font-light text-light"
-                  >/org</span
-                >
-              </div>
-            </div>
-            <div
-              class="psel p-5 bg-white"
-              onclick="selP(this, 'Standard', '750000')"
-            >
-              <div
-                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-2"
+              <h2
+                class="text-[20px] font-semibold text-ink mb-7"
+                style="letter-spacing: -0.3px"
               >
-                Standard
-              </div>
-              <h4 class="pn text-[16px] font-semibold text-ink mb-1">
-                Paket Standard
-              </h4>
-              <p class="text-[12px] font-light text-mid mb-3">
-                Porter bersama, tenda standard, 2× makan
-              </p>
-              <div class="text-[20px] font-light text-ink">
-                Rp 750.000<span class="text-[12px] font-light text-light"
-                  >/org</span
-                >
-              </div>
-            </div>
-            <div
-              class="psel p-5 bg-white"
-              onclick="selP(this, 'Sharing', '500000')"
-            >
-              <div
-                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-2"
-              >
-                Sharing
-              </div>
-              <h4 class="pn text-[16px] font-semibold text-ink mb-1">
-                Paket Sharing
-              </h4>
-              <p class="text-[12px] font-light text-mid mb-3">
-                Bergabung grup, tenda bersama, 2× makan
-              </p>
-              <div class="text-[20px] font-light text-ink">
-                Rp 500.000<span class="text-[12px] font-light text-light"
-                  >/org</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-5 mb-8">
-            <div>
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >Program / Durasi *</label
-              >
-              <select
-                id="sel-dur"
-                onchange="updS()"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                style="
-                  background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                  background-repeat: no-repeat;
-                  background-position: right 14px center;
-                "
-              >
-                <option value="">-- Pilih durasi --</option>
-                <option value="2d1n-snr">2D1N — Sembalun ke Senaru</option>
-                <option value="3d2n-snr">3D2N — Sembalun ke Senaru</option>
-                <option value="4d3n-snr">4D3N — Sembalun ke Senaru</option>
-                <option value="4d3n-tor">4D3N — Sembalun ke Torean</option>
-              </select>
-            </div>
-            <div>
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >Tanggal Mulai *</label
-              >
-              <input
-                type="date"
-                id="sel-tgl"
-                onchange="updS()"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-              />
-            </div>
-          </div>
-          <div id="err1" class="hidden text-[13px] text-red-400 mb-4">
-            ⚠ Pilih paket, durasi, dan tanggal terlebih dahulu.
-          </div>
-          <div class="flex justify-end">
-            <button
-              onclick="goS(2)"
-              class="bg-forest text-white text-[13px] font-semibold px-10 py-3.5 hover:bg-forest/85 transition-colors"
-            >
-              Lanjut →
-            </button>
-          </div>
-        </div>
+                Pilih Paket & Program
+              </h2>
 
-        <!-- STEP 2 -->
-        <div id="sc2" class="sc active px-10 py-10">
-          <p
-            class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-2"
-          >
-            Langkah 2
-          </p>
-          <h2
-            class="text-[26px] font-light text-ink mb-7"
-            style="letter-spacing: -0.4px"
-          >
-            Data <span class="italic">peserta</span>
-          </h2>
-          <div class="mb-7">
-            <label
-              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-3"
-              >Jumlah Peserta *</label
-            >
-            <div
-              class="flex items-center gap-4 border border-smoke bg-white py-2 px-3 w-fit"
-            >
-              <button
-                onclick="cPx(-1)"
-                class="w-9 h-9 border border-smoke flex items-center justify-center text-mid text-lg hover:bg-mist font-light"
-              >
-                −
-              </button>
-              <span
-                id="pax-n"
-                class="text-[20px] font-semibold text-ink min-w-[32px] text-center"
-                >3</span
-              >
-              <button
-                onclick="cPx(1)"
-                class="w-9 h-9 border border-smoke flex items-center justify-center text-mid text-lg hover:bg-mist font-light"
-              >
-                +
-              </button>
-            </div>
-            <p class="text-[11px] font-light text-light mt-2">
-              Harga menyesuaikan otomatis
-            </p>
-          </div>
-          <div class="grid grid-cols-2 gap-5 mb-5">
-            <div>
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >Nama Ketua Rombongan *</label
-              ><input
-                type="text"
-                id="inp-nama"
-                value="Rina Kusuma"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-              />
-            </div>
-            <div>
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >No. WhatsApp *</label
-              ><input
-                type="tel"
-                id="inp-wa"
-                value="08123456789"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-              />
-            </div>
-          </div>
-          <div class="grid grid-cols-2 gap-5 mb-5">
-            <div>
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >Email *</label
-              ><input
-                type="email"
-                id="inp-email"
-                value="rina@email.com"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-              />
-              <p class="text-[11px] font-light text-light mt-1.5">
-                📄 Invoice dikirim ke email ini setelah booking dikonfirmasi
-              </p>
-            </div>
-            <div>
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >Titik Jemput *</label
-              >
-              <select
-                id="inp-jemput"
-                onchange="updS()"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                style="
-                  background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                  background-repeat: no-repeat;
-                  background-position: right 14px center;
-                "
-              >
-                <option value="bil">Bandara Lombok (BIL)</option>
-                <option value="mtm">Mataram</option>
-                <option value="sng">Senggigi</option>
-                <option value="sbl">Sembalun Langsung</option>
-              </select>
-            </div>
-          </div>
-          <div class="mb-7">
-            <label
-              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-              >Catatan Khusus
-              <span class="font-normal text-light/60">(opsional)</span></label
-            ><textarea
-              rows="3"
-              class="w-full px-4 py-3 border border-smoke text-[14px] font-light resize-none"
-              placeholder="Alergi, kondisi kesehatan, permintaan khusus..."
-            ></textarea>
-          </div>
-          <div class="flex justify-between">
-            <button
-              onclick="goS(1)"
-              class="border border-smoke text-mid text-[13px] font-medium px-8 py-3 hover:bg-mist"
-            >
-              ← Kembali
-            </button>
-            <button
-              onclick="goS(3)"
-              class="bg-forest text-white text-[13px] font-semibold px-10 py-3 hover:bg-forest/85"
-            >
-              Lanjut ke Pembayaran →
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 3 -->
-        <div id="sc3" class="sc px-10 py-10">
-          <p
-            class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-2"
-          >
-            Langkah 3
-          </p>
-          <h2
-            class="text-[26px] font-light text-ink mb-7"
-            style="letter-spacing: -0.4px"
-          >
-            <span class="italic">Pembayaran</span>
-          </h2>
-
-          <!-- DP SLIDER -->
-          <div class="bg-white border border-smoke p-6 mb-5">
-            <div class="flex items-start justify-between mb-5">
-              <div>
-                <h3 class="text-[14px] font-semibold text-ink mb-1">
-                  Berapa DP yang ingin Anda bayar?
-                </h3>
-                <p class="text-[12px] font-light text-mid">
-                  Minimum <strong class="text-forest">20%</strong> dari total.
-                  Sisa dilunasi sebelum keberangkatan.
-                </p>
-              </div>
-              <div class="text-right flex-shrink-0 ml-6">
-                <div
-                  class="text-[30px] font-light text-forest"
-                  id="dp-disp"
-                  style="letter-spacing: -0.5px"
+              <div class="mb-6">
+                <label
+                  class="block text-[11px] font-semibold tracking-[.14em] uppercase text-light mb-3"
+                  >Paket</label
                 >
-                  Rp 840.000
-                </div>
-                <div
-                  class="text-[11px] font-semibold text-forest/55 mt-0.5"
-                  id="dp-pct-lbl"
-                >
-                  20% dari total
+                <div class="grid grid-cols-2 gap-4">
+                  <div
+                    class="pkg-card sel"
+                    id="pk-deluxe"
+                    onclick="selectPkg('deluxe')"
+                  >
+                    <div class="flex items-start gap-3 mb-2">
+                      <div class="pdot sel" id="pd-deluxe"></div>
+                      <div>
+                        <div class="text-[13px] font-semibold text-ink">
+                          ⭐ Paket Deluxe
+                        </div>
+                        <div class="text-[11px] font-light text-mid mt-0.5">
+                          Hotel AC, porter 1:1, makanan lengkap
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-[11px] font-medium text-forest">
+                      ✓ Nol biaya tambahan apapun
+                    </div>
+                  </div>
+                  <div
+                    class="pkg-card"
+                    id="pk-standard"
+                    onclick="selectPkg('standard')"
+                  >
+                    <div class="flex items-start gap-3 mb-2">
+                      <div class="pdot" id="pd-standard"></div>
+                      <div>
+                        <div class="text-[13px] font-semibold text-ink">
+                          🎒 Paket Standard / Sharing
+                        </div>
+                        <div class="text-[11px] font-light text-mid mt-0.5">
+                          Hotel kipas, porter 1:2, makanan standar
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-[11px] font-light text-amber-600">
+                      ⚠ Ada biaya tambahan jika balik lebih awal
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Slider -->
-            <div class="mb-4">
-              <input
-                type="range"
-                id="dp-slider"
-                min="20"
-                max="100"
-                step="5"
-                value="20"
-                oninput="updDP(this.value)"
-              />
-              <div
-                class="flex justify-between text-[10px] font-medium text-light mt-2.5"
-              >
-                <span class="text-forest font-semibold">20% min.</span
-                ><span>50%</span><span>100% lunas</span>
-              </div>
-            </div>
-
-            <!-- Quick select -->
-            <div class="flex gap-2 flex-wrap mb-6">
-              <button
-                onclick="setDP(20)"
-                class="dpbtn text-[11px] font-semibold px-4 py-2 border border-forest bg-forest/8 text-forest"
-              >
-                20%
-              </button>
-              <button
-                onclick="setDP(25)"
-                class="dpbtn text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-forest hover:text-forest"
-              >
-                25%
-              </button>
-              <button
-                onclick="setDP(30)"
-                class="dpbtn text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-forest hover:text-forest"
-              >
-                30%
-              </button>
-              <button
-                onclick="setDP(50)"
-                class="dpbtn text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-forest hover:text-forest"
-              >
-                50%
-              </button>
-              <button
-                onclick="setDP(75)"
-                class="dpbtn text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-forest hover:text-forest"
-              >
-                75%
-              </button>
-              <button
-                onclick="setDP(100)"
-                class="dpbtn text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-forest hover:text-forest"
-              >
-                100% Lunas
-              </button>
-            </div>
-
-            <!-- Breakdown 3 col -->
-            <div class="grid grid-cols-3 gap-0 border border-smoke">
-              <div class="p-4 text-center border-r border-smoke">
-                <div
-                  class="text-[9px] font-bold tracking-[.16em] uppercase text-light mb-2"
+              <div class="mb-6">
+                <label
+                  class="block text-[11px] font-semibold tracking-[.14em] uppercase text-light mb-2"
+                  >Program</label
                 >
-                  Total Booking
-                </div>
-                <div class="text-[16px] font-medium text-ink" id="bd-tot">
-                  Rp 4.200.000
-                </div>
-              </div>
-              <div class="p-4 text-center border-r border-smoke bg-forest/3">
-                <div
-                  class="text-[9px] font-bold tracking-[.16em] uppercase text-forest/60 mb-2"
-                >
-                  Dibayar Sekarang
-                </div>
-                <div class="text-[16px] font-semibold text-forest" id="bd-dp">
-                  Rp 840.000
-                </div>
-              </div>
-              <div class="p-4 text-center">
-                <div
-                  class="text-[9px] font-bold tracking-[.16em] uppercase text-light mb-2"
-                >
-                  Sisa Pelunasan
-                </div>
-                <div
-                  class="text-[16px] font-medium text-amber-500"
-                  id="bd-sisa"
-                >
-                  Rp 3.360.000
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ⚠ DP HANGUS WARNING -->
-          <div class="bg-amber-50 border-l-4 border-amber-400 p-5 mb-5">
-            <div class="flex gap-3">
-              <span class="text-xl flex-shrink-0">⚠️</span>
-              <div>
-                <h4 class="text-[13px] font-semibold text-amber-800 mb-2">
-                  Kebijakan DP — Harap Dibaca
-                </h4>
+                <select id="sel-prog" onchange="updateCalc()">
+                  <option value="2d1n_rim">2D1N — Crater Rim</option>
+                  <option value="3d2n_lake" selected>
+                    3D2N — Crater Rim, Lake & Hot Spring
+                  </option>
+                  <option value="3d2n_summit">
+                    3D2N — Crater Rim, Lake & Summit
+                  </option>
+                  <option value="4d3n">
+                    4D3N — Crater Rim, Lake & Hot Spring (Extended)
+                  </option>
+                </select>
                 <p
-                  class="text-[13px] font-light text-amber-700 leading-[1.85] mb-3"
+                  class="text-[11px] font-light text-light mt-1.5"
+                  id="prog-note"
                 >
-                  DP yang telah dibayarkan
-                  <strong>tidak dapat dikembalikan (hangus)</strong> apabila
-                  Anda membatalkan atau tidak jadi berangkat setelah booking
-                  dikonfirmasi admin, dengan alasan apapun.
+                  Termasuk Danau Segara Anak & Hot Spring Aik Kalak.
                 </p>
-                <ul class="space-y-1.5">
-                  <li class="flex gap-2 text-[12px] font-light text-amber-700">
-                    <span class="flex-shrink-0">•</span>Pembatalan
-                    <strong>sebelum</strong> konfirmasi admin → DP belum hangus,
-                    hubungi kami segera
-                  </li>
-                  <li class="flex gap-2 text-[12px] font-light text-amber-700">
-                    <span class="flex-shrink-0">•</span>Pembatalan
-                    <strong>setelah</strong> konfirmasi admin →
-                    <strong>DP hangus 100%</strong>
-                  </li>
-                  <li class="flex gap-2 text-[12px] font-light text-amber-700">
-                    <span class="flex-shrink-0">•</span>Tidak hadir hari
-                    keberangkatan tanpa pemberitahuan →
-                    <strong>DP hangus 100%</strong>
-                  </li>
-                </ul>
               </div>
+
+              <div class="mb-6">
+                <label
+                  class="block text-[11px] font-semibold tracking-[.14em] uppercase text-light mb-3"
+                  >Rute Pendakian</label
+                >
+                <div class="grid grid-cols-3 gap-3">
+                  <div
+                    class="rute-card sel"
+                    id="rt-senaru"
+                    onclick="selectRute('senaru')"
+                  >
+                    <div class="flex items-center gap-2 mb-1">
+                      <div class="dot sel" id="rd-senaru"></div>
+                      <span class="text-[12px] font-semibold text-ink"
+                        >Via Senaru</span
+                      >
+                    </div>
+                    <p class="text-[11px] font-light text-mid">
+                      Masuk & keluar Senaru
+                    </p>
+                  </div>
+                  <div
+                    class="rute-card"
+                    id="rt-sembalun"
+                    onclick="selectRute('sembalun')"
+                  >
+                    <div class="flex items-center gap-2 mb-1">
+                      <div class="dot" id="rd-sembalun"></div>
+                      <span class="text-[12px] font-semibold text-ink"
+                        >Via Sembalun</span
+                      >
+                    </div>
+                    <p class="text-[11px] font-light text-mid">
+                      Masuk & keluar Sembalun
+                    </p>
+                  </div>
+                  <div
+                    class="rute-card"
+                    id="rt-oneway"
+                    onclick="selectRute('oneway')"
+                  >
+                    <div class="flex items-center gap-2 mb-1">
+                      <div class="dot" id="rd-oneway"></div>
+                      <span class="text-[12px] font-semibold text-ink"
+                        >Smb → Snr</span
+                      >
+                    </div>
+                    <p class="text-[11px] font-light text-mid">
+                      One way (3D2N+)
+                    </p>
+                  </div>
+                </div>
+                <p class="text-[11px] font-light text-mid mt-2">
+                  💡 Harga Via Senaru dan Via Sembalun adalah
+                  <strong>sama</strong>.
+                </p>
+              </div>
+
+              <div class="mb-6">
+                <label
+                  class="block text-[11px] font-semibold tracking-[.14em] uppercase text-light mb-2"
+                  >Tanggal Mulai Pendakian</label
+                >
+                <input type="date" id="tgl-mulai" onchange="updateCalc()" />
+                <p class="text-[11px] font-light text-light mt-1.5">
+                  Pastikan tanggal sudah pasti sebelum melanjutkan.
+                </p>
+              </div>
+
+              <div>
+                <label
+                  class="block text-[11px] font-semibold tracking-[.14em] uppercase text-light mb-2"
+                  >Jumlah Peserta</label
+                >
+                <div
+                  class="flex items-center border border-smoke bg-white w-[160px]"
+                >
+                  <button
+                    type="button"
+                    onclick="chPax(-1)"
+                    class="px-4 py-3 text-mid hover:bg-mist text-xl font-light"
+                  >
+                    −
+                  </button>
+                  <span
+                    id="pax-val"
+                    class="flex-1 text-center text-[16px] font-semibold text-ink"
+                    >2</span
+                  >
+                  <button
+                    type="button"
+                    onclick="chPax(1)"
+                    class="px-4 py-3 text-mid hover:bg-mist text-xl font-light"
+                  >
+                    +
+                  </button>
+                </div>
+                <p class="text-[11px] font-light text-light mt-1.5">
+                  Min. 1 peserta. Rasio guide 1:1 s/d 1:4.
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onclick="goStep(2)"
+              class="w-full bg-forest text-white text-[13px] font-semibold py-4 hover:bg-forest/85 transition-colors"
+            >
+              Lanjut: Data Peserta →
+            </button>
+          </div>
+
+          <!-- STEP 2 -->
+          <div id="step2" style="display: none">
+            <div class="bg-white border border-smoke p-8 mb-6">
+              <p
+                class="text-[11px] font-semibold tracking-[.2em] uppercase text-tan mb-1"
+              >
+                Langkah 2
+              </p>
+              <h2
+                class="text-[20px] font-semibold text-ink mb-7"
+                style="letter-spacing: -0.3px"
+              >
+                Data Peserta & Kontak
+              </h2>
+              <div class="grid grid-cols-2 gap-5 mb-5">
+                <div>
+                  <label
+                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                    >Nama Lengkap (Ketua) *</label
+                  ><input
+                    type="text"
+                    id="f-nama"
+                    placeholder="Nama sesuai KTP / paspor"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                    >Nomor WhatsApp *</label
+                  ><input
+                    type="tel"
+                    id="f-wa"
+                    placeholder="+62 812-xxxx-xxxx"
+                  />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-5 mb-5">
+                <div>
+                  <label
+                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                    >Email *</label
+                  ><input
+                    type="email"
+                    id="f-email"
+                    placeholder="email@contoh.com"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                    >Kewarganegaraan</label
+                  ><select id="f-negara">
+                    <option>WNI (Indonesia)</option>
+                    <option>WNA (Asing)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-5 mb-5">
+                <div>
+                  <label
+                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                    >Titik Jemput</label
+                  ><select id="f-jemput">
+                    <option value="">— Pilih titik jemput —</option>
+                    <option>Bandara Lombok (BIL)</option>
+                    <option>Kota Mataram</option>
+                    <option>Senggigi</option>
+                    <option>Kuta Lombok</option>
+                    <option>Hotel (sebutkan di catatan)</option>
+                    <option>Langsung ke Sembalun</option>
+                    <option>Langsung ke Senaru</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                    >Pengalaman Mendaki</label
+                  ><select id="f-exp">
+                    <option>Pemula (pertama kali)</option>
+                    <option>Pernah mendaki sebelumnya</option>
+                    <option>Berpengalaman (gunung 3000+)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-5">
+                <label
+                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                  >Kondisi Kesehatan / Alergi Makanan</label
+                ><textarea
+                  rows="2"
+                  id="f-health"
+                  placeholder="Contoh: alergi seafood. Isi 'tidak ada' jika tidak ada."
+                ></textarea>
+              </div>
+              <div>
+                <label
+                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                  >Catatan Tambahan</label
+                ><textarea
+                  rows="3"
+                  id="f-catatan"
+                  placeholder="Permintaan khusus, nama anggota lain, info tambahan..."
+                ></textarea>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <button
+                type="button"
+                onclick="goStep(1)"
+                class="border border-smoke text-mid text-[13px] font-medium px-8 py-4 hover:bg-white transition-all"
+              >
+                ← Kembali
+              </button>
+              <button
+                type="button"
+                onclick="goStep(3)"
+                class="flex-1 bg-forest text-white text-[13px] font-semibold py-4 hover:bg-forest/85 transition-colors"
+              >
+                Lanjut: Pembayaran →
+              </button>
             </div>
           </div>
 
-          <!-- Rekening -->
-          <div class="grid grid-cols-2 gap-5 mb-5">
-            <div>
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >Rekening Tujuan *</label
+          <!-- STEP 3 -->
+          <div id="step3" style="display: none">
+            <div class="bg-white border border-smoke p-8 mb-6">
+              <p
+                class="text-[11px] font-semibold tracking-[.2em] uppercase text-tan mb-1"
               >
-              <select
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                style="
-                  background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                  background-repeat: no-repeat;
-                  background-position: right 14px center;
-                "
+                Langkah 3
+              </p>
+              <h2
+                class="text-[20px] font-semibold text-ink mb-2"
+                style="letter-spacing: -0.3px"
               >
-                <option>BCA — 1234567890 (Porter Rinjani)</option>
-                <option>BRI — 0987654321 (Porter Rinjani)</option>
-                <option>Mandiri — 1122334455 (Porter Rinjani)</option>
-              </select>
-            </div>
-            <div
-              class="bg-mist p-4 flex flex-col justify-center border border-smoke"
-            >
-              <div
-                class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1"
-              >
-                Nominal Transfer
-              </div>
-              <div class="text-[20px] font-semibold text-forest" id="nominal">
-                Rp 840.000
-              </div>
-              <div class="text-[11px] font-light text-mid mt-0.5">
-                Sesuai DP yang dipilih
-              </div>
-            </div>
-          </div>
+                Pilih Jumlah Pembayaran
+              </h2>
+              <p class="text-[13px] font-light text-mid mb-7 leading-[1.7]">
+                Minimum DP <strong>20%</strong> dari total. Anda bebas membayar
+                lebih atau langsung lunas — sisa dilunasi sebelum H-3
+                keberangkatan.
+              </p>
 
-          <!-- Upload -->
-          <div class="mb-5">
-            <label
-              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-              >Upload Bukti Transfer *</label
-            >
-            <div
-              id="dz"
-              class="dz p-7 text-center"
-              onclick="document.getElementById('fi').click()"
-              ondragover="
-                event.preventDefault();
-                this.classList.add('drag');
-              "
-              ondragleave="this.classList.remove('drag')"
-              ondrop="hDrop(event)"
-            >
-              <div id="dz-d">
-                <div class="text-3xl mb-2 opacity-25">📎</div>
-                <p class="text-[13px] font-medium text-mid">
-                  Klik atau drag & drop
+              <!-- Rekening -->
+              <div class="bg-mist border border-smoke p-5 mb-7">
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-4"
+                >
+                  Transfer ke salah satu rekening
                 </p>
-                <p class="text-[11px] font-light text-light mt-1">
-                  JPG, PNG, PDF · Maks. 5 MB
-                </p>
+                <div class="grid grid-cols-3 gap-4 text-[12px]">
+                  <div>
+                    <div
+                      class="text-[10px] font-semibold uppercase text-light mb-1"
+                    >
+                      Bank BCA
+                    </div>
+                    <div class="text-[15px] font-semibold text-ink">
+                      1234567890
+                    </div>
+                    <div class="font-light text-mid">a.n. Porter Rinjani</div>
+                  </div>
+                  <div>
+                    <div
+                      class="text-[10px] font-semibold uppercase text-light mb-1"
+                    >
+                      Bank BRI
+                    </div>
+                    <div class="text-[15px] font-semibold text-ink">
+                      0987654321
+                    </div>
+                    <div class="font-light text-mid">a.n. Porter Rinjani</div>
+                  </div>
+                  <div>
+                    <div
+                      class="text-[10px] font-semibold uppercase text-light mb-1"
+                    >
+                      Bank Mandiri
+                    </div>
+                    <div class="text-[15px] font-semibold text-ink">
+                      1122334455
+                    </div>
+                    <div class="font-light text-mid">a.n. Porter Rinjani</div>
+                  </div>
+                </div>
               </div>
-              <div id="dz-ok" class="hidden">
-                <div class="text-3xl mb-2">✅</div>
-                <p class="text-[13px] font-medium text-forest" id="fn-lbl"></p>
-                <button
-                  type="button"
-                  onclick="
-                    event.stopPropagation();
-                    clrF();
+
+              <!-- Pilihan DP preset -->
+              <div class="mb-4">
+                <label
+                  class="block text-[11px] font-semibold tracking-[.14em] uppercase text-light mb-3"
+                  >Pilih Jumlah Pembayaran</label
+                >
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                  <div class="dp-opt sel" id="dp-20" onclick="selectDP(20)">
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="dot sel" id="dd-20"></div>
+                      <span class="text-[12px] font-semibold text-ink"
+                        >DP 20%</span
+                      >
+                    </div>
+                    <div
+                      class="text-[15px] font-semibold text-forest"
+                      id="amt-20"
+                    >
+                      USD —
+                    </div>
+                    <div class="text-[10px] font-light text-light mt-0.5">
+                      Minimum
+                    </div>
+                  </div>
+                  <div class="dp-opt" id="dp-50" onclick="selectDP(50)">
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="dot" id="dd-50"></div>
+                      <span class="text-[12px] font-semibold text-ink"
+                        >DP 50%</span
+                      >
+                    </div>
+                    <div
+                      class="text-[15px] font-semibold text-forest"
+                      id="amt-50"
+                    >
+                      USD —
+                    </div>
+                    <div class="text-[10px] font-light text-light mt-0.5">
+                      Separuh
+                    </div>
+                  </div>
+                  <div class="dp-opt" id="dp-100" onclick="selectDP(100)">
+                    <div class="flex items-center gap-2 mb-1.5">
+                      <div class="dot" id="dd-100"></div>
+                      <span class="text-[12px] font-semibold text-ink"
+                        >Lunas 100%</span
+                      >
+                    </div>
+                    <div
+                      class="text-[15px] font-semibold text-forest"
+                      id="amt-100"
+                    >
+                      USD —
+                    </div>
+                    <div class="text-[10px] font-light text-light mt-0.5">
+                      Bebas sisa
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Slider custom -->
+                <div class="border border-smoke p-4 bg-white">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[12px] font-semibold text-ink"
+                      >Atau atur sendiri:
+                      <span id="slider-pct" class="text-forest">20%</span></span
+                    >
+                    <span
+                      class="text-[15px] font-semibold text-forest"
+                      id="slider-amt"
+                      >USD —</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="dp-slider"
+                    min="20"
+                    max="100"
+                    value="20"
+                    step="5"
+                    oninput="onSlider(this.value)"
+                  />
+                  <div
+                    class="flex justify-between text-[10px] font-light text-light mt-1.5"
+                  >
+                    <span>20% (min)</span><span>50%</span
+                    ><span>100% (lunas)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ringkasan pembayaran -->
+              <div class="border border-smoke divide-y divide-smoke mb-7">
+                <div class="flex justify-between px-5 py-3 text-[13px]">
+                  <span class="font-light text-mid">Total booking</span
+                  ><span class="font-semibold text-ink" id="p-total"
+                    >USD —</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between px-5 py-3.5 text-[13px] bg-forest/5"
+                >
+                  <div>
+                    <span class="font-semibold text-ink">Dibayar sekarang</span
+                    ><span class="text-[11px] font-light text-mid ml-1"
+                      >(<span id="p-pct">20</span>%)</span
+                    >
+                  </div>
+                  <span class="font-semibold text-forest text-[16px]" id="p-now"
+                    >USD —</span
+                  >
+                </div>
+                <div class="flex justify-between px-5 py-3 text-[13px]">
+                  <span class="font-light text-mid">Sisa pelunasan</span
+                  ><span class="font-medium text-amber-600" id="p-sisa"
+                    >USD —</span
+                  >
+                </div>
+              </div>
+
+              <!-- Upload bukti -->
+              <div>
+                <label
+                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-3"
+                  >Upload Bukti Transfer *</label
+                >
+                <div
+                  class="drop-zone"
+                  id="drop-zone"
+                  onclick="document.getElementById('file-inp').click()"
+                  ondragover="
+                    event.preventDefault();
+                    this.classList.add('dg');
                   "
-                  class="text-[11px] text-red-400 underline mt-1"
+                  ondragleave="this.classList.remove('dg')"
+                  ondrop="handleDrop(event)"
                 >
-                  Hapus
-                </button>
+                  <div id="drop-c">
+                    <div class="text-[30px] mb-2">📎</div>
+                    <p class="text-[14px] font-medium text-ink mb-1">
+                      Klik atau drag & drop file
+                    </p>
+                    <p class="text-[12px] font-light text-light">
+                      JPG, PNG, PDF · Maks. 5 MB
+                    </p>
+                  </div>
+                  <div id="drop-p" style="display: none">
+                    <div class="text-[30px] mb-2">✅</div>
+                    <p
+                      class="text-[13px] font-semibold text-forest"
+                      id="f-name"
+                    >
+                      -
+                    </p>
+                    <p class="text-[12px] font-light text-light mt-1">
+                      File siap diupload
+                    </p>
+                  </div>
+                </div>
+                <input
+                  type="file"
+                  id="file-inp"
+                  accept=".jpg,.jpeg,.png,.pdf"
+                  style="display: none"
+                  onchange="handleFile(this)"
+                />
               </div>
             </div>
-            <input
-              type="file"
-              id="fi"
-              accept=".jpg,.jpeg,.png,.pdf"
-              class="hidden"
-              onchange="hFile(this)"
-            />
-          </div>
-
-          <!-- Agree checkbox WAJIB -->
-          <div class="border border-amber-200 bg-amber-50/60 p-5 mb-6">
-            <label class="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                id="agree"
-                class="mt-0.5 accent-amber-600 w-4 h-4 flex-shrink-0"
-              />
-              <span
-                class="text-[13px] font-medium text-amber-800 leading-[1.8]"
+            <div class="flex gap-3">
+              <button
+                type="button"
+                onclick="goStep(2)"
+                class="border border-smoke text-mid text-[13px] font-medium px-8 py-4 hover:bg-white transition-all"
               >
-                Saya memahami bahwa DP sebesar
-                <strong id="agree-lbl">Rp 840.000</strong> yang saya bayarkan
-                <strong>tidak dapat dikembalikan (hangus)</strong> apabila saya
-                membatalkan atau tidak jadi berangkat setelah booking
-                dikonfirmasi admin.
-              </span>
-            </label>
+                ← Kembali
+              </button>
+              <button
+                type="button"
+                onclick="submitBooking()"
+                class="flex-1 bg-forest text-white text-[13px] font-semibold py-4 hover:bg-forest/85 transition-colors"
+              >
+                Kirim Booking & Upload Bukti →
+              </button>
+            </div>
           </div>
 
-          <!-- Non-deluxe note -->
-          <div
-            id="extra-warn"
-            class="hidden bg-blue-50 border border-blue-200 p-4 mb-5"
-          >
-            <p class="text-[13px] font-light text-blue-700 leading-[1.75]">
-              ℹ <strong>Paket Standard/Sharing:</strong> Ada kemungkinan biaya
-              tambahan jika tidak sampai puncak karena cuaca/kondisi fisik.
-              Terpisah dari DP.
-            </p>
-          </div>
+          <!-- STEP 4: KONFIRMASI -->
+          <div id="step4" style="display: none">
+            <div class="bg-white border border-smoke p-10">
+              <div class="text-center mb-8">
+                <div class="text-[56px] mb-3">🎉</div>
+                <h2
+                  class="text-[24px] font-semibold text-ink mb-2"
+                  style="letter-spacing: -0.4px"
+                >
+                  Booking Berhasil Terkirim!
+                </h2>
+                <p
+                  class="text-[13px] font-light text-mid max-w-[440px] mx-auto leading-[1.8]"
+                >
+                  Admin akan memverifikasi & mengirim konfirmasi via WhatsApp
+                  dan email dalam <strong>1×24 jam</strong>.
+                </p>
+              </div>
 
-          <div class="flex justify-between">
-            <button
-              onclick="goS(2)"
-              class="border border-smoke text-mid text-[13px] font-medium px-8 py-3 hover:bg-mist"
-            >
-              ← Kembali
-            </button>
-            <button
-              onclick="submit()"
-              class="bg-forest text-white text-[13px] font-semibold px-10 py-3 hover:bg-forest/85"
-            >
-              Konfirmasi Booking →
-            </button>
+              <div class="border border-smoke mb-7 overflow-hidden">
+                <div
+                  class="bg-forest px-6 py-5 flex items-center justify-between"
+                >
+                  <div>
+                    <p
+                      class="text-[10px] font-semibold tracking-[.2em] uppercase text-white/40 mb-0.5"
+                    >
+                      Nomor Booking
+                    </p>
+                    <p
+                      class="text-[24px] font-light text-white"
+                      style="letter-spacing: -0.5px"
+                    >
+                      #BK-0044
+                    </p>
+                  </div>
+                  <span
+                    class="text-[10px] font-bold tracking-[.08em] uppercase bg-white/15 text-white px-3 py-2"
+                    >⏳ Menunggu Verifikasi</span
+                  >
+                </div>
+
+                <div class="px-6 py-4 border-b border-smoke bg-mist">
+                  <p
+                    class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1"
+                  >
+                    Atas Nama (Ketua Rombongan)
+                  </p>
+                  <p class="text-[16px] font-semibold text-ink" id="c-nama">
+                    —
+                  </p>
+                  <p class="text-[12px] font-light text-mid mt-0.5" id="c-wa">
+                    —
+                  </p>
+                </div>
+
+                <div
+                  class="grid grid-cols-2 divide-x divide-smoke border-b border-smoke"
+                >
+                  <div class="px-6 py-4 border-b border-smoke">
+                    <p
+                      class="text-[9px] font-bold tracking-[.14em] uppercase text-light mb-1"
+                    >
+                      Paket
+                    </p>
+                    <p class="text-[14px] font-semibold text-ink" id="c-paket">
+                      —
+                    </p>
+                  </div>
+                  <div class="px-6 py-4 border-b border-smoke">
+                    <p
+                      class="text-[9px] font-bold tracking-[.14em] uppercase text-light mb-1"
+                    >
+                      Program
+                    </p>
+                    <p class="text-[14px] font-semibold text-ink" id="c-prog">
+                      —
+                    </p>
+                  </div>
+                  <div class="px-6 py-4 border-b border-smoke">
+                    <p
+                      class="text-[9px] font-bold tracking-[.14em] uppercase text-light mb-1"
+                    >
+                      Rute
+                    </p>
+                    <p class="text-[14px] font-semibold text-ink" id="c-rute">
+                      —
+                    </p>
+                  </div>
+                  <div class="px-6 py-4 border-b border-smoke">
+                    <p
+                      class="text-[9px] font-bold tracking-[.14em] uppercase text-light mb-1"
+                    >
+                      Jumlah Peserta
+                    </p>
+                    <p class="text-[14px] font-semibold text-ink" id="c-pax">
+                      —
+                    </p>
+                  </div>
+                  <div class="px-6 py-4">
+                    <p
+                      class="text-[9px] font-bold tracking-[.14em] uppercase text-light mb-1"
+                    >
+                      Tanggal Booking
+                    </p>
+                    <p class="text-[14px] font-semibold text-ink" id="c-tgl-bk">
+                      —
+                    </p>
+                  </div>
+                  <div class="px-6 py-4">
+                    <p
+                      class="text-[9px] font-bold tracking-[.14em] uppercase text-light mb-1"
+                    >
+                      Tanggal Pendakian
+                    </p>
+                    <p
+                      class="text-[14px] font-semibold text-forest"
+                      id="c-tgl-naik"
+                    >
+                      —
+                    </p>
+                  </div>
+                </div>
+
+                <div class="divide-y divide-smoke">
+                  <div class="flex justify-between px-6 py-3 text-[13px]">
+                    <span class="font-light text-mid">Total Booking</span
+                    ><span class="font-semibold text-ink" id="c-total">—</span>
+                  </div>
+                  <div
+                    class="flex justify-between px-6 py-4 text-[13px] bg-forest/5"
+                  >
+                    <div>
+                      <span class="font-semibold text-ink"
+                        >Dibayar Sekarang</span
+                      ><span class="text-[11px] text-mid ml-1"
+                        >(<span id="c-pct">20</span>%)</span
+                      >
+                    </div>
+                    <span
+                      class="font-semibold text-forest text-[16px]"
+                      id="c-dibayar"
+                      >—</span
+                    >
+                  </div>
+                  <div class="flex justify-between px-6 py-3 text-[13px]">
+                    <span class="font-light text-mid">Sisa Pelunasan</span
+                    ><span class="font-semibold text-amber-600" id="c-sisa"
+                      >—</span
+                    >
+                  </div>
+                </div>
+
+                <div class="px-6 py-4 bg-mist border-t border-smoke">
+                  <p class="text-[12px] font-light text-mid leading-[1.7]">
+                    📌 Simpan nomor <strong>#BK-0044</strong>. Invoice PDF
+                    dikirim setelah admin konfirmasi. Sisa pelunasan wajib
+                    diselesaikan <strong>H-3 sebelum keberangkatan</strong>.
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex gap-3 justify-center flex-wrap">
+                <a
+                  href="status.html"
+                  class="bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
+                >
+                  Pantau Status Booking
+                </a>
+                <a
+                  href="invoice.html"
+                  class="border border-smoke text-ink text-[13px] font-semibold px-8 py-3.5 hover:bg-mist transition-all"
+                >
+                  📄 Lihat Invoice
+                </a>
+                <a
+                  href="https://wa.me/628123456789"
+                  target="_blank"
+                  class="bg-[#25D366] text-white text-[13px] font-semibold px-6 py-3.5 hover:bg-[#1fbd5c] transition-colors"
+                >
+                  💬 WhatsApp Admin
+                </a>
+              </div>
+            </div>
           </div>
         </div>
+        <!-- /form -->
 
-        <!-- STEP 4 -->
-        <div id="sc4" class="sc px-10 py-14 max-w-[540px]">
-          <div
-            class="w-14 h-14 rounded-full bg-forest/10 border-2 border-forest/20 flex items-center justify-center text-2xl mb-7"
-          >
-            ✅
-          </div>
-          <p
-            class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-3"
-          >
-            Booking Berhasil Diterima
-          </p>
-          <h2
-            class="text-[28px] font-light text-ink mb-4"
-            style="letter-spacing: -0.5px"
-          >
-            Terima kasih,<br /><span class="italic"
-              >booking Anda sedang diproses!</span
-            >
-          </h2>
-          <p class="text-[14px] font-light text-mid leading-[1.85] mb-7">
-            Tim kami akan memverifikasi pembayaran dalam
-            <strong class="text-forest">1×24 jam</strong>. Setelah dikonfirmasi,
-            <strong>invoice otomatis akan dikirim ke email Anda</strong> dan
-            bisa diunduh PDF kapanpun dari halaman Status Booking.
-          </p>
-
-          <div class="bg-mist border border-smoke p-6 mb-5">
+        <!-- ═══ SIDEBAR ═══ -->
+        <div class="sticky top-[120px]">
+          <div class="bg-white border border-smoke p-6 mb-4">
             <p
               class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-4"
             >
-              Ringkasan Booking
+              Ringkasan Pesanan
             </p>
-            <div class="space-y-2.5">
-              <div class="flex justify-between text-[13px]">
-                <span class="font-light text-mid">No. Booking</span
-                ><span class="font-semibold text-ink">#BK-0043</span>
-              </div>
-              <div class="flex justify-between text-[13px]">
-                <span class="font-light text-mid">Paket</span
-                ><span class="font-medium text-ink" id="c-pkt">—</span>
-              </div>
-              <div class="flex justify-between text-[13px]">
-                <span class="font-light text-mid">Tanggal Naik</span
-                ><span class="font-medium text-ink" id="c-tgl">—</span>
-              </div>
-              <div class="flex justify-between text-[13px]">
-                <span class="font-light text-mid">Peserta</span
-                ><span class="font-medium text-ink" id="c-pax">—</span>
-              </div>
-              <div
-                class="flex justify-between text-[13px] border-t border-smoke pt-2.5 mt-1"
+            <div class="srow">
+              <span class="font-light text-mid">Paket</span
+              ><span class="font-semibold text-ink" id="s-paket"
+                >Paket Deluxe</span
               >
-                <span class="font-semibold text-ink">Total Booking</span
-                ><span class="font-semibold text-ink" id="c-tot">—</span>
-              </div>
-              <div class="flex justify-between text-[13px]">
-                <span class="font-semibold text-ink"
-                  >DP Dibayar (<span id="c-dpPct">20</span>%)</span
-                ><span class="font-semibold text-forest text-[15px]" id="c-dp"
+            </div>
+            <div class="srow">
+              <span class="font-light text-mid">Program</span
+              ><span class="font-medium text-ink" id="s-prog"
+                >3D2N Lake & Hot Spring</span
+              >
+            </div>
+            <div class="srow">
+              <span class="font-light text-mid">Rute</span
+              ><span class="font-medium text-ink" id="s-rute">Via Senaru</span>
+            </div>
+            <div class="srow">
+              <span class="font-light text-mid">Tanggal</span
+              ><span class="font-medium text-ink" id="s-tgl">—</span>
+            </div>
+            <div class="srow">
+              <span class="font-light text-mid">Peserta</span
+              ><span class="font-medium text-ink" id="s-pax">2 orang</span>
+            </div>
+            <div class="srow">
+              <span class="font-light text-mid">Harga/orang</span
+              ><span class="font-medium text-ink" id="s-hpp">—</span>
+            </div>
+            <div class="border-t-2 border-ink pt-4 mt-2 space-y-1.5">
+              <div class="flex justify-between">
+                <span class="text-[13px] font-semibold text-ink">Total</span
+                ><span class="text-[20px] font-light text-forest" id="s-total"
                   >—</span
                 >
               </div>
-              <div class="flex justify-between text-[13px]">
-                <span class="font-light text-mid">Sisa Pelunasan</span
-                ><span class="font-medium text-amber-500" id="c-sisa">—</span>
+              <div class="flex justify-between">
+                <span class="text-[12px] font-light text-mid"
+                  >Dibayar sekarang</span
+                ><span class="text-[14px] font-semibold text-ink" id="s-dp"
+                  >—</span
+                >
+              </div>
+              <div class="flex justify-between">
+                <span class="text-[12px] font-light text-mid">Sisa</span
+                ><span
+                  class="text-[13px] font-medium text-amber-600"
+                  id="s-sisa"
+                  >—</span
+                >
               </div>
             </div>
           </div>
-
-          <div class="bg-amber-50 border border-amber-200 p-4 mb-6">
-            <p class="text-[12px] font-light text-amber-700 leading-[1.8]">
-              ⚠️ Pengingat: DP sebesar <strong id="c-dp-remind">—</strong> yang
-              telah dibayarkan <strong>tidak dapat dikembalikan</strong> jika
-              Anda membatalkan keberangkatan setelah booking dikonfirmasi.
+          <div class="bg-forest/5 border border-forest/10 p-5 mb-4">
+            <p
+              class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-3"
+            >
+              Sudah Termasuk
             </p>
+            <ul
+              class="space-y-1.5 text-[12px] font-light text-mid"
+              id="incl-list"
+            ></ul>
           </div>
-
-          <div class="flex gap-3 flex-wrap">
-            <a
-              href="status.html"
-              class="bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
-              >Lihat Status & Invoice</a
-            >
-            <a
-              href="https://wa.me/628123456789"
-              target="_blank"
-              class="border border-smoke text-mid text-[13px] font-medium px-8 py-3.5 hover:bg-mist flex items-center gap-2"
-              >💬 Chat Tim Kami</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- SIDEBAR -->
-      <div class="w-[360px] flex-shrink-0 bg-white">
-        <div class="sticky top-[136px] p-8">
-          <p
-            class="text-[10px] font-semibold tracking-[.2em] uppercase text-light mb-6"
+          <a
+            href="https://wa.me/628123456789"
+            target="_blank"
+            class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white text-[12px] font-semibold py-3.5 hover:bg-[#1fbd5c] transition-colors"
+            >💬 Tanya via WhatsApp</a
           >
-            Ringkasan
-          </p>
-          <div class="bg-mist p-5 mb-6">
-            <div class="text-[15px] font-semibold text-ink mb-1" id="s-pkt">
-              Paket Deluxe
-            </div>
-            <div class="text-[12px] font-light text-mid" id="s-prog">
-              — Pilih durasi & tanggal
-            </div>
-          </div>
-          <div class="space-y-3 text-[13px] mb-6">
-            <div class="flex justify-between">
-              <span class="font-light text-mid">Tanggal mulai</span
-              ><span class="font-medium text-ink" id="s-tgl">—</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="font-light text-mid">Peserta</span
-              ><span class="font-medium text-ink" id="s-pax">3 orang</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="font-light text-mid">Titik jemput</span
-              ><span class="font-medium text-ink" id="s-jmpt">Bandara BIL</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="font-light text-mid">Harga/orang</span
-              ><span class="font-medium text-ink" id="s-hpp">Rp 1.400.000</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="font-light text-mid">Subtotal</span
-              ><span class="font-medium text-ink" id="s-sub">Rp 4.200.000</span>
-            </div>
-            <div
-              class="flex justify-between font-medium text-forest"
-              id="s-ext-row"
-            >
-              <span>Biaya tambahan</span><span id="s-ext">Tidak ada ✓</span>
-            </div>
-          </div>
-          <div class="border-t border-smoke pt-5 mb-5">
-            <div class="flex justify-between items-center">
-              <span class="text-[14px] font-semibold text-ink">Total</span
-              ><span
-                class="text-[24px] font-light text-forest"
-                id="s-tot"
-                style="letter-spacing: -0.5px"
-                >Rp 4.200.000</span
-              >
-            </div>
-          </div>
-          <div class="border border-smoke p-4 mb-4 space-y-2.5">
-            <div class="flex justify-between text-[13px]">
-              <span class="font-medium text-ink"
-                >DP (<span id="s-dpPct">20</span>%)</span
-              ><span class="font-semibold text-forest" id="s-dp"
-                >Rp 840.000</span
-              >
-            </div>
-            <div class="flex justify-between text-[13px]">
-              <span class="font-light text-mid">Sisa pelunasan</span
-              ><span class="font-medium text-amber-500" id="s-sisa"
-                >Rp 3.360.000</span
-              >
-            </div>
-            <div
-              class="text-[11px] font-light text-light pt-1 border-t border-smoke"
-              id="s-sisa-note"
-            >
-              Sisa dilunasi sebelum keberangkatan
-            </div>
-          </div>
-          <div class="bg-amber-50 border border-amber-200 p-3 mb-4">
-            <p class="text-[11px] font-medium text-amber-700">
-              ⚠️ DP tidak dapat dikembalikan jika Anda membatalkan setelah
-              booking dikonfirmasi.
-            </p>
-          </div>
-          <div class="bg-forest/5 border border-forest/15 p-3 mb-5">
-            <p class="text-[11px] font-medium text-forest/75">
-              📄 Invoice otomatis dikirim ke email setelah admin mengkonfirmasi.
-            </p>
-          </div>
-          <div class="border-t border-smoke pt-5">
-            <p class="text-[12px] font-light text-mid mb-3">Butuh bantuan?</p>
-            <a
-              href="https://wa.me/628123456789"
-              target="_blank"
-              class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white text-[12px] font-semibold py-2.5 hover:bg-[#1fbd5c] transition-colors"
-              >💬 Chat WhatsApp</a
-            >
-          </div>
         </div>
       </div>
     </div>
+
+    <footer class="bg-white border-t border-smoke py-8 px-8 mt-6">
+      <div
+        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-4"
+      >
+        <div class="text-[17px] font-semibold text-ink">
+          Porter <span class="font-light text-mid">Rinjani</span>
+        </div>
+        <p class="text-[12px] font-light text-light">© 2025 Porter Rinjani</p>
+      </div>
+    </footer>
+    <a
+      href="https://wa.me/628123456789"
+      target="_blank"
+      class="fixed bottom-7 right-7 z-50 w-[52px] h-[52px] rounded-full bg-[#25D366] flex items-center justify-center text-[22px] shadow-lg shadow-green-500/25 hover:scale-110 transition-all"
+      >💬</a
+    >
+
     <script>
-      const ST = {
-        pkt: "Deluxe",
-        base: 1250000,
-        pax: 3,
-        tgl: "",
-        prog: "",
-        jmpt: "Bandara BIL",
-        dpPct: 20,
+      const PRICE = {
+        deluxe: {
+          "2d1n_rim": { 1: 310, 4: 230, 10: 180, 99: 150 },
+          "3d2n_lake": { 1: 400, 4: 280, 10: 255, 99: 220 },
+          "3d2n_summit": { 1: 450, 4: 290, 10: 265, 99: 235 },
+          "4d3n": { 1: 500, 4: 340, 10: 315, 99: 285 },
+        },
+        standard: {
+          "2d1n_rim": { 1: 305, 4: 220, 10: 175, 99: 145 },
+          "3d2n_lake": { 1: 395, 4: 270, 10: 250, 99: 215 },
+          "3d2n_summit": { 1: 445, 4: 285, 10: 260, 99: 230 },
+          "4d3n": { 1: 495, 4: 335, 10: 310, 99: 280 },
+        },
       };
-      const HR = {
-        Deluxe: [
-          { max: 2, p: 1750000 },
-          { max: 5, p: 1400000 },
-          { max: 99, p: 1250000 },
-        ],
-        Standard: [
-          { max: 2, p: 1100000 },
-          { max: 5, p: 900000 },
-          { max: 99, p: 750000 },
-        ],
-        Sharing: [{ max: 99, p: 600000 }],
+      const PLBL = {
+        "2d1n_rim": "2D1N — Crater Rim",
+        "3d2n_lake": "3D2N — Lake & Hot Spring",
+        "3d2n_summit": "3D2N — Lake & Summit",
+        "4d3n": "4D3N — Lake & Hot Spring",
       };
-      function gP(k, n) {
-        return (HR[k] || HR.Standard).find((r) => n <= r.max)?.p || 600000;
+      const PNOTE = {
+        "2d1n_rim": "Kawah Rim Rinjani, pemandangan kaldera dari atas.",
+        "3d2n_lake": "Termasuk Danau Segara Anak & Hot Spring Aik Kalak.",
+        "3d2n_summit": "Termasuk Danau Segara Anak & puncak 3.726 mdpl.",
+        "4d3n": "Danau Segara Anak, Hot Spring, program lebih santai.",
+      };
+      const DINCL = [
+        "Hotel AC + air panas",
+        "Makan malam di hotel",
+        "Porter 1:1",
+        "Makanan lengkap + buah + 3L air/hari",
+        "Matras 8cm + bantal + sleeping bag premium",
+        "Guide + tiket air terjun (bonus)",
+        "Tiket & asuransi TNGR",
+        "Transport PP Lombok",
+        "Nol biaya tambahan ✓",
+      ];
+      const SINCL = [
+        "Hotel kipas + air dingin",
+        "Porter 1:2",
+        "Makanan bergizi + air gunung",
+        "Matras 3cm + sleeping bag",
+        "Tiket & asuransi TNGR",
+        "Transport PP Lombok",
+      ];
+
+      let PKG = "deluxe",
+        RUTE = "senaru",
+        PAX = 2,
+        PROG = "3d2n_lake",
+        PCT = 20;
+
+      function hpp() {
+        const t = PRICE[PKG][PROG];
+        return PAX <= 1 ? t[1] : PAX <= 4 ? t[4] : PAX <= 10 ? t[10] : t[99];
       }
-      function rp(n) {
-        return "Rp " + n.toLocaleString("id-ID");
-      }
-      function updS() {
-        const dur = document.getElementById("sel-dur")?.value || "";
-        const tgl = document.getElementById("sel-tgl")?.value || "";
-        const dLbl =
-          document.getElementById("sel-dur")?.options[
-            document.getElementById("sel-dur").selectedIndex
-          ]?.text || "";
-        const jm = {
-          bil: "Bandara BIL",
-          mtm: "Mataram",
-          sng: "Senggigi",
-          sbl: "Sembalun Langsung",
-        };
-        ST.jmpt =
-          jm[document.getElementById("inp-jemput")?.value || "bil"] ||
-          "Bandara BIL";
-        ST.tgl = tgl;
-        ST.prog = dLbl;
-        const hpp = gP(ST.pkt, ST.pax),
-          sub = hpp * ST.pax,
-          dp = Math.round((sub * ST.dpPct) / 100),
-          sisa = sub - dp,
-          isDlx = ST.pkt === "Deluxe";
-        // Sidebar
-        document.getElementById("s-pkt").textContent = "Paket " + ST.pkt;
-        document.getElementById("s-prog").textContent = dur
-          ? dLbl
-          : "— Pilih durasi & tanggal";
-        document.getElementById("s-tgl").textContent = tgl
-          ? new Date(tgl).toLocaleDateString("id-ID", {
+      function fmtD(s) {
+        if (!s) return "—";
+        const d = new Date(s);
+        return isNaN(d)
+          ? s
+          : d.toLocaleDateString("id-ID", {
               day: "numeric",
-              month: "short",
+              month: "long",
               year: "numeric",
-            })
-          : "—";
-        document.getElementById("s-pax").textContent = ST.pax + " orang";
-        document.getElementById("s-jmpt").textContent = ST.jmpt;
-        document.getElementById("s-hpp").textContent = rp(hpp);
-        document.getElementById("s-sub").textContent = rp(sub);
-        document.getElementById("s-tot").textContent = rp(sub);
-        document.getElementById("s-dpPct").textContent = ST.dpPct;
-        document.getElementById("s-dp").textContent = rp(dp);
-        document.getElementById("s-sisa").textContent = rp(sisa);
-        document.getElementById("s-sisa-note").textContent =
-          ST.dpPct === 100
-            ? "Pembayaran penuh ✓"
-            : "Sisa dilunasi sebelum keberangkatan";
-        document.getElementById("s-ext").textContent = isDlx
-          ? "Tidak ada ✓"
-          : "Sesuai kondisi";
-        document.getElementById("s-ext").className = isDlx
-          ? "font-medium text-forest"
-          : "font-medium text-amber-500";
-        // Pay step
-        const dd = document.getElementById("dp-disp");
-        if (dd) {
-          dd.textContent = rp(dp);
-          document.getElementById("dp-pct-lbl").textContent =
-            ST.dpPct + "% dari total";
-        }
-        ["bd-tot", "bd-dp", "bd-sisa", "nominal"].forEach((id) => {
-          const el = document.getElementById(id);
-          if (!el) return;
-          if (id === "bd-tot") el.textContent = rp(sub);
-          else if (id === "bd-dp") el.textContent = rp(dp);
-          else if (id === "bd-sisa") el.textContent = rp(sisa);
-          else el.textContent = rp(dp);
+            });
+      }
+      function todayStr() {
+        return new Date().toLocaleDateString("id-ID", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
         });
-        const al = document.getElementById("agree-lbl");
-        if (al) al.textContent = rp(dp);
-        const ew = document.getElementById("extra-warn");
-        if (ew) ew.style.display = isDlx ? "none" : "block";
       }
-      function updDP(v) {
-        ST.dpPct = parseInt(v);
-        document.querySelectorAll(".dpbtn").forEach((b) => {
-          const bv = parseInt(b.textContent);
-          const match =
-            bv === ST.dpPct ||
-            (b.textContent.includes("Lunas") && ST.dpPct === 100);
-          b.className = match
-            ? "dpbtn text-[11px] font-semibold px-4 py-2 border border-forest bg-forest/8 text-forest"
-            : "dpbtn text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-forest hover:text-forest";
+      function rl(id) {
+        return document.getElementById(id);
+      }
+
+      function updateCalc() {
+        PROG = rl("sel-prog").value;
+        const tgl = rl("tgl-mulai").value;
+        const h = hpp(),
+          tot = h * PAX,
+          now = Math.round((tot * PCT) / 100),
+          sisa = tot - now;
+
+        // preset amounts
+        rl("amt-20").textContent = "USD " + Math.round(tot * 0.2);
+        rl("amt-50").textContent = "USD " + Math.round(tot * 0.5);
+        rl("amt-100").textContent = "USD " + tot;
+        rl("slider-pct").textContent = PCT + "%";
+        rl("slider-amt").textContent = "USD " + now;
+
+        // step3 summary
+        rl("p-total").textContent = "USD " + tot;
+        rl("p-pct").textContent = PCT;
+        rl("p-now").textContent = "USD " + now;
+        rl("p-sisa").textContent = sisa > 0 ? "USD " + sisa : "Lunas ✓";
+
+        // sidebar
+        rl("s-paket").textContent =
+          PKG === "deluxe" ? "Paket Deluxe" : "Paket Standard";
+        rl("s-prog").textContent = PLBL[PROG];
+        rl("s-rute").textContent =
+          RUTE === "senaru"
+            ? "Via Senaru"
+            : RUTE === "sembalun"
+              ? "Via Sembalun"
+              : "Sembalun → Senaru";
+        rl("s-tgl").textContent = fmtD(tgl);
+        rl("s-pax").textContent = PAX + " orang";
+        rl("s-hpp").textContent = "USD " + h;
+        rl("s-total").textContent = "USD " + tot;
+        rl("s-dp").textContent = "USD " + now;
+        rl("s-sisa").textContent = sisa > 0 ? "USD " + sisa : "Lunas";
+
+        rl("prog-note").textContent = PNOTE[PROG];
+        const list = PKG === "deluxe" ? DINCL : SINCL;
+        rl("incl-list").innerHTML = list
+          .map(
+            (i) =>
+              `<li class="flex gap-2"><span class="text-forest">✓</span>${i}</li>`,
+          )
+          .join("");
+
+        // one-way
+        const ok = ["3d2n_lake", "3d2n_summit", "4d3n"].includes(PROG);
+        rl("rt-oneway").style.opacity = ok ? "1" : "0.4";
+        rl("rt-oneway").style.pointerEvents = ok ? "auto" : "none";
+        if (!ok && RUTE === "oneway") selectRute("senaru");
+      }
+
+      function selectPkg(p) {
+        PKG = p;
+        ["deluxe", "standard"].forEach((x) => {
+          const m = x === p;
+          rl("pk-" + x).classList.toggle("sel", m);
+          rl("pd-" + x).classList.toggle("sel", m);
+          rl("pd-" + x).style.background = m ? "#1B3A2D" : "";
+          rl("pd-" + x).style.borderColor = m ? "#1B3A2D" : "#EFEFEC";
         });
-        updS();
+        updateCalc();
       }
-      function setDP(p) {
-        ST.dpPct = p;
-        const sl = document.getElementById("dp-slider");
-        if (sl) sl.value = p;
-        updDP(p);
+
+      function selectRute(r) {
+        RUTE = r;
+        ["senaru", "sembalun", "oneway"].forEach((x) => {
+          const m = x === r;
+          rl("rt-" + x).classList.toggle("sel", m);
+          rl("rd-" + x).classList.toggle("sel", m);
+          rl("rd-" + x).style.background = m ? "#1B3A2D" : "";
+          rl("rd-" + x).style.borderColor = m ? "#1B3A2D" : "#EFEFEC";
+        });
+        updateCalc();
       }
-      function selP(el, n, p) {
-        document
-          .querySelectorAll(".psel")
-          .forEach((x) => x.classList.remove("on"));
-        el.classList.add("on");
-        ST.pkt = n;
-        ST.base = parseInt(p);
-        updS();
+
+      function selectDP(pct) {
+        PCT = pct;
+        rl("dp-slider").value = pct;
+        ["20", "50", "100"].forEach((x) => {
+          const m = parseInt(x) === pct;
+          rl("dp-" + x).classList.toggle("sel", m);
+          rl("dd-" + x).classList.toggle("sel", m);
+          rl("dd-" + x).style.background = m ? "#1B3A2D" : "";
+          rl("dd-" + x).style.borderColor = m ? "#1B3A2D" : "#EFEFEC";
+        });
+        updateCalc();
       }
-      function cPx(d) {
-        ST.pax = Math.max(1, Math.min(20, ST.pax + d));
-        document.getElementById("pax-n").textContent = ST.pax;
-        updS();
+
+      function onSlider(v) {
+        PCT = parseInt(v);
+        ["20", "50", "100"].forEach((x) => {
+          const m = parseInt(x) === PCT;
+          rl("dp-" + x).classList.toggle("sel", m);
+          rl("dd-" + x).classList.toggle("sel", m);
+          rl("dd-" + x).style.background = m ? "#1B3A2D" : "";
+          rl("dd-" + x).style.borderColor = m ? "#1B3A2D" : "#EFEFEC";
+        });
+        updateCalc();
       }
-      function goS(n) {
-        if (n === 2) {
-          const dur = document.getElementById("sel-dur");
-          const tgl = document.getElementById("sel-tgl");
-          // only validate if coming from step 1
-          const currentActive = document.querySelector(".sc.active");
-          if (
-            currentActive &&
-            currentActive.id === "sc1" &&
-            (!dur.value || !tgl.value)
-          ) {
-            document.getElementById("err1").classList.remove("hidden");
-            return;
-          }
-          document.getElementById("err1").classList.add("hidden");
-        }
-        if (n === 4) {
-          const hpp = gP(ST.pkt, ST.pax),
-            sub = hpp * ST.pax,
-            dp = Math.round((sub * ST.dpPct) / 100),
-            sisa = sub - dp;
-          document.getElementById("c-pkt").textContent = "Paket " + ST.pkt;
-          document.getElementById("c-tgl").textContent = ST.tgl
-            ? new Date(ST.tgl).toLocaleDateString("id-ID", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })
-            : "—";
-          document.getElementById("c-pax").textContent = ST.pax + " orang";
-          document.getElementById("c-tot").textContent = rp(sub);
-          document.getElementById("c-dpPct").textContent = ST.dpPct;
-          document.getElementById("c-dp").textContent = rp(dp);
-          document.getElementById("c-sisa").textContent = rp(sisa);
-          document.getElementById("c-dp-remind").textContent = rp(dp);
-        }
-        document
-          .querySelectorAll(".sc")
-          .forEach((s) => s.classList.remove("active"));
-        document.getElementById("sc" + n).classList.add("active");
-        ["s1", "s2", "s3", "s4"].forEach((id, i) => {
-          const el = document.getElementById(id);
-          el.classList.remove("step-done", "step-active");
-          if (i + 1 < n) el.classList.add("step-done");
-          else if (i + 1 === n) el.classList.add("step-active");
-          el.querySelector(".sn").textContent = i + 1 < n ? "✓" : i + 1;
+
+      function chPax(d) {
+        PAX = Math.max(1, Math.min(30, PAX + d));
+        rl("pax-val").textContent = PAX;
+        updateCalc();
+      }
+
+      function goStep(n) {
+        [1, 2, 3, 4].forEach((i) => (rl("step" + i).style.display = "none"));
+        rl("step" + n).style.display = "block";
+        [2, 3, 4].forEach((i) => {
+          const dot = rl("sd" + i),
+            lbl = rl("sl" + i),
+            line = rl("l" + (i - 1));
+          const done = n >= i;
+          dot.className =
+            "w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold " +
+            (done ? "bg-forest text-white" : "bg-smoke text-mid");
+          if (lbl)
+            lbl.className =
+              "text-[12px] hidden sm:block " +
+              (done ? "font-semibold text-ink" : "font-medium text-mid");
+          if (line) line.classList.toggle("done", done);
         });
         window.scrollTo({ top: 0, behavior: "smooth" });
-        updS();
+        if (n === 4) fillConf();
       }
-      function submit() {
-        if (!document.getElementById("agree")?.checked) {
-          alert("Anda harus menyetujui kebijakan DP terlebih dahulu.");
+
+      function fillConf() {
+        const h = hpp(),
+          tot = h * PAX,
+          now = Math.round((tot * PCT) / 100),
+          sisa = tot - now;
+        const tgl = rl("tgl-mulai").value;
+        rl("c-nama").textContent = rl("f-nama").value || "—";
+        rl("c-wa").textContent = rl("f-wa").value || "—";
+        rl("c-paket").textContent =
+          PKG === "deluxe" ? "Paket Deluxe" : "Paket Standard";
+        rl("c-prog").textContent = PLBL[PROG];
+        rl("c-rute").textContent =
+          RUTE === "senaru"
+            ? "Via Senaru"
+            : RUTE === "sembalun"
+              ? "Via Sembalun"
+              : "Sembalun → Senaru";
+        rl("c-pax").textContent = PAX + " orang";
+        rl("c-tgl-bk").textContent = todayStr();
+        rl("c-tgl-naik").textContent = fmtD(tgl);
+        rl("c-total").textContent = "USD " + tot;
+        rl("c-pct").textContent = PCT;
+        rl("c-dibayar").textContent = "USD " + now;
+        rl("c-sisa").textContent = sisa > 0 ? "USD " + sisa : "Lunas ✓";
+      }
+
+      function handleFile(inp) {
+        if (inp.files && inp.files[0]) {
+          rl("f-name").textContent = inp.files[0].name;
+          rl("drop-c").style.display = "none";
+          rl("drop-p").style.display = "block";
+        }
+      }
+      function handleDrop(ev) {
+        ev.preventDefault();
+        rl("drop-zone").classList.remove("dg");
+        const f = ev.dataTransfer.files[0];
+        if (f) {
+          rl("f-name").textContent = f.name;
+          rl("drop-c").style.display = "none";
+          rl("drop-p").style.display = "block";
+        }
+      }
+
+      function submitBooking() {
+        if (!rl("f-nama").value || !rl("f-wa").value || !rl("f-email").value) {
+          alert("Mohon lengkapi nama, WhatsApp, dan email.");
+          goStep(2);
           return;
         }
-        goS(4);
+        if (!rl("tgl-mulai").value) {
+          alert("Mohon pilih tanggal mulai pendakian.");
+          goStep(1);
+          return;
+        }
+        if (rl("drop-c").style.display !== "none") {
+          alert("Mohon upload bukti transfer terlebih dahulu.");
+          return;
+        }
+        goStep(4);
       }
-      function hFile(inp) {
-        if (inp.files[0]) shF(inp.files[0]);
-      }
-      function hDrop(e) {
-        e.preventDefault();
-        document.getElementById("dz").classList.remove("drag");
-        if (e.dataTransfer.files[0]) shF(e.dataTransfer.files[0]);
-      }
-      function shF(f) {
-        document.getElementById("dz-d").classList.add("hidden");
-        document.getElementById("dz-ok").classList.remove("hidden");
-        document.getElementById("fn-lbl").textContent = f.name;
-      }
-      function clrF() {
-        document.getElementById("dz-d").classList.remove("hidden");
-        document.getElementById("dz-ok").classList.add("hidden");
-        document.getElementById("fi").value = "";
-      }
-      document.addEventListener("change", (e) => {
-        if (e.target.id === "inp-jemput") updS();
-      });
 
-      // FIX: inisialisasi dengan goS(2) agar step 2 langsung tampil
-      goS(2);
+      // Init
+      rl("tgl-mulai").min = new Date().toISOString().split("T")[0];
+      updateCalc();
     </script>
   </body>
 </html>
