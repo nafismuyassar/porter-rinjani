@@ -75,9 +75,29 @@
         transition: max-height 0.35s ease;
       }
       .faq-body.open {
-        max-height: 300px;
+        max-height: 400px;
       }
-      /* calculator */
+      .testi-scroll {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scroll-snap-type: x mandatory;
+      }
+      .testi-scroll::-webkit-scrollbar {
+        height: 3px;
+      }
+      .testi-scroll::-webkit-scrollbar-thumb {
+        background: #ddd;
+      }
+      .testi-card {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+      }
+      .stars {
+        color: #c4a882;
+        letter-spacing: 2px;
+      }
       input[type="range"] {
         -webkit-appearance: none;
         width: 100%;
@@ -177,10 +197,10 @@
           >
         </h1>
         <p
-          class="text-[15px] font-light text-white/40 max-w-[380px] leading-[1.85]"
+          class="text-[15px] font-light text-white/40 max-w-[420px] leading-[1.85]"
         >
-          Tiga pilihan dirancang untuk setiap jenis pendaki — dari pemula hingga
-          berpengalaman.
+          Dua pilihan dirancang untuk setiap jenis pendaki — via Senaru maupun
+          Sembalun dengan harga yang sama.
         </p>
       </div>
     </div>
@@ -209,14 +229,14 @@
                 id="calc-total"
                 style="letter-spacing: -0.5px"
               >
-                Rp 4.200.000
+                USD 690
               </div>
               <div class="text-[11px] font-light text-mid" id="calc-sub">
-                3 orang × Rp 1.400.000
+                3 orang × USD 230
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-3 gap-6">
+          <div class="grid grid-cols-4 gap-6">
             <div>
               <label
                 class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
@@ -233,8 +253,34 @@
                 "
               >
                 <option value="deluxe">Paket Deluxe</option>
-                <option value="standard">Paket Standard</option>
-                <option value="sharing">Paket Sharing</option>
+                <option value="standard">Paket Standard / Sharing</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+                >Program</label
+              >
+              <select
+                id="c-prog"
+                onchange="calc()"
+                class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
+                style="
+                  background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
+                  background-repeat: no-repeat;
+                  background-position: right 14px center;
+                "
+              >
+                <option value="2d1n">2D1N — Crater Rim</option>
+                <option value="3d2n_lake" selected>
+                  3D2N — Crater Rim, Lake & Hot Spring
+                </option>
+                <option value="3d2n_summit">
+                  3D2N — Crater Rim, Lake & Summit
+                </option>
+                <option value="4d3n">
+                  4D3N — Crater Rim, Lake & Hot Spring
+                </option>
               </select>
             </div>
             <div>
@@ -265,11 +311,11 @@
             <div>
               <label
                 class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >DP Minimum (20%)</label
+                >DP Minimum (30%)</label
               >
               <div class="border border-smoke px-4 py-3 bg-mist">
                 <div class="text-[16px] font-semibold text-forest" id="calc-dp">
-                  Rp 840.000
+                  USD 207
                 </div>
                 <div class="text-[11px] font-light text-light mt-0.5">
                   dibayar sekarang
@@ -316,13 +362,7 @@
           onclick="ft(this, 'standard')"
           class="chip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
         >
-          Standard
-        </button>
-        <button
-          onclick="ft(this, 'sharing')"
-          class="chip text-[11px] font-medium px-4 py-2 border border-smoke text-mid hover:border-mid transition-all"
-        >
-          Sharing
+          Standard / Sharing
         </button>
         <div class="w-px h-5 bg-smoke mx-2"></div>
         <span
@@ -356,10 +396,22 @@
       </div>
     </div>
 
+    <!-- RUTE INFO BANNER -->
+    <div class="bg-forest/5 border-b border-smoke">
+      <div class="max-w-[1280px] mx-auto px-8 py-4 flex items-center gap-4">
+        <span class="text-forest text-[18px]">🗺️</span>
+        <p class="text-[13px] font-light text-mid leading-[1.7]">
+          <span class="font-semibold text-ink">Via Senaru & Via Sembalun</span>
+          — Harga berlaku untuk kedua rute. Rute dipilih saat booking. Sembalun
+          → Senaru (one way) tersedia untuk semua paket 3D2N ke atas.
+        </p>
+      </div>
+    </div>
+
     <!-- PAKET CARDS -->
     <div class="max-w-[1280px] mx-auto px-8 py-14">
-      <div class="grid grid-cols-3 gap-6">
-        <!-- DELUXE -->
+      <div class="grid grid-cols-2 gap-8">
+        <!-- ========== DELUXE ========== -->
         <div
           class="pcard bg-white border border-smoke lift overflow-hidden"
           data-t="deluxe"
@@ -395,7 +447,7 @@
           </div>
           <div class="p-7">
             <span
-              class="text-[10px] font-semibold tracking-[.2em] uppercase text-light block mb-3"
+              class="text-[10px] font-semibold tracking-[.2em] uppercase text-tan block mb-3"
               >Deluxe</span
             >
             <h3
@@ -406,270 +458,559 @@
             </h3>
             <p class="text-[13px] font-light text-mid leading-[1.8] mb-5">
               Pengalaman mendaki paling lengkap — semua kebutuhan terpenuhi
-              tanpa kejutan biaya.
+              tanpa kejutan biaya tambahan apapun.
             </p>
-            <ul class="space-y-2.5 mb-6">
+
+            <!-- Fasilitas Deluxe -->
+            <ul class="space-y-2 mb-6">
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Porter personal (maks. 15 kg)
+                >Transport bebas tujuan area Lombok (jemput & antar)
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Cook / chef berpengalaman
+                >Hotel 1 malam sebelum pendakian (AC + air panas)
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Tenda deluxe 4 musim
+                >Bonus makan malam di hotel
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Makan 3× sehari + snack
+                >Bonus guide + tiket masuk air terjun
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Sleeping bag & matras
+                >Guide taman nasional Rinjani berpengalaman
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Transportasi PP Lombok
+                >Porter handal (1 peserta : 1 porter — hanya bawa food &
+                equipment)
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Tiket & asuransi Taman Nasional Rinjani
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Makanan bergizi lengkap + 3 liter air mineral/hari/orang
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Equipment: tenda (1:2), matras 8cm, bantal, sleeping bag
+                premium, kursi, meja, toilet tent
               </li>
               <li class="flex gap-3 text-[13px] font-medium text-forest">
                 <span
                   class="w-1 h-1 rounded-full bg-forest mt-[7px] flex-shrink-0"
                 ></span
-                >Nol biaya tambahan jika tidak summit
+                >Nol biaya tambahan jika tidak summit ✓
+              </li>
+              <li class="flex gap-3 text-[13px] font-medium text-forest">
+                <span
+                  class="w-1 h-1 rounded-full bg-forest mt-[7px] flex-shrink-0"
+                ></span
+                >Gratis transport jika program tidak selesai dari Sembalun ✓
               </li>
             </ul>
+
+            <!-- Harga Deluxe sesuai gambar -->
             <div class="bg-mist p-4 mb-5">
               <p
                 class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
               >
-                Harga per orang
+                Harga per orang (USD)
               </p>
-              <div class="space-y-2">
-                <div
-                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
-                >
-                  <span class="font-light text-mid">1–2 orang</span
-                  ><span class="font-semibold text-ink">Rp 1.750.000</span>
+              <div class="overflow-x-auto">
+                <table class="w-full text-[12px]">
+                  <thead>
+                    <tr class="border-b border-smoke">
+                      <th class="text-left font-semibold text-light pb-2">
+                        Program
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        1 org
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        2–4 org
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        5–10 org
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        11+ org
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-smoke">
+                    <tr>
+                      <td class="py-2 font-light text-mid">2D1N Crater Rim</td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $310
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $230
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $180
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $150
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 font-light text-mid">
+                        3D2N Lake & Hot Spring
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $400
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $280
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $255
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $220
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 font-light text-mid">
+                        3D2N Lake & Summit
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $450
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $290
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $265
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $235
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 font-light text-mid">
+                        4D3N Lake & Hot Spring
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $500
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $340
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $315
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $285
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Testimoni Deluxe -->
+            <div class="mb-5">
+              <p
+                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
+              >
+                Kata Mereka
+              </p>
+              <div class="testi-scroll">
+                <div class="testi-card bg-mist border border-smoke p-4">
+                  <div class="stars text-[12px] mb-2">★★★★★</div>
+                  <p class="text-[12px] font-light text-mid leading-[1.7] mb-3">
+                    "Porter & chef-nya luar biasa. Makanan di gunung setara
+                    restoran! Hotel sebelum pendakian juga nyaman banget, AC dan
+                    air panas. Highly recommended."
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-7 h-7 rounded-full bg-forest/15 flex items-center justify-center text-[10px] font-bold text-forest"
+                    >
+                      A
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-semibold text-ink">
+                        Ahmad Fauzi
+                      </div>
+                      <div class="text-[10px] font-light text-light">
+                        Jakarta · 3D2N Summit
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
-                >
-                  <span class="font-light text-mid">3–5 orang</span
-                  ><span class="font-semibold text-ink">Rp 1.400.000</span>
+                <div class="testi-card bg-mist border border-smoke p-4">
+                  <div class="stars text-[12px] mb-2">★★★★★</div>
+                  <p class="text-[12px] font-light text-mid leading-[1.7] mb-3">
+                    "Paket Deluxe worth every penny. Tidak ada biaya tambahan
+                    sama sekali meski kami putar balik sebelum summit karena
+                    cuaca. Tim sangat profesional."
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-7 h-7 rounded-full bg-forest/15 flex items-center justify-center text-[10px] font-bold text-forest"
+                    >
+                      S
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-semibold text-ink">
+                        Sarah Wijaya
+                      </div>
+                      <div class="text-[10px] font-light text-light">
+                        Surabaya · 4D3N
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="flex justify-between text-[13px] py-1.5">
-                  <span class="font-light text-mid">6–10 orang</span
-                  ><span class="font-semibold text-ink">Rp 1.250.000</span>
+                <div class="testi-card bg-mist border border-smoke p-4">
+                  <div class="stars text-[12px] mb-2">★★★★★</div>
+                  <p class="text-[12px] font-light text-mid leading-[1.7] mb-3">
+                    "Guide-nya sabar dan berpengalaman. Matras tebal, sleeping
+                    bag hangat, tenda luas. Tidak nyangka bisa senyaman ini di
+                    gunung!"
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-7 h-7 rounded-full bg-forest/15 flex items-center justify-center text-[10px] font-bold text-forest"
+                    >
+                      R
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-semibold text-ink">
+                        Rudi Hartono
+                      </div>
+                      <div class="text-[10px] font-light text-light">
+                        Bandung · 3D2N Lake
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
             <a
               href="booking.html"
               class="block w-full text-center bg-forest text-white text-[12px] font-semibold tracking-[.06em] py-4 hover:bg-forest/85 transition-colors"
-              >Booking Sekarang</a
+              >Booking Paket Deluxe →</a
             >
           </div>
         </div>
 
-        <!-- STANDARD -->
+        <!-- ========== STANDARD / SHARING ========== -->
         <div
           class="pcard bg-white border border-smoke lift overflow-hidden"
           data-t="standard"
           data-d="2d1n 3d2n 4d3n"
         >
           <div
-            class="h-[200px] bg-gradient-to-br from-mid/8 to-mid/3 flex items-center justify-center text-light italic text-sm"
+            class="relative h-[200px] bg-gradient-to-br from-mid/8 to-mid/3 flex items-center justify-center text-light italic text-sm"
           >
             <div class="text-center">
               <div class="text-[48px] opacity-10 mb-2">🎒</div>
               [ Foto Paket Standard ]
             </div>
+            <div class="absolute bottom-3 left-3 flex gap-1.5">
+              <span
+                class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
+                >2D1N</span
+              >
+              <span
+                class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
+                >3D2N</span
+              >
+              <span
+                class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
+                >4D3N</span
+              >
+            </div>
           </div>
           <div class="p-7">
             <span
               class="text-[10px] font-semibold tracking-[.2em] uppercase text-light block mb-3"
-              >Standard</span
+              >Standard / Sharing</span
             >
             <h3
               class="text-[22px] font-medium text-ink mb-2"
               style="letter-spacing: -0.3px"
             >
-              Paket Standard
+              Paket Standard / Sharing
             </h3>
             <p class="text-[13px] font-light text-mid leading-[1.8] mb-5">
-              Paket lengkap dengan layanan essensial pendakian. Pilihan terbaik
-              untuk grup.
+              Paket essensial dengan layanan lengkap. Cocok untuk pendaki yang
+              ingin pengalaman nyata Rinjani dengan budget lebih hemat.
             </p>
-            <ul class="space-y-2.5 mb-6">
+
+            <!-- Fasilitas Standard -->
+            <ul class="space-y-2 mb-6">
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Porter bersama (maks. 12 kg)
+                >Transport bebas tujuan area Lombok (jemput & antar)
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Tenda dome standard
+                >Hotel 1 malam sebelum pendakian (kipas angin + air dingin)
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Makan 2× sehari
+                >Guide berpengalaman
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Sleeping bag & P3K dasar
+                >Porter 1 untuk 2 peserta
               </li>
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
                 ></span
-                >Transportasi PP Lombok
+                >Makanan bergizi (nasi campur, curry, mie goreng, soup, pancake,
+                buah) + air gunung
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Equipment: tenda (1:2), matras 3cm, sleeping bag, toilet tent
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-mid">
+                <span
+                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
+                ></span
+                >Tiket & asuransi Taman Nasional Rinjani
               </li>
               <li class="flex gap-3 text-[13px] font-light text-red-400">
                 <span
                   class="w-1 h-1 rounded-full bg-red-300 mt-[7px] flex-shrink-0"
                 ></span
-                >Ada biaya tambahan jika tidak summit
+                >Ada biaya tambahan jika kembali sebelum program selesai
+              </li>
+              <li class="flex gap-3 text-[13px] font-light text-red-400">
+                <span
+                  class="w-1 h-1 rounded-full bg-red-300 mt-[7px] flex-shrink-0"
+                ></span
+                >Pilihan makanan lebih terbatas, buah tidak selengkap Deluxe
               </li>
             </ul>
+
+            <!-- Harga Standard sesuai gambar -->
             <div class="bg-mist p-4 mb-5">
               <p
                 class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
               >
-                Harga per orang
+                Harga per orang (USD)
               </p>
-              <div class="space-y-2">
-                <div
-                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
-                >
-                  <span class="font-light text-mid">1–2 orang</span
-                  ><span class="font-semibold text-ink">Rp 1.100.000</span>
+              <div class="overflow-x-auto">
+                <table class="w-full text-[12px]">
+                  <thead>
+                    <tr class="border-b border-smoke">
+                      <th class="text-left font-semibold text-light pb-2">
+                        Program
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        1 org
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        2–4 org
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        5–10 org
+                      </th>
+                      <th class="text-center font-semibold text-light pb-2">
+                        11+ org
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-smoke">
+                    <tr>
+                      <td class="py-2 font-light text-mid">2D1N Crater Rim</td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $305
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $220
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $175
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $145
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 font-light text-mid">
+                        3D2N Lake & Hot Spring
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $395
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $270
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $250
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $215
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 font-light text-mid">
+                        3D2N Lake & Summit
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $445
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $285
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $260
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $230
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-2 font-light text-mid">
+                        4D3N Lake & Hot Spring
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $495
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $335
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $310
+                      </td>
+                      <td class="py-2 text-center font-semibold text-ink">
+                        $280
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="text-[11px] font-light text-amber-600 mt-2">
+                * Harga tanpa hotel lebih hemat $15–$20 per orang
+              </p>
+            </div>
+
+            <!-- Testimoni Standard -->
+            <div class="mb-5">
+              <p
+                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
+              >
+                Kata Mereka
+              </p>
+              <div class="testi-scroll">
+                <div class="testi-card bg-mist border border-smoke p-4">
+                  <div class="stars text-[12px] mb-2">★★★★★</div>
+                  <p class="text-[12px] font-light text-mid leading-[1.7] mb-3">
+                    "Paket sharing cocok banget buat solo traveler. Ketemu teman
+                    baru, guide ramah dan profesional. Pengalaman Rinjani yang
+                    tak terlupakan!"
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-7 h-7 rounded-full bg-mid/15 flex items-center justify-center text-[10px] font-bold text-mid"
+                    >
+                      D
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-semibold text-ink">
+                        Dini Rahayu
+                      </div>
+                      <div class="text-[10px] font-light text-light">
+                        Yogyakarta · Solo · 3D2N
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="flex justify-between text-[13px] py-1.5 border-b border-smoke"
-                >
-                  <span class="font-light text-mid">3–5 orang</span
-                  ><span class="font-semibold text-ink">Rp 900.000</span>
+                <div class="testi-card bg-mist border border-smoke p-4">
+                  <div class="stars text-[12px] mb-2">★★★★☆</div>
+                  <p class="text-[12px] font-light text-mid leading-[1.7] mb-3">
+                    "Harga terjangkau, guide berpengalaman, equipment memadai.
+                    Makanan cukup memuaskan. Recommended untuk yang budget
+                    terbatas tapi mau nanjak Rinjani."
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-7 h-7 rounded-full bg-mid/15 flex items-center justify-center text-[10px] font-bold text-mid"
+                    >
+                      B
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-semibold text-ink">
+                        Budi Santoso
+                      </div>
+                      <div class="text-[10px] font-light text-light">
+                        Semarang · Grup 5 org · 2D1N
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="flex justify-between text-[13px] py-1.5">
-                  <span class="font-light text-mid">6–10 orang</span
-                  ><span class="font-semibold text-ink">Rp 750.000</span>
+                <div class="testi-card bg-mist border border-smoke p-4">
+                  <div class="stars text-[12px] mb-2">★★★★★</div>
+                  <p class="text-[12px] font-light text-mid leading-[1.7] mb-3">
+                    "Kami berenam pilih Standard, sangat puas! Porter kuat
+                    banget, tenda bersih, view danau Segara Anak bikin nangis
+                    terharu. Pasti balik lagi!"
+                  </p>
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-7 h-7 rounded-full bg-mid/15 flex items-center justify-center text-[10px] font-bold text-mid"
+                    >
+                      M
+                    </div>
+                    <div>
+                      <div class="text-[11px] font-semibold text-ink">
+                        Maya Sari
+                      </div>
+                      <div class="text-[10px] font-light text-light">
+                        Makassar · Grup 6 org · 4D3N
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
             <a
               href="booking.html"
               class="block w-full text-center border-2 border-ink text-ink text-[12px] font-semibold tracking-[.06em] py-4 hover:bg-ink hover:text-white transition-all"
-              >Booking Sekarang</a
-            >
-          </div>
-        </div>
-
-        <!-- SHARING -->
-        <div
-          class="pcard bg-white border border-smoke lift overflow-hidden"
-          data-t="sharing"
-          data-d="3d2n 4d3n"
-        >
-          <div
-            class="h-[200px] bg-gradient-to-br from-tan/10 to-tan/3 flex items-center justify-center text-light italic text-sm"
-          >
-            <div class="text-center">
-              <div class="text-[48px] opacity-10 mb-2">👥</div>
-              [ Foto Paket Sharing ]
-            </div>
-          </div>
-          <div class="p-7">
-            <span
-              class="text-[10px] font-semibold tracking-[.2em] uppercase text-light block mb-3"
-              >Sharing</span
-            >
-            <h3
-              class="text-[22px] font-medium text-ink mb-2"
-              style="letter-spacing: -0.3px"
-            >
-              Paket Sharing
-            </h3>
-            <p class="text-[13px] font-light text-mid leading-[1.8] mb-5">
-              Bergabung dengan grup lain. Cocok untuk solo traveler atau yang
-              ingin berhemat.
-            </p>
-            <ul class="space-y-2.5 mb-6">
-              <li class="flex gap-3 text-[13px] font-light text-mid">
-                <span
-                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
-                ></span
-                >Bergabung grup (max 10 orang)
-              </li>
-              <li class="flex gap-3 text-[13px] font-light text-mid">
-                <span
-                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
-                ></span
-                >Porter bersama
-              </li>
-              <li class="flex gap-3 text-[13px] font-light text-mid">
-                <span
-                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
-                ></span
-                >Tenda bersama
-              </li>
-              <li class="flex gap-3 text-[13px] font-light text-mid">
-                <span
-                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
-                ></span
-                >Makan 2× sehari
-              </li>
-              <li class="flex gap-3 text-[13px] font-light text-mid">
-                <span
-                  class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
-                ></span
-                >Transportasi PP Lombok
-              </li>
-              <li class="flex gap-3 text-[13px] font-light text-red-400">
-                <span
-                  class="w-1 h-1 rounded-full bg-red-300 mt-[7px] flex-shrink-0"
-                ></span
-                >Ada biaya tambahan jika tidak summit
-              </li>
-            </ul>
-            <div class="bg-mist p-4 mb-5">
-              <p
-                class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
-              >
-                Harga per orang
-              </p>
-              <div class="py-2 flex justify-between text-[13px]">
-                <span class="font-light text-mid">Semua grup</span
-                ><span class="font-semibold text-ink">Rp 600.000</span>
-              </div>
-              <p class="text-[11px] font-light text-light mt-1">
-                Harga tetap, tidak tergantung jumlah
-              </p>
-            </div>
-            <a
-              href="booking.html"
-              class="block w-full text-center border border-smoke text-mid text-[12px] font-semibold tracking-[.06em] py-4 hover:border-ink hover:text-ink transition-all"
-              >Booking Sekarang</a
+              >Booking Paket Standard →</a
             >
           </div>
         </div>
@@ -686,7 +1027,7 @@
           <thead>
             <tr class="border-b border-smoke">
               <th
-                class="py-4 px-6 text-left text-[11px] font-semibold tracking-[.12em] uppercase text-light w-[40%]"
+                class="py-4 px-6 text-left text-[11px] font-semibold tracking-[.12em] uppercase text-light w-[50%]"
               >
                 Fasilitas
               </th>
@@ -698,85 +1039,125 @@
               <th
                 class="py-4 px-4 text-center text-[11px] font-semibold tracking-[.12em] uppercase text-ink"
               >
-                Standard
-              </th>
-              <th
-                class="py-4 px-4 text-center text-[11px] font-semibold tracking-[.12em] uppercase text-tan"
-              >
-                Sharing
+                Standard / Sharing
               </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-smoke">
             <tr>
               <td class="py-3.5 px-6 text-[13px] font-light text-mid">
-                Porter personal
+                Transport area Lombok (jemput & antar)
               </td>
               <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+            </tr>
+            <tr class="bg-mist/50">
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Hotel 1 malam sebelum pendakian
+              </td>
               <td
-                class="py-3.5 px-4 text-center text-[13px] font-medium text-mid"
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
               >
-                Bersama
+                AC + Air Panas ✓
               </td>
               <td
                 class="py-3.5 px-4 text-center text-[13px] font-medium text-mid"
               >
-                Bersama
+                Kipas + Air Dingin
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Bonus makan malam di hotel
+              </td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-red-400 text-[16px]">
+                ✕
               </td>
             </tr>
             <tr class="bg-mist/50">
               <td class="py-3.5 px-6 text-[13px] font-light text-mid">
-                Chef / masak
+                Bonus guide + tiket air terjun
               </td>
               <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
               <td class="py-3.5 px-4 text-center text-red-400 text-[16px]">
                 ✕
               </td>
-              <td class="py-3.5 px-4 text-center text-red-400 text-[16px]">
-                ✕
-              </td>
             </tr>
             <tr>
-              <td class="py-3.5 px-6 text-[13px] font-light text-mid">Tenda</td>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Guide profesional
+              </td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+            </tr>
+            <tr class="bg-mist/50">
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Porter
+              </td>
               <td
                 class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
               >
-                Deluxe 4 musim
+                1 tamu : 1 porter
               </td>
               <td
-                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-mid"
               >
-                Dome standard
+                1 porter : 2 tamu
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Tiket & asuransi Taman Nasional
+              </td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+            </tr>
+            <tr class="bg-mist/50">
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Makanan
               </td>
               <td
-                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
               >
-                Bersama
+                Lengkap + buah + 3L air/hari
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-mid"
+              >
+                Standar + air gunung
+              </td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Matras
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
+              >
+                8 cm + bantal
+              </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-mid"
+              >
+                3 cm
               </td>
             </tr>
             <tr class="bg-mist/50">
-              <td class="py-3.5 px-6 text-[13px] font-light text-mid">Makan</td>
-              <td
-                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
-              >
-                3× + snack
-              </td>
-              <td
-                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
-              >
-                2×
-              </td>
-              <td
-                class="py-3.5 px-4 text-center text-[13px] font-medium text-ink"
-              >
-                2×
-              </td>
-            </tr>
-            <tr>
               <td class="py-3.5 px-6 text-[13px] font-light text-mid">
                 Sleeping bag
               </td>
+              <td
+                class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
+              >
+                Premium ✓
+              </td>
               <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
+                Kursi & meja camp
+              </td>
               <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
               <td class="py-3.5 px-4 text-center text-red-400 text-[16px]">
                 ✕
@@ -784,25 +1165,12 @@
             </tr>
             <tr class="bg-mist/50">
               <td class="py-3.5 px-6 text-[13px] font-light text-mid">
-                Transportasi PP
-              </td>
-              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
-              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
-              <td class="py-3.5 px-4 text-center text-forest text-[16px]">✓</td>
-            </tr>
-            <tr>
-              <td class="py-3.5 px-6 text-[13px] font-light text-mid">
-                Biaya tambahan jika tidak summit
+                Biaya tambahan jika tidak summit / balik lebih awal
               </td>
               <td
                 class="py-3.5 px-4 text-center text-[13px] font-medium text-forest"
               >
                 Tidak ada ✓
-              </td>
-              <td
-                class="py-3.5 px-4 text-center text-[13px] font-medium text-red-400"
-              >
-                Ada
               </td>
               <td
                 class="py-3.5 px-4 text-center text-[13px] font-medium text-red-400"
@@ -838,7 +1206,7 @@
               onclick="tFaq(this)"
             >
               <span class="text-[14px] font-medium text-ink"
-                >Apa itu biaya tambahan jika tidak summit?</span
+                >Apa perbedaan Deluxe dan Standard/Sharing?</span
               ><span
                 class="fq text-light text-2xl font-light ml-4 flex-shrink-0 transition-transform"
                 >+</span
@@ -846,9 +1214,53 @@
             </button>
             <div class="faq-body">
               <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
-                Untuk paket Standard dan Sharing, jika tidak sampai puncak
-                karena cuaca/kondisi fisik, ada biaya kompensasi untuk porter.
-                Paket Deluxe tidak dikenakan biaya tambahan apapun.
+                Deluxe menawarkan hotel AC + air panas, porter 1:1, matras 8cm,
+                makanan lengkap dengan buah & 3L air mineral/hari, bonus makan
+                malam & guide air terjun. Tidak ada biaya tambahan apapun.
+                Standard/Sharing menawarkan hotel lebih sederhana, porter 1:2,
+                makanan standar. Ada biaya tambahan jika kembali sebelum program
+                selesai.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-smoke">
+            <button
+              class="w-full flex justify-between items-center py-5 text-left"
+              onclick="tFaq(this)"
+            >
+              <span class="text-[14px] font-medium text-ink"
+                >Apakah harga Via Senaru & Via Sembalun sama?</span
+              ><span
+                class="fq text-light text-2xl font-light ml-4 flex-shrink-0"
+                >+</span
+              >
+            </button>
+            <div class="faq-body">
+              <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
+                Ya, harga untuk Via Senaru dan Via Sembalun adalah sama. Rute
+                dipilih saat proses booking. Untuk program 3D2N ke atas,
+                tersedia opsi one-way Sembalun → Senaru tanpa biaya tambahan.
+              </p>
+            </div>
+          </div>
+          <div class="border-b border-smoke">
+            <button
+              class="w-full flex justify-between items-center py-5 text-left"
+              onclick="tFaq(this)"
+            >
+              <span class="text-[14px] font-medium text-ink"
+                >Apa itu biaya tambahan jika tidak summit (Standard)?</span
+              ><span
+                class="fq text-light text-2xl font-light ml-4 flex-shrink-0"
+                >+</span
+              >
+            </button>
+            <div class="faq-body">
+              <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
+                Untuk paket Standard/Sharing, jika tidak sampai puncak dan ingin
+                kembali sebelum program selesai, ada biaya kompensasi untuk
+                porter. Paket Deluxe tidak dikenakan biaya tambahan apapun —
+                termasuk jika program tidak selesai dari Sembalun.
               </p>
             </div>
           </div>
@@ -885,7 +1297,7 @@
             </button>
             <div class="faq-body">
               <p class="text-[13px] font-light text-mid leading-[1.85] pb-5">
-                Transfer bank (BCA/BRI/Mandiri). Bisa DP minimum 20%, sisa
+                Transfer bank (BCA/BRI/Mandiri). Bisa DP minimum 30%, sisa
                 dilunasi sebelum keberangkatan. Upload bukti di halaman booking.
               </p>
             </div>
@@ -989,36 +1401,40 @@
     >
 
     <script>
-      const HR = {
-        deluxe: [
-          { max: 2, p: 1750000 },
-          { max: 5, p: 1400000 },
-          { max: 99, p: 1250000 },
-        ],
-        standard: [
-          { max: 2, p: 1100000 },
-          { max: 5, p: 900000 },
-          { max: 99, p: 750000 },
-        ],
-        sharing: [{ max: 99, p: 600000 }],
+      // Pricing data USD — Via Senaru = Via Sembalun
+      const PRICE = {
+        deluxe: {
+          "2d1n": { 1: 310, 4: 230, 10: 180, 99: 150 },
+          "3d2n_lake": { 1: 400, 4: 280, 10: 255, 99: 220 },
+          "3d2n_summit": { 1: 450, 4: 290, 10: 265, 99: 235 },
+          "4d3n": { 1: 500, 4: 340, 10: 315, 99: 285 },
+        },
+        standard: {
+          "2d1n": { 1: 305, 4: 220, 10: 175, 99: 145 },
+          "3d2n_lake": { 1: 395, 4: 270, 10: 250, 99: 215 },
+          "3d2n_summit": { 1: 445, 4: 285, 10: 260, 99: 230 },
+          "4d3n": { 1: 495, 4: 335, 10: 310, 99: 280 },
+        },
       };
       let cpax = 3;
-      function gP(k, n) {
-        return (HR[k] || HR.standard).find((r) => n <= r.max)?.p || 600000;
-      }
-      function rp(n) {
-        return "Rp " + n.toLocaleString("id-ID");
+      function gP(pkg, prog, n) {
+        const tiers = PRICE[pkg][prog];
+        if (n <= 1) return tiers[1];
+        if (n <= 4) return tiers[4];
+        if (n <= 10) return tiers[10];
+        return tiers[99];
       }
       function calc() {
         const k = document.getElementById("c-pkt").value;
-        const hpp = gP(k, cpax),
-          sub = hpp * cpax,
-          dp = Math.round(sub * 0.2);
-        document.getElementById("calc-total").textContent = rp(sub);
+        const prog = document.getElementById("c-prog").value;
+        const pp = gP(k, prog, cpax);
+        const total = pp * cpax;
+        const dp = Math.round(total * 0.3);
+        document.getElementById("calc-total").textContent = "USD " + total;
         document.getElementById("calc-sub").textContent =
-          cpax + " orang × " + rp(hpp);
-        document.getElementById("calc-dp").textContent = rp(dp);
-        const nm = k.charAt(0).toUpperCase() + k.slice(1);
+          cpax + " orang × USD " + pp;
+        document.getElementById("calc-dp").textContent = "USD " + dp;
+        const nm = k === "deluxe" ? "Deluxe" : "Standard";
         document.getElementById("calc-cta").textContent =
           "Booking Paket " + nm + " →";
       }
