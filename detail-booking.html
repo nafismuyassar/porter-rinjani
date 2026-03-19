@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detail Booking #BK-0043 — Porter Rinjani</title>
+    <title>Detail Booking #BK-0042 — Porter Rinjani</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
       rel="stylesheet"
@@ -78,7 +78,6 @@
       .d5 {
         animation-delay: 0.31s;
       }
-      /* Timeline */
       .tl-line {
         position: absolute;
         left: 15px;
@@ -87,7 +86,6 @@
         width: 1.5px;
         background: #efefec;
       }
-      /* Status badge */
       .badge-pending {
         background: #fef3c7;
         color: #92400e;
@@ -98,22 +96,6 @@
         color: #065f46;
         border: 1px solid #a7f3d0;
       }
-      .badge-paid {
-        background: #ecfdf5;
-        color: #065f46;
-        border: 1px solid #6ee7b7;
-      }
-      .badge-done {
-        background: #f0fdf4;
-        color: #166534;
-        border: 1px solid #86efac;
-      }
-      .badge-cancel {
-        background: #fee2e2;
-        color: #991b1b;
-        border: 1px solid #fca5a5;
-      }
-      /* Progress steps */
       .ps-done .ps-dot {
         background: #1b3a2d;
         border-color: #1b3a2d;
@@ -131,21 +113,33 @@
         color: #1a1a1a;
         font-weight: 600;
       }
-      /* Print */
-      @media print {
-        nav,
-        footer,
-        .no-print {
-          display: none !important;
-        }
-        body {
-          background: #fff;
-        }
+      input,
+      select {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid #efefec;
+        background: #fff;
+        font-size: 13px;
+        font-weight: 300;
+        color: #1a1a1a;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #1b3a2d;
+        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
+      }
+      select {
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23A8A8A4' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
       }
     </style>
   </head>
   <body>
-    <!-- NAV -->
     <nav
       class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
     >
@@ -201,7 +195,6 @@
       </div>
     </nav>
 
-    <!-- BREADCRUMB + ACTIONS -->
     <div class="bg-white border-b border-smoke">
       <div
         class="max-w-[1280px] mx-auto px-8 py-3 flex items-center justify-between"
@@ -209,36 +202,26 @@
         <div class="flex items-center gap-2 text-[12px] font-light text-light">
           <a href="profil.html" class="hover:text-ink transition-colors"
             >Profil</a
-          >
-          <span>/</span>
+          ><span>/</span>
           <a href="status.html" class="hover:text-ink transition-colors"
             >Riwayat Booking</a
-          >
-          <span>/</span>
-          <span class="text-ink font-medium">#BK-0043</span>
+          ><span>/</span>
+          <span class="text-ink font-medium">#BK-0042</span>
         </div>
         <div class="flex gap-3 no-print">
-          <button
-            onclick="window.print()"
-            class="flex items-center gap-2 border border-smoke text-mid text-[12px] font-medium px-4 py-2 hover:bg-mist transition-colors"
-          >
-            🖨 Cetak
-          </button>
-          <button
-            onclick="dlPDF()"
+          <a
+            href="invoice.html"
             class="flex items-center gap-2 bg-forest text-white text-[12px] font-semibold px-4 py-2 hover:bg-forest/85 transition-colors"
           >
-            ⬇ Unduh Invoice PDF
-          </button>
+            📄 Lihat Invoice
+          </a>
         </div>
       </div>
     </div>
 
     <div class="max-w-[1280px] mx-auto px-8 py-10">
       <div class="grid grid-cols-[1fr_340px] gap-7 items-start">
-        <!-- ═══ KONTEN UTAMA ═══ -->
         <div class="space-y-5">
-          <!-- Header card -->
           <div class="bg-white border border-smoke p-8 fu d1">
             <div class="flex items-start justify-between mb-6">
               <div>
@@ -251,21 +234,20 @@
                   class="text-[32px] font-light text-ink"
                   style="letter-spacing: -0.6px"
                 >
-                  #BK-0043
+                  #BK-0042
                 </h1>
               </div>
               <div class="text-right">
                 <span
-                  class="badge-pending inline-flex items-center text-[11px] font-semibold px-3 py-1.5 mb-2"
-                  >⏳ Menunggu Konfirmasi Admin</span
+                  class="badge-confirmed inline-flex items-center text-[11px] font-semibold px-3 py-1.5 mb-2"
+                  >✓ Booking Confirmed</span
                 >
                 <p class="text-[11px] font-light text-light">
-                  Dibuat: 18 Mar 2025, 14.22 WIB
+                  Dibuat: 10 Mar 2025, 14.32 WIB
                 </p>
               </div>
             </div>
 
-            <!-- Progress steps -->
             <div class="relative">
               <div
                 class="absolute top-[15px] left-0 right-0 h-px bg-smoke z-0"
@@ -293,14 +275,14 @@
                   <p
                     class="ps-lbl text-[10px] font-medium text-light text-center leading-tight"
                   >
-                    DP<br />Diterima
+                    DP<br />Dikonfirmasi
                   </p>
                 </div>
-                <div class="ps-active flex flex-col items-center gap-2 w-[18%]">
+                <div class="ps-done flex flex-col items-center gap-2 w-[18%]">
                   <div
-                    class="ps-dot w-8 h-8 rounded-full border-2 border-smoke bg-white flex items-center justify-center text-[11px] font-bold text-light transition-all"
+                    class="ps-dot w-8 h-8 rounded-full border-2 border-smoke bg-white flex items-center justify-center text-[12px] font-bold text-white transition-all"
                   >
-                    3
+                    ✓
                   </div>
                   <p
                     class="ps-lbl text-[10px] font-medium text-light text-center leading-tight"
@@ -308,7 +290,7 @@
                     Dikonfirmasi<br />Admin
                   </p>
                 </div>
-                <div class="flex flex-col items-center gap-2 w-[18%]">
+                <div class="ps-active flex flex-col items-center gap-2 w-[18%]">
                   <div
                     class="ps-dot w-8 h-8 rounded-full border-2 border-smoke bg-white flex items-center justify-center text-[11px] font-bold text-light transition-all"
                   >
@@ -338,23 +320,21 @@
             <div
               class="mt-6 bg-amber-50 border border-amber-200 px-5 py-3.5 flex items-center gap-3"
             >
-              <span class="text-[18px]">⏳</span>
+              <span class="text-[18px]">⏰</span>
               <p class="text-[13px] font-light text-amber-700">
-                Admin sedang memverifikasi pembayaran Anda. Estimasi konfirmasi
-                dalam <strong>1×24 jam</strong>. Notifikasi akan dikirim via
-                WhatsApp & email.
+                Sisa pelunasan <strong>USD 588</strong> wajib diselesaikan
+                sebelum <strong>12 April 2025 (H-3)</strong>.
               </p>
             </div>
           </div>
 
-          <!-- Detail paket -->
           <div class="bg-white border border-smoke p-8 fu d2">
             <p
               class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-5"
             >
               Detail Paket
             </p>
-            <div class="grid grid-cols-2 gap-x-10 gap-y-4">
+            <div class="grid grid-cols-2 gap-x-10 gap-y-4 mb-6">
               <div>
                 <p
                   class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
@@ -367,11 +347,30 @@
                 <p
                   class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
                 >
-                  Durasi / Program
+                  Program
                 </p>
                 <p class="text-[15px] font-semibold text-ink">
-                  3D2N — Sembalun ke Senaru
+                  3D2N — Lake & Hot Spring
                 </p>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  Rute
+                </p>
+                <p class="text-[15px] font-semibold text-ink">
+                  Via Sembalun → Senaru
+                  <span class="text-[12px] font-light text-mid">(One Way)</span>
+                </p>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  Jumlah Peserta
+                </p>
+                <p class="text-[15px] font-semibold text-ink">3 orang</p>
               </div>
               <div>
                 <p
@@ -393,28 +392,27 @@
                 <p
                   class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
                 >
-                  Jumlah Peserta
-                </p>
-                <p class="text-[15px] font-semibold text-ink">3 orang</p>
-              </div>
-              <div>
-                <p
-                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
-                >
                   Titik Jemput
                 </p>
                 <p class="text-[15px] font-semibold text-ink">
                   Bandara Lombok (BIL)
                 </p>
               </div>
+              <div>
+                <p
+                  class="text-[10px] font-semibold tracking-[.14em] uppercase text-light mb-1.5"
+                >
+                  Tanggal Booking
+                </p>
+                <p class="text-[15px] font-semibold text-ink">10 Maret 2025</p>
+              </div>
             </div>
 
-            <!-- Peserta -->
-            <div class="mt-7 pt-7 border-t border-smoke">
+            <div class="pt-6 border-t border-smoke mb-6">
               <p
                 class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-4"
               >
-                Data Peserta (Ketua Rombongan)
+                Data Ketua Rombongan
               </p>
               <div class="grid grid-cols-3 gap-5">
                 <div>
@@ -423,7 +421,7 @@
                   >
                     Nama
                   </p>
-                  <p class="text-[13px] font-medium text-ink">Rina Kusuma</p>
+                  <p class="text-[13px] font-semibold text-ink">Rina Kusuma</p>
                 </div>
                 <div>
                   <p
@@ -444,98 +442,134 @@
               </div>
             </div>
 
-            <!-- Fasilitas -->
-            <div class="mt-7 pt-7 border-t border-smoke">
+            <div class="pt-6 border-t border-smoke mb-6">
+              <p
+                class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-3"
+              >
+                Keterangan Rute
+              </p>
+              <div class="bg-forest/5 border border-forest/10 p-4">
+                <p class="text-[12px] font-semibold text-forest mb-1">
+                  🗺️ Via Sembalun → Senaru (One Way)
+                </p>
+                <p class="text-[12px] font-light text-mid leading-[1.7]">
+                  Pendakian dimulai dari Pos Sembalun Lawang menuju Kawah Rim,
+                  Danau Segara Anak & Hot Spring, lalu turun via Senaru. Tim
+                  menjemput di Bandara Lombok sebelum pendakian dan mengantar ke
+                  tujuan setelah selesai —
+                  <strong class="text-ink">tanpa biaya tambahan</strong> (Paket
+                  Deluxe).
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-smoke">
               <p
                 class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-4"
               >
-                Fasilitas Termasuk
+                Fasilitas Termasuk (Paket Deluxe)
               </p>
               <div class="grid grid-cols-2 gap-x-8 gap-y-2">
                 <div class="flex gap-2.5 text-[13px] font-light text-mid">
-                  <span class="text-forest flex-shrink-0">✓</span>Porter
-                  personal (maks. 15 kg)
+                  <span class="text-forest flex-shrink-0">✓</span>Transport
+                  bebas tujuan area Lombok (jemput & antar)
                 </div>
                 <div class="flex gap-2.5 text-[13px] font-light text-mid">
-                  <span class="text-forest flex-shrink-0">✓</span>Chef / cook
-                  berpengalaman
+                  <span class="text-forest flex-shrink-0">✓</span>Hotel 1 malam
+                  sebelum pendakian (AC + air panas)
                 </div>
                 <div class="flex gap-2.5 text-[13px] font-light text-mid">
-                  <span class="text-forest flex-shrink-0">✓</span>Tenda deluxe 4
-                  musim
+                  <span class="text-forest flex-shrink-0">✓</span>Bonus makan
+                  malam di hotel
                 </div>
                 <div class="flex gap-2.5 text-[13px] font-light text-mid">
-                  <span class="text-forest flex-shrink-0">✓</span>Makan 3×
-                  sehari + snack
+                  <span class="text-forest flex-shrink-0">✓</span>Bonus guide +
+                  tiket masuk air terjun
                 </div>
                 <div class="flex gap-2.5 text-[13px] font-light text-mid">
-                  <span class="text-forest flex-shrink-0">✓</span>Sleeping bag &
-                  matras
+                  <span class="text-forest flex-shrink-0">✓</span>Guide Taman
+                  Nasional Rinjani berpengalaman
                 </div>
                 <div class="flex gap-2.5 text-[13px] font-light text-mid">
-                  <span class="text-forest flex-shrink-0">✓</span>Transportasi
-                  PP Lombok
+                  <span class="text-forest flex-shrink-0">✓</span>Porter 1:1
+                  (hanya bawa food, minuman & equipment)
                 </div>
-                <div class="flex gap-2.5 text-[13px] font-medium text-forest">
-                  <span class="flex-shrink-0">✓</span>Nol biaya tambahan jika
-                  tidak summit
+                <div class="flex gap-2.5 text-[13px] font-light text-mid">
+                  <span class="text-forest flex-shrink-0">✓</span>Tiket &
+                  asuransi Taman Nasional Rinjani
+                </div>
+                <div class="flex gap-2.5 text-[13px] font-light text-mid">
+                  <span class="text-forest flex-shrink-0">✓</span>Makanan
+                  bergizi lengkap + buah + 3L air mineral/hari
+                </div>
+                <div class="flex gap-2.5 text-[13px] font-light text-mid">
+                  <span class="text-forest flex-shrink-0">✓</span>Tenda (1:2
+                  peserta), matras 8cm, bantal
+                </div>
+                <div class="flex gap-2.5 text-[13px] font-light text-mid">
+                  <span class="text-forest flex-shrink-0">✓</span>Sleeping bag
+                  premium, kursi, meja, toilet tent
+                </div>
+                <div
+                  class="flex gap-2.5 text-[13px] font-medium text-forest col-span-2"
+                >
+                  <span class="flex-shrink-0">✓</span>Nol biaya tambahan apapun
+                  — termasuk jika program tidak selesai dari Sembalun
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Pembayaran -->
           <div class="bg-white border border-smoke p-8 fu d3">
             <p
               class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-5"
             >
               Rincian Pembayaran
             </p>
-
             <div class="space-y-0 divide-y divide-smoke mb-5">
               <div class="py-3.5 flex justify-between text-[13px]">
                 <span class="font-light text-mid"
-                  >Harga per orang (3–5 orang)</span
+                  >Harga per orang (2–4 orang)</span
+                ><span class="font-medium text-ink">USD 280</span>
+              </div>
+              <div class="py-3.5 flex justify-between text-[13px]">
+                <span class="font-light text-mid">× 3 peserta</span
+                ><span class="font-medium text-ink">USD 840</span>
+              </div>
+              <div class="py-3.5 flex justify-between text-[13px]">
+                <span class="font-light text-mid">Biaya tambahan</span
+                ><span class="font-medium text-forest"
+                  >Tidak ada (Paket Deluxe)</span
                 >
-                <span class="font-medium text-ink">Rp 1.400.000</span>
-              </div>
-              <div class="py-3.5 flex justify-between text-[13px]">
-                <span class="font-light text-mid">× 3 peserta</span>
-                <span class="font-medium text-ink">Rp 4.200.000</span>
-              </div>
-              <div class="py-3.5 flex justify-between text-[13px]">
-                <span class="font-light text-mid">Biaya tambahan</span>
-                <span class="font-medium text-forest">Tidak ada (Deluxe)</span>
               </div>
               <div class="py-4 flex justify-between text-[15px] font-semibold">
-                <span class="text-ink">Total Booking</span>
-                <span class="text-ink">Rp 4.200.000</span>
+                <span class="text-ink">Total Booking</span
+                ><span class="text-ink">USD 840</span>
               </div>
             </div>
 
-            <!-- Payment status breakdown -->
-            <div class="grid grid-cols-3 gap-0 border border-smoke">
+            <div class="grid grid-cols-3 gap-0 border border-smoke mb-5">
               <div class="p-5 text-center border-r border-smoke">
                 <p
                   class="text-[9px] font-bold tracking-[.16em] uppercase text-light mb-2"
                 >
                   Total
                 </p>
-                <p class="text-[18px] font-medium text-ink">Rp 4.200.000</p>
+                <p class="text-[18px] font-medium text-ink">USD 840</p>
               </div>
               <div class="p-5 text-center border-r border-smoke bg-forest/3">
                 <p
                   class="text-[9px] font-bold tracking-[.16em] uppercase text-forest/60 mb-2"
                 >
-                  DP Dibayar (20%)
+                  DP Dibayar (30%)
                 </p>
-                <p class="text-[18px] font-semibold text-forest">Rp 840.000</p>
+                <p class="text-[18px] font-semibold text-forest">USD 252</p>
                 <div class="flex items-center justify-center gap-1 mt-1">
                   <span
-                    class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"
-                  ></span>
-                  <span class="text-[10px] font-medium text-amber-600"
-                    >Menunggu verif.</span
+                    class="w-1.5 h-1.5 rounded-full bg-forest inline-block"
+                  ></span
+                  ><span class="text-[10px] font-medium text-forest"
+                    >Dikonfirmasi</span
                   >
                 </div>
               </div>
@@ -545,17 +579,14 @@
                 >
                   Sisa Pelunasan
                 </p>
-                <p class="text-[18px] font-medium text-amber-500">
-                  Rp 3.360.000
-                </p>
+                <p class="text-[18px] font-medium text-amber-500">USD 588</p>
                 <p class="text-[10px] font-light text-light mt-1">
-                  Sebelum keberangkatan
+                  Sebelum 12 Apr 2025
                 </p>
               </div>
             </div>
 
-            <!-- Bukti transfer -->
-            <div class="mt-5 border border-smoke p-5">
+            <div class="border border-smoke p-5 mb-5">
               <p
                 class="text-[11px] font-semibold tracking-[.14em] uppercase text-light mb-3"
               >
@@ -563,7 +594,7 @@
               </p>
               <div class="flex items-center gap-4">
                 <div
-                  class="w-16 h-16 bg-mist border border-smoke flex items-center justify-center text-2xl flex-shrink-0"
+                  class="w-14 h-14 bg-mist border border-smoke flex items-center justify-center text-2xl flex-shrink-0"
                 >
                   📎
                 </div>
@@ -572,50 +603,45 @@
                     bukti_transfer_bca.jpg
                   </p>
                   <p class="text-[11px] font-light text-light mb-2">
-                    Upload: 18 Mar 2025, 14.20 WIB · 1.2 MB
+                    Upload: 10 Mar 2025, 14.20 WIB · 1.2 MB
                   </p>
                   <div class="flex items-center gap-2">
                     <span
-                      class="text-[10px] font-semibold bg-amber-100 text-amber-700 px-2.5 py-1"
-                      >⏳ Sedang Diverifikasi</span
+                      class="text-[10px] font-semibold bg-green-100 text-green-700 px-2.5 py-1"
+                      >✓ Terverifikasi</span
                     >
-                    <button
-                      onclick="replaceProof()"
-                      class="text-[11px] font-medium text-mid hover:text-ink underline"
+                    <span class="text-[10px] font-light text-light"
+                      >10 Mar 2025, 15.10 WIB</span
                     >
-                      Ganti file
-                    </button>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Pelunasan CTA -->
-            <div
-              class="mt-5 bg-mist border border-smoke p-5 flex items-center justify-between gap-5"
-            >
-              <div>
-                <p class="text-[13px] font-semibold text-ink mb-1">
-                  Bayar Sisa Pelunasan
-                </p>
-                <p class="text-[12px] font-light text-mid">
-                  Rp 3.360.000 — Wajib dilunasi sebelum 12 April 2025
-                </p>
+            <div class="bg-amber-50 border border-amber-200 p-5">
+              <div class="flex items-center justify-between gap-5">
+                <div>
+                  <p class="text-[13px] font-semibold text-amber-800 mb-1">
+                    Bayar Sisa / Tambah Pembayaran
+                  </p>
+                  <p class="text-[12px] font-light text-amber-700">
+                    USD 588 — Wajib dilunasi sebelum 12 April 2025 (H-3)
+                  </p>
+                  <p class="text-[11px] font-light text-amber-600 mt-1">
+                    💡 Anda bisa bayar sebagian dulu atau langsung lunas
+                    sekaligus
+                  </p>
+                </div>
+                <button
+                  onclick="openPayModal()"
+                  class="flex-shrink-0 bg-amber-500 text-white text-[12px] font-semibold px-6 py-3 hover:bg-amber-600 transition-colors"
+                >
+                  Upload Bukti Bayar
+                </button>
               </div>
-              <button
-                onclick="
-                  alert(
-                    'Fitur upload pelunasan aktif setelah DP dikonfirmasi admin.',
-                  )
-                "
-                class="flex-shrink-0 bg-forest text-white text-[12px] font-semibold px-6 py-3 hover:bg-forest/85 transition-colors"
-              >
-                Upload Bukti Lunas
-              </button>
             </div>
           </div>
 
-          <!-- Timeline aktivitas -->
           <div class="bg-white border border-smoke p-8 fu d4">
             <p
               class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-5"
@@ -623,7 +649,6 @@
               Riwayat Aktivitas
             </p>
             <div class="space-y-0">
-              <!-- Item -->
               <div class="relative tl-line pb-6 pl-10">
                 <div
                   class="absolute left-0 top-0.5 w-8 h-8 rounded-full bg-forest flex items-center justify-center text-white text-[12px] z-10"
@@ -642,7 +667,7 @@
                   <p
                     class="text-[11px] font-light text-light flex-shrink-0 ml-4"
                   >
-                    18 Mar 2025<br />14.20 WIB
+                    10 Mar 2025<br />14.20 WIB
                   </p>
                 </div>
               </div>
@@ -664,7 +689,29 @@
                   <p
                     class="text-[11px] font-light text-light flex-shrink-0 ml-4"
                   >
-                    18 Mar 2025<br />14.22 WIB
+                    10 Mar 2025<br />14.22 WIB
+                  </p>
+                </div>
+              </div>
+              <div class="relative tl-line pb-6 pl-10">
+                <div
+                  class="absolute left-0 top-0.5 w-8 h-8 rounded-full bg-forest flex items-center justify-center text-white text-[12px] z-10"
+                >
+                  ✓
+                </div>
+                <div class="flex items-start justify-between">
+                  <div>
+                    <p class="text-[13px] font-semibold text-ink">
+                      DP 30% dikonfirmasi admin (USD 252)
+                    </p>
+                    <p class="text-[12px] font-light text-mid">
+                      Booking aktif · Invoice dikirim via WhatsApp & email
+                    </p>
+                  </div>
+                  <p
+                    class="text-[11px] font-light text-light flex-shrink-0 ml-4"
+                  >
+                    10 Mar 2025<br />15.10 WIB
                   </p>
                 </div>
               </div>
@@ -672,15 +719,15 @@
                 <div
                   class="absolute left-0 top-0.5 w-8 h-8 rounded-full bg-smoke border-2 border-smoke flex items-center justify-center text-light text-[12px] z-10"
                 >
-                  3
+                  4
                 </div>
                 <div class="flex items-start justify-between opacity-40">
                   <div>
                     <p class="text-[13px] font-semibold text-ink">
-                      Konfirmasi admin
+                      Pelunasan selesai
                     </p>
                     <p class="text-[12px] font-light text-mid">
-                      Menunggu admin memverifikasi DP Anda
+                      Menunggu pelunasan USD 588
                     </p>
                   </div>
                   <p
@@ -693,7 +740,6 @@
             </div>
           </div>
 
-          <!-- Catatan -->
           <div class="bg-white border border-smoke p-8 fu d5">
             <p
               class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-4"
@@ -708,23 +754,29 @@
           </div>
         </div>
 
-        <!-- ═══ SIDEBAR KANAN ═══ -->
         <div class="space-y-4 sticky top-[88px]">
-          <!-- Quick summary -->
           <div class="bg-white border border-smoke p-6 fu d1">
             <p
               class="text-[10px] font-semibold tracking-[.2em] uppercase text-light mb-4"
             >
               Ringkasan
             </p>
-            <div class="space-y-3 text-[13px] mb-5">
+            <div class="space-y-2.5 text-[13px] mb-5">
               <div class="flex justify-between">
                 <span class="font-light text-mid">No. Booking</span
-                ><span class="font-semibold text-ink">#BK-0043</span>
+                ><span class="font-semibold text-ink">#BK-0042</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-light text-mid">Tgl. Booking</span
+                ><span class="font-medium text-ink">10 Mar 2025</span>
               </div>
               <div class="flex justify-between">
                 <span class="font-light text-mid">Paket</span
                 ><span class="font-medium text-ink">Deluxe · 3D2N</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="font-light text-mid">Rute</span
+                ><span class="font-medium text-ink">Smb → Snr</span>
               </div>
               <div class="flex justify-between">
                 <span class="font-light text-mid">Tanggal naik</span
@@ -735,23 +787,22 @@
                 ><span class="font-medium text-ink">3 orang</span>
               </div>
             </div>
-            <div class="border-t border-smoke pt-4 space-y-2.5">
+            <div class="border-t border-smoke pt-4 space-y-2">
               <div class="flex justify-between text-[13px]">
                 <span class="font-semibold text-ink">Total</span
-                ><span class="font-semibold text-ink">Rp 4.200.000</span>
+                ><span class="font-semibold text-ink">USD 840</span>
               </div>
               <div class="flex justify-between text-[13px]">
-                <span class="font-medium text-mid">DP (20%)</span
-                ><span class="font-semibold text-forest">Rp 840.000</span>
+                <span class="font-medium text-mid">Dibayar (30%)</span
+                ><span class="font-semibold text-forest">USD 252</span>
               </div>
               <div class="flex justify-between text-[13px]">
                 <span class="font-light text-mid">Sisa pelunasan</span
-                ><span class="font-medium text-amber-500">Rp 3.360.000</span>
+                ><span class="font-semibold text-amber-500">USD 588</span>
               </div>
             </div>
           </div>
 
-          <!-- Status indicator -->
           <div class="bg-white border border-smoke p-6 fu d2">
             <p
               class="text-[10px] font-semibold tracking-[.2em] uppercase text-light mb-4"
@@ -763,15 +814,15 @@
                 class="w-3 h-3 rounded-full bg-amber-400 animate-pulse flex-shrink-0"
               ></div>
               <p class="text-[13px] font-semibold text-ink">
-                Menunggu Konfirmasi Admin
+                Menunggu Pelunasan
               </p>
             </div>
             <p class="text-[12px] font-light text-mid leading-[1.75]">
-              DP Anda telah diterima. Admin sedang memverifikasi dalam 1×24 jam.
+              Booking sudah dikonfirmasi. Selesaikan pelunasan sebelum
+              <strong>12 April 2025</strong>.
             </p>
           </div>
 
-          <!-- Actions -->
           <div class="bg-white border border-smoke p-6 fu d3 space-y-3">
             <p
               class="text-[10px] font-semibold tracking-[.2em] uppercase text-light mb-1"
@@ -779,33 +830,33 @@
               Aksi
             </p>
             <button
-              onclick="dlPDF()"
-              class="flex items-center justify-center gap-2 w-full bg-forest text-white text-[12px] font-semibold py-3.5 hover:bg-forest/85 transition-colors"
+              onclick="openPayModal()"
+              class="flex items-center justify-center gap-2 w-full bg-amber-500 text-white text-[12px] font-semibold py-3.5 hover:bg-amber-600 transition-colors"
             >
-              ⬇ Unduh Invoice PDF
+              💳 Bayar Sisa / Tambah Bayar
             </button>
             <a
-              href="https://wa.me/628123456789?text=Halo%2C%20saya%20ingin%20tanya%20booking%20%23BK-0043..."
+              href="invoice.html"
+              class="flex items-center justify-center gap-2 w-full border border-forest text-forest text-[12px] font-semibold py-3.5 hover:bg-forest/5 transition-colors"
+            >
+              📄 Lihat Invoice
+            </a>
+            <a
+              href="https://wa.me/628123456789"
               target="_blank"
               class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white text-[12px] font-semibold py-3 hover:bg-[#1fbd5c] transition-colors"
-              >💬 Hubungi Admin</a
             >
-            <button
-              onclick="window.print()"
-              class="flex items-center justify-center gap-2 w-full border border-smoke text-mid text-[12px] font-medium py-3 hover:bg-mist transition-colors"
-            >
-              🖨 Cetak Halaman
-            </button>
+              💬 Hubungi Admin
+            </a>
           </div>
 
-          <!-- Cancel policy -->
           <div class="bg-amber-50 border border-amber-200 p-5 fu d4">
             <p class="text-[11px] font-semibold text-amber-800 mb-2">
               ⚠️ Kebijakan DP
             </p>
             <p class="text-[12px] font-light text-amber-700 leading-[1.8]">
-              DP sebesar <strong>Rp 840.000</strong> tidak dapat dikembalikan
-              jika Anda membatalkan setelah booking dikonfirmasi admin.
+              DP sebesar <strong>USD 252</strong> tidak dapat dikembalikan jika
+              Anda membatalkan setelah booking dikonfirmasi admin.
             </p>
             <button
               onclick="cancelBooking()"
@@ -814,38 +865,143 @@
               Ajukan Pembatalan →
             </button>
           </div>
-
-          <!-- Other bookings -->
-          <div class="bg-white border border-smoke p-5 fu d5">
-            <p
-              class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
-            >
-              Booking Lain
-            </p>
-            <a
-              href="detail-booking.html"
-              class="flex items-center gap-3 hover:bg-mist p-2 -mx-2 transition-colors"
-            >
-              <div
-                class="w-7 h-7 bg-green-100 flex items-center justify-center text-green-700 font-bold text-[11px] flex-shrink-0"
-              >
-                S
-              </div>
-              <div>
-                <p class="text-[12px] font-semibold text-ink">
-                  #BK-0031 · Selesai
-                </p>
-                <p class="text-[11px] font-light text-light">
-                  Standard 4D3N · Jan 2025
-                </p>
-              </div>
-            </a>
-          </div>
         </div>
       </div>
     </div>
 
-    <!-- FOOTER -->
+    <div
+      id="pay-modal-bg"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+      "
+      onclick="if (event.target === this) closePayModal();"
+    >
+      <div
+        class="bg-white w-full max-w-[440px] mx-4 p-8"
+        style="animation: slideUp 0.25s ease"
+      >
+        <div class="flex justify-between items-center mb-6">
+          <h3
+            class="text-[20px] font-semibold text-ink"
+            style="letter-spacing: -0.3px"
+          >
+            Bayar / Tambah Pembayaran
+          </h3>
+          <button
+            onclick="closePayModal()"
+            class="text-light hover:text-mid text-2xl font-light"
+          >
+            ×
+          </button>
+        </div>
+        <div class="bg-mist border border-smoke p-4 mb-5">
+          <div class="text-[12px] font-light text-mid mb-2">
+            #BK-0042 · Paket Deluxe 3D2N
+          </div>
+          <div class="flex justify-between text-[13px]">
+            <span class="font-light text-mid">Total</span
+            ><span class="font-semibold text-ink">USD 840</span>
+          </div>
+          <div class="flex justify-between text-[13px] mt-1">
+            <span class="font-light text-mid">Sudah dibayar</span
+            ><span class="font-semibold text-forest">USD 252</span>
+          </div>
+          <div
+            class="flex justify-between text-[13px] mt-2 pt-2 border-t border-smoke"
+          >
+            <span class="font-semibold text-ink">Sisa</span
+            ><span class="font-semibold text-amber-600 text-[16px]"
+              >USD 588</span
+            >
+          </div>
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+            >Jumlah yang Dibayar</label
+          >
+          <div class="grid grid-cols-2 gap-2 mb-3">
+            <button
+              onclick="document.getElementById('pm-input').value = 294"
+              class="border border-smoke text-[12px] font-medium py-2.5 hover:border-forest hover:text-forest transition-all text-mid"
+            >
+              USD 294 (50% sisa)
+            </button>
+            <button
+              onclick="document.getElementById('pm-input').value = 588"
+              class="border border-smoke text-[12px] font-medium py-2.5 hover:border-forest hover:text-forest transition-all text-mid"
+            >
+              USD 588 (Lunas)
+            </button>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-[12px] font-light text-mid flex-shrink-0"
+              >Atau jumlah lain:</span
+            >
+            <div class="relative flex-1">
+              <span
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] font-medium text-mid"
+                >USD</span
+              ><input
+                type="number"
+                id="pm-input"
+                value="588"
+                min="1"
+                max="588"
+                class="pl-10 pr-3 py-2.5 text-[13px]"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+            >Rekening Tujuan</label
+          >
+          <select>
+            <option>BCA — 1234567890 (Porter Rinjani)</option>
+            <option>BRI — 0987654321 (Porter Rinjani)</option>
+            <option>Mandiri — 1122334455 (Porter Rinjani)</option>
+          </select>
+        </div>
+        <div class="mb-5">
+          <label
+            class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+            >Upload Bukti Transfer</label
+          >
+          <div
+            class="border-2 border-dashed border-smoke p-5 text-center cursor-pointer hover:border-forest hover:bg-forest/3 transition-all"
+            onclick="document.getElementById('pm-file').click()"
+          >
+            <div class="text-2xl mb-1 opacity-40">📎</div>
+            <p class="text-[12px] font-light text-mid">
+              Klik untuk upload bukti transfer
+            </p>
+            <p class="text-[10px] text-light mt-0.5">
+              JPG, PNG, PDF · Maks. 5 MB
+            </p>
+          </div>
+          <input
+            type="file"
+            id="pm-file"
+            accept=".jpg,.jpeg,.png,.pdf"
+            style="display: none"
+          />
+        </div>
+        <button
+          class="w-full bg-forest text-white text-[13px] font-semibold py-3.5 hover:bg-forest/85 transition-colors"
+        >
+          Kirim Bukti Pembayaran
+        </button>
+      </div>
+    </div>
+
     <footer class="bg-white border-t border-smoke py-8 px-8 mt-4">
       <div
         class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-4"
@@ -864,25 +1020,27 @@
     >
 
     <script>
-      function dlPDF() {
-        alert(
-          "Invoice PDF sedang digenerate...\n\nFile akan terunduh otomatis.",
-        );
+      function openPayModal() {
+        document.getElementById("pay-modal-bg").style.display = "flex";
+        document.body.style.overflow = "hidden";
       }
-      function replaceProof() {
-        alert(
-          "Fitur ganti bukti transfer: hanya tersedia jika status masih 'Menunggu Verifikasi'.",
-        );
+      function closePayModal() {
+        document.getElementById("pay-modal-bg").style.display = "none";
+        document.body.style.overflow = "";
       }
       function cancelBooking() {
         if (
           confirm(
-            "Apakah Anda yakin ingin mengajukan pembatalan?\n\nPerhatian: DP Rp 840.000 TIDAK dapat dikembalikan jika booking sudah dikonfirmasi admin.\n\nAnda akan diarahkan ke halaman kontak untuk proses pembatalan.",
+            "Apakah Anda yakin ingin mengajukan pembatalan?\n\nPerhatian: DP USD 252 TIDAK dapat dikembalikan jika booking sudah dikonfirmasi admin.",
           )
-        ) {
-          window.location = "kontak.html";
-        }
+        )
+          alert(
+            "Permintaan pembatalan terkirim. Admin akan menghubungi Anda via WhatsApp dalam 1×24 jam.",
+          );
       }
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closePayModal();
+      });
     </script>
   </body>
 </html>
