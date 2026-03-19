@@ -53,7 +53,7 @@
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.45);
         z-index: 200;
         align-items: center;
         justify-content: center;
@@ -83,19 +83,65 @@
         width: 1px;
         background: #efefec;
       }
+      input,
+      select,
+      textarea {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid #efefec;
+        background: #fff;
+        font-size: 13px;
+        font-weight: 300;
+        color: #1a1a1a;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #1b3a2d;
+        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
+      }
+      select {
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23A8A8A4' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 4px;
+        background: #efefec;
+        border-radius: 2px;
+        outline: none;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+      }
+      input[type="range"]:focus {
+        border-color: transparent;
+        box-shadow: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #1b3a2d;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
-    <!-- NAV -->
     <nav
       class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
     >
       <div
         class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
       >
-        <a
-          href="index.html"
-          class="text-[17px] font-semibold text-ink tracking-tight"
+        <a href="index.html" class="text-[17px] font-semibold text-ink"
           >Porter <span class="font-light text-mid">Rinjani</span></a
         >
         <div class="flex items-center gap-2">
@@ -111,7 +157,7 @@
           >
           <a
             href="booking.html"
-            class="text-[12px] font-semibold text-forest hover:text-forest/70 transition-colors px-3 py-2"
+            class="text-[12px] font-semibold text-forest hover:text-forest/70 px-3 py-2"
             >+ Booking Baru</a
           >
         </div>
@@ -124,7 +170,7 @@
           <span class="text-[13px] font-medium text-ink">Rina Kusuma</span>
           <div class="w-px h-4 bg-smoke ml-1"></div>
           <a
-            href="login.html"
+            href="index.html"
             class="text-[12px] font-medium text-mid hover:text-red-400 transition-colors"
             >Keluar</a
           >
@@ -132,7 +178,6 @@
       </div>
     </nav>
 
-    <!-- PAGE HEADER -->
     <div class="bg-white border-b border-smoke pt-10 pb-10 px-8">
       <div class="max-w-[1280px] mx-auto flex items-end justify-between">
         <div>
@@ -142,7 +187,7 @@
             Dashboard
           </p>
           <h1
-            class="text-[clamp(30px,4vw,44px)] font-light text-ink"
+            class="text-[clamp(28px,4vw,42px)] font-light text-ink"
             style="letter-spacing: -0.8px"
           >
             Halo, <span class="italic">Rina</span> 👋
@@ -159,22 +204,15 @@
       </div>
     </div>
 
-    <!-- MAIN -->
     <div
       class="max-w-[1280px] mx-auto px-8 py-10 grid grid-cols-[1fr_300px] gap-8 items-start"
     >
-      <!-- BOOKING LIST -->
       <div>
         <div class="flex items-center justify-between mb-5">
           <h2 class="text-[14px] font-semibold text-ink">Riwayat Booking</h2>
           <select
             onchange="filterBK(this.value)"
-            class="border border-smoke bg-white text-[12px] font-light px-3 py-2 appearance-none pr-7"
-            style="
-              background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-              background-repeat: no-repeat;
-              background-position: right 8px center;
-            "
+            class="w-auto border border-smoke bg-white text-[12px] font-light px-3 py-2 appearance-none pr-8"
           >
             <option value="all">Semua Status</option>
             <option value="confirmed">Confirmed</option>
@@ -184,20 +222,19 @@
         </div>
 
         <div class="space-y-4" id="bk-list">
-          <!-- BK-0042 Confirmed -->
           <div
             class="bcard bg-white border border-smoke overflow-hidden"
             data-st="confirmed"
           >
             <div
-              class="flex items-center justify-between px-6 py-4 bg-white border-b border-smoke"
+              class="flex items-center justify-between px-6 py-4 border-b border-smoke"
             >
               <div>
                 <div class="text-[14px] font-semibold text-ink">
                   #BK-0042 · Paket Deluxe 3D2N
                 </div>
                 <div class="text-[11px] font-light text-light mt-0.5">
-                  Dipesan 10 Mar 2025
+                  Dipesan 10 Mar 2025 · Via Sembalun → Senaru
                 </div>
               </div>
               <span
@@ -206,7 +243,7 @@
               >
             </div>
             <div class="p-6">
-              <div class="grid grid-cols-3 border border-smoke mb-6">
+              <div class="grid grid-cols-3 border border-smoke mb-2">
                 <div class="p-4 border-r border-smoke">
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
@@ -235,38 +272,39 @@
                     Smb → Snr
                   </div>
                 </div>
-                <div class="p-4 border-r border-smoke border-t border-smoke">
+              </div>
+              <div class="grid grid-cols-3 border border-smoke border-t-0 mb-6">
+                <div class="p-4 border-r border-smoke">
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
                     Total
                   </div>
-                  <div class="text-[14px] font-semibold text-ink">
-                    Rp 4.200.000
-                  </div>
+                  <div class="text-[14px] font-semibold text-ink">USD 840</div>
                 </div>
-                <div class="p-4 border-r border-smoke border-t border-smoke">
+                <div class="p-4 border-r border-smoke">
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
                     Sudah Dibayar
                   </div>
                   <div class="text-[14px] font-semibold text-forest">
-                    Rp 2.100.000
+                    USD 252
+                    <span class="text-[10px] font-light text-light">(30%)</span>
                   </div>
                 </div>
-                <div class="p-4 border-t border-smoke">
+                <div class="p-4">
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
-                    Sisa
+                    Sisa Pelunasan
                   </div>
                   <div class="text-[14px] font-semibold text-amber-500">
-                    Rp 2.100.000
+                    USD 588
                   </div>
                 </div>
               </div>
-              <!-- Timeline -->
+
               <div class="mb-6">
                 <p
                   class="text-[10px] font-semibold tracking-[0.18em] uppercase text-light mb-4"
@@ -297,7 +335,7 @@
                     </div>
                     <div class="pt-0.5">
                       <div class="text-[13px] font-semibold text-ink">
-                        Pembayaran DP dikonfirmasi
+                        DP 30% dikonfirmasi (USD 252)
                       </div>
                       <div class="text-[11px] font-light text-light mt-0.5">
                         10 Mar 2025 · 15.10 WIB
@@ -317,7 +355,7 @@
                       <div
                         class="text-[11px] font-medium text-amber-500 mt-0.5"
                       >
-                        Batas: 12 April 2025
+                        Batas: 12 April 2025 (H-3)
                       </div>
                     </div>
                   </div>
@@ -350,19 +388,24 @@
                   </div>
                 </div>
               </div>
-              <!-- Actions -->
+
               <div class="flex gap-3 flex-wrap">
                 <button
                   onclick="openModal('bayar')"
                   class="bg-amber-500 text-white text-[12px] font-semibold px-6 py-2.5 hover:bg-amber-600 transition-colors"
                 >
-                  Bayar Sisa
+                  Bayar Sisa / Tambah Bayar
                 </button>
-                <button
+                <a
+                  href="detail-booking.html"
                   class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                  >Lihat Detail</a
                 >
-                  Lihat Detail
-                </button>
+                <a
+                  href="invoice.html"
+                  class="border border-smoke text-ink text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                  >📄 Lihat Invoice</a
+                >
                 <a
                   href="https://wa.me/628123456789"
                   target="_blank"
@@ -373,20 +416,19 @@
             </div>
           </div>
 
-          <!-- BK-0038 Pending -->
           <div
             class="bcard bg-white border border-smoke overflow-hidden"
             data-st="pending"
           >
             <div
-              class="flex items-center justify-between px-6 py-4 bg-white border-b border-smoke"
+              class="flex items-center justify-between px-6 py-4 border-b border-smoke"
             >
               <div>
                 <div class="text-[14px] font-semibold text-ink">
-                  #BK-0038 · Paket Standard 3D2N
+                  #BK-0038 · Paket Standard 2D1N
                 </div>
                 <div class="text-[11px] font-light text-light mt-0.5">
-                  Dipesan 5 Jan 2025
+                  Dipesan 5 Mar 2025 · Via Senaru
                 </div>
               </div>
               <span
@@ -402,7 +444,7 @@
                   >
                     Tanggal Naik
                   </div>
-                  <div class="text-[14px] font-semibold">20 Jan 2025</div>
+                  <div class="text-[14px] font-semibold">20 Apr 2025</div>
                 </div>
                 <div class="p-4 border-r border-smoke">
                   <div
@@ -418,24 +460,28 @@
                   >
                     Total
                   </div>
-                  <div class="text-[14px] font-semibold">Rp 1.800.000</div>
+                  <div class="text-[14px] font-semibold">USD 440</div>
                 </div>
               </div>
               <div class="bg-blue-50 border border-blue-100 p-4 mb-5">
                 <p class="text-[13px] font-light text-blue-600 leading-[1.75]">
-                  ℹ Booking sedang ditinjau admin. Konfirmasi akan dikirim via
+                  ℹ Booking sedang ditinjau admin. Konfirmasi dikirim via
                   WhatsApp & email dalam <strong>1×24 jam</strong>.
                 </p>
               </div>
               <div class="flex gap-3">
-                <button
+                <a
+                  href="detail-booking.html"
                   class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                  >Lihat Detail</a
                 >
-                  Lihat Detail
-                </button>
                 <button
                   onclick="
-                    if (confirm('Batalkan booking ini?'))
+                    if (
+                      confirm(
+                        'Batalkan booking ini? DP tidak dapat dikembalikan jika sudah dikonfirmasi.',
+                      )
+                    )
                       this.closest('.bcard').remove();
                   "
                   class="bg-red-50 border border-red-100 text-red-400 text-[12px] font-medium px-6 py-2.5 hover:bg-red-100 transition-all"
@@ -446,20 +492,19 @@
             </div>
           </div>
 
-          <!-- BK-0031 Done -->
           <div
             class="bcard bg-white border border-smoke overflow-hidden"
             data-st="done"
           >
             <div
-              class="flex items-center justify-between px-6 py-4 bg-white border-b border-smoke"
+              class="flex items-center justify-between px-6 py-4 border-b border-smoke"
             >
               <div>
                 <div class="text-[14px] font-semibold text-ink">
-                  #BK-0031 · Paket Sharing 3D2N
+                  #BK-0031 · Paket Standard 4D3N
                 </div>
                 <div class="text-[11px] font-light text-light mt-0.5">
-                  Dipesan 5 Nov 2024
+                  Dipesan 5 Nov 2024 · Via Sembalun → Senaru
                 </div>
               </div>
               <span
@@ -483,7 +528,7 @@
                   >
                     Peserta
                   </div>
-                  <div class="text-[14px] font-semibold">1 orang</div>
+                  <div class="text-[14px] font-semibold">4 orang</div>
                 </div>
                 <div class="p-4">
                   <div
@@ -492,31 +537,34 @@
                     Total Dibayar
                   </div>
                   <div class="text-[14px] font-semibold text-forest">
-                    Rp 600.000
+                    USD 1.340
                   </div>
                 </div>
               </div>
               <div class="flex gap-3">
-                <button
+                <a
+                  href="detail-booking.html"
                   class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                  >Lihat Detail</a
                 >
-                  Lihat Detail
-                </button>
                 <button
                   onclick="openModal('ulasan')"
                   class="bg-forest/8 border border-forest/15 text-forest text-[12px] font-medium px-6 py-2.5 hover:bg-forest/12 transition-all"
                 >
                   ⭐ Beri Ulasan
                 </button>
+                <a
+                  href="invoice.html"
+                  class="border border-smoke text-ink text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
+                  >📄 Lihat Invoice</a
+                >
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- SIDEBAR -->
       <div class="space-y-5 sticky top-[88px]">
-        <!-- Stats -->
         <div class="bg-white border border-smoke p-6">
           <h3
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-5"
@@ -542,7 +590,6 @@
             </div>
           </div>
         </div>
-        <!-- Sisa bayar -->
         <div class="bg-forest/6 border border-forest/15 p-6">
           <h3
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-forest/60 mb-3"
@@ -557,7 +604,7 @@
             class="text-[28px] font-light text-forest mb-4"
             style="letter-spacing: -0.5px"
           >
-            Rp 2.100.000
+            USD 588
           </div>
           <button
             onclick="openModal('bayar')"
@@ -566,7 +613,6 @@
             Bayar Sekarang
           </button>
         </div>
-        <!-- New booking -->
         <div class="bg-white border border-smoke p-6">
           <h3
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-3"
@@ -582,7 +628,6 @@
             >+ Booking Baru</a
           >
         </div>
-        <!-- Profil -->
         <div class="bg-white border border-smoke p-6">
           <h3
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-4"
@@ -604,81 +649,126 @@
             <div>📱 08123456789</div>
             <div>📍 Jakarta, Indonesia</div>
           </div>
-          <button
-            class="mt-4 w-full border border-smoke text-mid text-[12px] font-medium py-2 hover:bg-mist transition-all"
+          <a
+            href="edit-profil.html"
+            class="mt-4 block w-full text-center border border-smoke text-mid text-[12px] font-medium py-2 hover:bg-mist transition-all"
+            >Edit Profil</a
           >
-            Edit Profil
-          </button>
         </div>
       </div>
     </div>
 
-    <!-- MODAL -->
     <div id="modal-bg" onclick="if (event.target === this) closeMdl();">
-      <div id="modal-box" class="bg-white w-full max-w-[420px] mx-4">
-        <!-- Bayar -->
+      <div id="modal-box" class="bg-white w-full max-w-[440px] mx-4">
         <div id="m-bayar" class="p-8">
           <div class="flex justify-between items-center mb-6">
             <h3
               class="text-[20px] font-semibold text-ink"
               style="letter-spacing: -0.3px"
             >
-              Bayar Sisa
+              Bayar / Tambah Pembayaran
             </h3>
             <button
               onclick="closeMdl()"
-              class="text-light hover:text-mid text-2xl font-light transition-colors"
+              class="text-light hover:text-mid text-2xl font-light"
             >
               ×
             </button>
           </div>
-          <div class="bg-mist p-5 mb-5">
+          <div class="bg-mist p-4 mb-5 border border-smoke">
             <div class="text-[12px] font-light text-mid mb-1">
-              #BK-0042 · Paket Deluxe 3D2N
+              #BK-0042 · Paket Deluxe 3D2N · 15 Apr 2025
+            </div>
+            <div class="flex justify-between text-[13px] mt-2">
+              <span class="font-light text-mid">Total</span
+              ><span class="font-semibold text-ink">USD 840</span>
+            </div>
+            <div class="flex justify-between text-[13px] mt-1">
+              <span class="font-light text-mid">Sudah dibayar</span
+              ><span class="font-semibold text-forest">USD 252</span>
             </div>
             <div
-              class="text-[28px] font-light text-forest"
-              style="letter-spacing: -0.5px"
+              class="flex justify-between text-[13px] mt-1 pt-2 border-t border-smoke"
             >
-              Rp 2.100.000
-            </div>
-            <div class="text-[11px] font-light text-light mt-1">
-              Batas pelunasan: 12 April 2025
+              <span class="font-semibold text-ink">Sisa</span
+              ><span class="font-semibold text-amber-600 text-[16px]"
+                >USD 588</span
+              >
             </div>
           </div>
           <div class="mb-4">
             <label
-              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
+              >Jumlah yang Dibayar</label
+            >
+            <div class="grid grid-cols-2 gap-2 mb-3">
+              <button
+                onclick="setBayarAmt(294)"
+                class="border border-smoke text-[12px] font-medium py-2.5 hover:border-forest hover:text-forest transition-all text-mid"
+              >
+                USD 294 (50% sisa)
+              </button>
+              <button
+                onclick="setBayarAmt(588)"
+                class="border border-smoke text-[12px] font-medium py-2.5 hover:border-forest hover:text-forest transition-all text-mid"
+              >
+                USD 588 (Lunas)
+              </button>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-[12px] font-light text-mid flex-shrink-0"
+                >Atau jumlah lain:</span
+              >
+              <div class="relative flex-1">
+                <span
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] font-medium text-mid"
+                  >USD</span
+                >
+                <input
+                  type="number"
+                  id="bayar-input"
+                  value="588"
+                  min="1"
+                  max="588"
+                  class="pl-10 pr-3 py-2.5 text-[13px]"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
               >Rekening Tujuan</label
             >
-            <select
-              class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-              style="
-                background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                background-repeat: no-repeat;
-                background-position: right 14px center;
-              "
-            >
+            <select>
               <option>BCA — 1234567890 (Porter Rinjani)</option>
               <option>BRI — 0987654321 (Porter Rinjani)</option>
+              <option>Mandiri — 1122334455 (Porter Rinjani)</option>
             </select>
           </div>
           <div class="mb-5">
             <label
-              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
               >Upload Bukti Transfer</label
             >
             <div
-              class="border-2 border-dashed border-smoke p-6 text-center cursor-pointer hover:border-forest hover:bg-forest/3 transition-all"
+              class="border-2 border-dashed border-smoke p-5 text-center cursor-pointer hover:border-forest hover:bg-forest/3 transition-all"
+              onclick="document.getElementById('m-file').click()"
             >
-              <div class="text-2xl mb-2 opacity-30">📎</div>
+              <div class="text-2xl mb-1 opacity-40">📎</div>
               <p class="text-[12px] font-light text-mid">
                 Klik untuk upload bukti transfer
               </p>
-              <p class="text-[10px] text-light mt-1">
+              <p class="text-[10px] text-light mt-0.5">
                 JPG, PNG, PDF · Maks. 5 MB
               </p>
             </div>
+            <input
+              type="file"
+              id="m-file"
+              accept=".jpg,.jpeg,.png,.pdf"
+              style="display: none"
+            />
           </div>
           <button
             class="w-full bg-forest text-white text-[13px] font-semibold py-3.5 hover:bg-forest/85 transition-colors"
@@ -686,7 +776,7 @@
             Kirim Bukti Pembayaran
           </button>
         </div>
-        <!-- Ulasan -->
+
         <div id="m-ulasan" class="p-8 hidden">
           <div class="flex justify-between items-center mb-5">
             <h3
@@ -697,17 +787,17 @@
             </h3>
             <button
               onclick="closeMdl()"
-              class="text-light hover:text-mid text-2xl font-light transition-colors"
+              class="text-light hover:text-mid text-2xl font-light"
             >
               ×
             </button>
           </div>
           <div class="text-[12px] font-light text-mid mb-6">
-            #BK-0031 · Paket Sharing 3D2N · Nov 2024
+            #BK-0031 · Paket Standard 4D3N · Nov 2024
           </div>
           <div class="mb-5">
             <label
-              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-3"
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-3"
               >Rating *</label
             >
             <div class="flex gap-2" id="stars">
@@ -748,7 +838,7 @@
           </div>
           <div class="mb-5">
             <label
-              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
               >Ceritakan Pengalaman Anda *</label
             >
             <textarea
@@ -806,7 +896,10 @@
         document.querySelectorAll(".star").forEach((s, i) => {
           s.style.color = i < n ? "#C4A882" : "#EFEFEC";
         });
-        document.getElementById("star-lbl").textContent = starLbls[n] || "";
+        document.getElementById("star-lbl").textContent = starLbls[n];
+      }
+      function setBayarAmt(amt) {
+        document.getElementById("bayar-input").value = amt;
       }
     </script>
   </body>
