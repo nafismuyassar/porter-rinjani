@@ -97,24 +97,96 @@
       .img-wrap:hover > * {
         transform: scale(1.04);
       }
+
+      /* Mobile menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: white;
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        right: 0;
+      }
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        background: transparent;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #6b6b6b;
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: absolute;
+      }
+      .hamburger span:nth-child(1) {
+        transform: translateY(-6px);
+      }
+      .hamburger span:nth-child(2) {
+        transform: translateY(0);
+      }
+      .hamburger span:nth-child(3) {
+        transform: translateY(6px);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
+      }
     </style>
   </head>
   <body>
-    <!-- NAV -->
+    <!-- NAVBAR -->
     <nav
       class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
     >
       <div
-        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+        class="max-w-[1280px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between"
       >
         <a href="index.html" class="inline-block">
           <img
-            src="images/loegoe.png"
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
           />
         </a>
-        <div class="flex items-center gap-9">
+        <div class="hidden md:flex items-center gap-9">
           <a
             href="index.html"
             class="text-[12px] font-semibold text-ink border-b-2 border-ink pb-0.5"
@@ -148,19 +220,78 @@
           >
             N
           </div>
-          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+          <a
+            href="profil.html"
+            class="hidden sm:inline-block text-[13px] font-semibold text-forest"
             >Nafis Muyassar</a
           >
           <a
             href="status.html"
-            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            class="hidden sm:inline-block text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
             >Status Booking</a
           >
+          <button
+            id="hamburgerBtn"
+            class="md:hidden hamburger"
+            aria-label="Menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="p-6 border-b border-smoke flex justify-between items-center">
+        <span class="text-[18px] font-semibold text-ink">Menu</span>
+        <button id="closeMenuBtn" class="text-2xl text-mid hover:text-ink">
+          &times;
+        </button>
+      </div>
+      <div class="flex flex-col p-6 gap-5">
+        <a
+          href="index.html"
+          class="text-[14px] font-medium text-ink border-b border-smoke pb-2 hover:bg-mist hover:pl-2 transition-all"
+          >Beranda</a
+        >
+        <a
+          href="paket.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Paket</a
+        >
+        <a
+          href="rute.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Rute</a
+        >
+        <a
+          href="galeri.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Galeri</a
+        >
+        <a
+          href="kontak.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Kontak</a
+        >
+        <div class="pt-4">
+          <a
+            href="profil.html"
+            class="block w-full text-center bg-forest/10 text-forest text-[13px] font-semibold py-3 mb-3 hover:bg-forest/20 transition-colors rounded-none"
+            >Profil Saya</a
+          >
+          <a
+            href="status.html"
+            class="block w-full text-center bg-forest text-white text-[13px] font-semibold py-3 rounded-none hover:bg-forest/90 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <!-- HERO SECTION -->
     <section class="relative bg-forest overflow-hidden">
       <div
         class="absolute inset-0 bg-gradient-to-br from-[#0f2219] via-[#1B3A2D] to-[#2d5a40]"
@@ -168,7 +299,9 @@
       <div
         class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"
       ></div>
-      <div class="relative z-10 max-w-[1280px] mx-auto px-8 pt-20 pb-24">
+      <div
+        class="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8 pt-20 pb-24"
+      >
         <div class="max-w-[620px]">
           <p
             class="fu d1 text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
@@ -176,12 +309,11 @@
             Selamat Datang Kembali
           </p>
           <h1
-            class="fu d2 text-[clamp(38px,5vw,64px)] font-light text-white leading-[1.08] mb-5"
+            class="fu d2 text-[clamp(32px,8vw,64px)] font-light text-white leading-[1.08] mb-5"
             style="letter-spacing: -1.2px"
           >
-            Halo,
-            <span class="italic text-white/55">Nafis</span>
-            👋<br />Siap mendaki lagi?
+            Halo, <span class="italic text-white/55">Nafis</span> 👋<br />Siap
+            mendaki lagi?
           </h1>
           <p
             class="fu d3 text-[15px] font-light text-white/40 leading-[1.9] mb-8"
@@ -227,7 +359,7 @@
 
     <!-- STATUS BOOKING QUICK PANEL -->
     <section class="border-b border-smoke bg-mist">
-      <div class="max-w-[1280px] mx-auto px-8 py-8">
+      <div class="max-w-[1280px] mx-auto px-6 sm:px-8 py-8">
         <div class="flex items-center justify-between mb-5">
           <p
             class="text-[11px] font-semibold tracking-[.2em] uppercase text-light"
@@ -240,15 +372,14 @@
             >Lihat semua →</a
           >
         </div>
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <!-- Booking aktif -->
           <div class="bg-white border border-smoke p-5 card-hover">
             <div class="flex items-center justify-between mb-4">
               <span
                 class="text-[10px] font-semibold tracking-[.16em] uppercase text-mid"
                 >#BK-0043</span
-              >
-              <span
+              ><span
                 class="text-[10px] font-semibold bg-amber-100 text-amber-700 px-2.5 py-1"
                 >Menunggu Konfirmasi</span
               >
@@ -288,8 +419,7 @@
               <span
                 class="text-[10px] font-semibold tracking-[.16em] uppercase text-mid"
                 >#BK-0031</span
-              >
-              <span
+              ><span
                 class="text-[10px] font-semibold bg-green-100 text-green-700 px-2.5 py-1"
                 >Selesai</span
               >
@@ -331,10 +461,7 @@
               >
                 Pendakian Baru
               </p>
-              <h4
-                class="text-[18px] font-light text-white leading-[1.3] mb-3"
-                style="letter-spacing: -0.3px"
-              >
+              <h4 class="text-[18px] font-light text-white leading-[1.3] mb-3">
                 Rencanakan
                 <span class="italic text-white/50">petualangan berikutnya</span>
               </h4>
@@ -353,9 +480,9 @@
       </div>
     </section>
 
-    <!-- PAKET QUICK OVERVIEW — 2 paket -->
-    <section class="max-w-[1280px] mx-auto px-8 py-16">
-      <div class="flex items-end justify-between mb-10">
+    <!-- PAKET QUICK OVERVIEW -->
+    <section class="max-w-[1280px] mx-auto px-6 sm:px-8 py-16">
+      <div class="flex flex-wrap items-end justify-between mb-10 gap-4">
         <div>
           <p
             class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-2"
@@ -363,7 +490,7 @@
             Paket Kami
           </p>
           <h2
-            class="text-[32px] font-light text-ink"
+            class="text-[28px] sm:text-[32px] font-light text-ink"
             style="letter-spacing: -0.5px"
           >
             Pilih pengalaman <span class="italic">yang tepat</span>
@@ -375,10 +502,8 @@
           >Lihat semua detail →</a
         >
       </div>
-
-      <!-- Info rute -->
       <div
-        class="flex items-center gap-3 bg-forest/5 border border-forest/10 px-5 py-3.5 mb-8"
+        class="flex items-center gap-3 bg-forest/5 border border-forest/10 px-5 py-3.5 mb-8 flex-wrap"
       >
         <span class="text-[18px]">🗺️</span>
         <p class="text-[13px] font-light text-mid">
@@ -386,8 +511,7 @@
           — Harga berlaku untuk kedua rute. Pilih rute saat booking.
         </p>
       </div>
-
-      <div class="grid grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Deluxe -->
         <div class="border border-smoke p-7 card-hover relative">
           <div
@@ -428,8 +552,7 @@
             >Booking Deluxe</a
           >
         </div>
-
-        <!-- Standard / Sharing -->
+        <!-- Standard -->
         <div class="border border-smoke p-7 card-hover">
           <div
             class="w-10 h-10 bg-forest/8 flex items-center justify-center text-xl mb-5"
@@ -468,8 +591,8 @@
 
     <!-- RUTE HIGHLIGHT -->
     <section class="bg-mist border-t border-b border-smoke">
-      <div class="max-w-[1280px] mx-auto px-8 py-14">
-        <div class="flex items-end justify-between mb-8">
+      <div class="max-w-[1280px] mx-auto px-6 sm:px-8 py-14">
+        <div class="flex flex-wrap items-end justify-between mb-8 gap-4">
           <div>
             <p
               class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-2"
@@ -477,7 +600,7 @@
               Jalur Pendakian
             </p>
             <h2
-              class="text-[28px] font-light text-ink"
+              class="text-[26px] sm:text-[28px] font-light text-ink"
               style="letter-spacing: -0.4px"
             >
               Rute populer <span class="italic">Rinjani</span>
@@ -489,7 +612,7 @@
             >Lihat detail rute →</a
           >
         </div>
-        <div class="grid grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div class="bg-white border border-smoke p-6 card-hover">
             <div class="flex items-center gap-3 mb-4">
               <div
@@ -560,8 +683,8 @@
     </section>
 
     <!-- GALERI TEASER -->
-    <section class="max-w-[1280px] mx-auto px-8 py-16">
-      <div class="flex items-end justify-between mb-8">
+    <section class="max-w-[1280px] mx-auto px-6 sm:px-8 py-16">
+      <div class="flex flex-wrap items-end justify-between mb-8 gap-4">
         <div>
           <p
             class="text-[11px] font-semibold tracking-[.24em] uppercase text-tan mb-2"
@@ -569,7 +692,7 @@
             Galeri
           </p>
           <h2
-            class="text-[28px] font-light text-ink"
+            class="text-[26px] sm:text-[28px] font-light text-ink"
             style="letter-spacing: -0.4px"
           >
             Momen dari <span class="italic">pendaki kami</span>
@@ -581,29 +704,29 @@
           >Lihat semua foto →</a
         >
       </div>
-      <div class="grid grid-cols-4 gap-3">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 auto-rows-min">
         <div
-          class="img-wrap col-span-2 row-span-2 h-[320px] bg-gradient-to-br from-forest/15 to-forest/5 flex items-center justify-center text-light text-sm italic border border-smoke"
+          class="img-wrap col-span-2 row-span-2 h-[280px] sm:h-[320px] bg-gradient-to-br from-forest/15 to-forest/5 flex items-center justify-center text-light text-sm italic border border-smoke"
         >
           [ Foto Panorama Rinjani ]
         </div>
         <div
-          class="img-wrap h-[153px] bg-gradient-to-br from-tan/15 to-tan/5 flex items-center justify-center text-light text-sm italic border border-smoke"
+          class="img-wrap h-[130px] sm:h-[153px] bg-gradient-to-br from-tan/15 to-tan/5 flex items-center justify-center text-light text-sm italic border border-smoke"
         >
           [ Danau Segara Anak ]
         </div>
         <div
-          class="img-wrap h-[153px] bg-gradient-to-br from-forest/10 to-forest/3 flex items-center justify-center text-light text-sm italic border border-smoke"
+          class="img-wrap h-[130px] sm:h-[153px] bg-gradient-to-br from-forest/10 to-forest/3 flex items-center justify-center text-light text-sm italic border border-smoke"
         >
           [ Puncak Rinjani ]
         </div>
         <div
-          class="img-wrap h-[153px] bg-gradient-to-br from-tan/10 to-tan/3 flex items-center justify-center text-light text-sm italic border border-smoke"
+          class="img-wrap h-[130px] sm:h-[153px] bg-gradient-to-br from-tan/10 to-tan/3 flex items-center justify-center text-light text-sm italic border border-smoke"
         >
           [ Camp Sembalun ]
         </div>
         <div
-          class="img-wrap h-[153px] bg-gradient-to-br from-forest/8 to-forest/2 flex items-center justify-center text-light text-sm italic border border-smoke"
+          class="img-wrap h-[130px] sm:h-[153px] bg-gradient-to-br from-forest/8 to-forest/2 flex items-center justify-center text-light text-sm italic border border-smoke"
         >
           [ Tim Porter ]
         </div>
@@ -611,41 +734,40 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-white border-t border-smoke py-10 px-8">
+    <footer class="bg-white border-t border-smoke py-10 px-6 sm:px-8">
       <div
-        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-6"
+        class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
       >
-        <a href="index.html" class="inline-block">
-          <img
-            src="images/loegoe.png"
+        <a href="index.html" class="inline-block"
+          ><img
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
-          />
-        </a>
-        <div class="flex gap-8">
+        /></a>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-8">
           <a
             href="index.html"
-            class="text-[12px] font-light text-mid hover:text-ink transition-colors"
+            class="text-[12px] font-light text-mid hover:text-ink"
             >Beranda</a
           >
           <a
             href="paket.html"
-            class="text-[12px] font-light text-mid hover:text-ink transition-colors"
+            class="text-[12px] font-light text-mid hover:text-ink"
             >Paket</a
           >
           <a
             href="rute.html"
-            class="text-[12px] font-light text-mid hover:text-ink transition-colors"
+            class="text-[12px] font-light text-mid hover:text-ink"
             >Rute</a
           >
           <a
             href="galeri.html"
-            class="text-[12px] font-light text-mid hover:text-ink transition-colors"
+            class="text-[12px] font-light text-mid hover:text-ink"
             >Galeri</a
           >
           <a
             href="kontak.html"
-            class="text-[12px] font-light text-mid hover:text-ink transition-colors"
+            class="text-[12px] font-light text-mid hover:text-ink"
             >Kontak</a
           >
         </div>
@@ -661,5 +783,57 @@
       class="fixed bottom-7 right-7 z-50 w-[52px] h-[52px] rounded-full bg-[#25D366] flex items-center justify-center text-[22px] shadow-lg shadow-green-500/25 hover:scale-110 transition-all"
       >💬</a
     >
+
+    <script>
+      // Mobile menu toggle & active page highlight
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        mobileMenu.classList.add("open");
+        menuOverlay.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+      closeMenuBtn.addEventListener("click", closeMenu);
+      menuOverlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open"))
+          closeMenu();
+      });
+
+      const currentPath =
+        window.location.pathname.split("/").pop() || "index.html";
+      const mobileLinks = document.querySelectorAll(
+        "#mobileMenu .flex.flex-col a",
+      );
+      mobileLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === currentPath) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else {
+          link.classList.remove("font-semibold", "text-forest");
+          if (!link.classList.contains("text-ink"))
+            link.classList.add("font-medium", "text-mid");
+          link.style.borderLeft = "";
+          link.style.paddingLeft = "";
+        }
+      });
+    </script>
   </body>
 </html>
