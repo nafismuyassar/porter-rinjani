@@ -42,18 +42,13 @@
         -webkit-font-smoothing: antialiased;
         background: #fff;
         color: #1a1a1a;
+        overflow-x: hidden;
       }
       ::-webkit-scrollbar {
         width: 4px;
       }
       ::-webkit-scrollbar-thumb {
         background: #ddd;
-      }
-      input:focus,
-      select:focus {
-        outline: none;
-        border-color: #1b3a2d !important;
-        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
       }
       .chip-on {
         background: #1a1a1a !important;
@@ -114,24 +109,122 @@
         background: #1b3a2d;
         cursor: pointer;
       }
+      @keyframes fadeup {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fu {
+        opacity: 0;
+        animation: fadeup 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .d1 {
+        animation-delay: 0.08s;
+      }
+      .d2 {
+        animation-delay: 0.2s;
+      }
+      .d3 {
+        animation-delay: 0.35s;
+      }
+      .d4 {
+        animation-delay: 0.5s;
+      }
+
+      /* Mobile menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: white;
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        right: 0;
+      }
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        background: transparent;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #6b6b6b;
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: absolute;
+      }
+      .hamburger span:nth-child(1) {
+        transform: translateY(-6px);
+      }
+      .hamburger span:nth-child(2) {
+        transform: translateY(0);
+      }
+      .hamburger span:nth-child(3) {
+        transform: translateY(6px);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
+      }
     </style>
   </head>
   <body>
-    <!-- NAV -->
+    <!-- NAVBAR -->
     <nav
       class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
     >
       <div
-        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+        class="max-w-[1280px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between"
       >
         <a href="index.html" class="inline-block">
           <img
-            src="images/loegoe.png"
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
           />
         </a>
-        <div class="flex items-center gap-9">
+        <div class="hidden md:flex items-center gap-9">
           <a
             href="index.html"
             class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
@@ -165,31 +258,97 @@
           >
             N
           </div>
-          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+          <a
+            href="profil.html"
+            class="hidden sm:inline-block text-[13px] font-semibold text-forest"
             >Nafis Muyassar</a
           >
           <a
             href="status.html"
-            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            class="hidden sm:inline-block text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
             >Status Booking</a
           >
+          <button
+            id="hamburgerBtn"
+            class="md:hidden hamburger"
+            aria-label="Menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </div>
     </nav>
 
+    <!-- Mobile Menu (slide-in) -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="p-6 border-b border-smoke flex justify-between items-center">
+        <span class="text-[18px] font-semibold text-ink">Menu</span>
+        <button id="closeMenuBtn" class="text-2xl text-mid hover:text-ink">
+          &times;
+        </button>
+      </div>
+      <div class="flex flex-col p-6 gap-5" id="mobileMenuLinks">
+        <a
+          href="index.html"
+          class="text-[14px] font-medium text-ink border-b border-smoke pb-2 hover:bg-mist hover:pl-2 transition-all"
+          >Beranda</a
+        >
+        <a
+          href="paket.html"
+          class="text-[14px] font-medium text-ink border-b border-smoke pb-2 hover:bg-mist hover:pl-2 transition-all"
+          >Paket</a
+        >
+        <a
+          href="rute.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Rute</a
+        >
+        <a
+          href="galeri.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Galeri</a
+        >
+        <a
+          href="kontak.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Kontak</a
+        >
+        <div class="pt-4">
+          <a
+            href="profil.html"
+            class="block w-full text-center bg-forest/10 text-forest text-[13px] font-semibold py-3 mb-3 hover:bg-forest/20 transition-colors rounded-none"
+            >Profil Saya</a
+          >
+          <a
+            href="status.html"
+            class="block w-full text-center bg-forest text-white text-[13px] font-semibold py-3 rounded-none hover:bg-forest/90 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <!-- HERO, KALKULATOR, FILTER, PAKET CARD, COMPARISON, FAQ, FOOTER (sama seperti sebelumnya) -->
+    <!-- ... konten selengkapnya sama seperti kode yang saya kirim sebelumnya ... -->
+    <!-- Agar tidak terlalu panjang, saya akan mengulang bagian yang sama dengan perbaikan menu mobile. -->
+
+    <!-- ==================== ISI KONTEN (sama seperti sebelumnya) ==================== -->
     <!-- HERO -->
     <div class="relative bg-forest overflow-hidden">
       <div
         class="absolute inset-0 bg-gradient-to-br from-[#0f2219] to-[#1B3A2D]/80"
       ></div>
-      <div class="relative z-10 max-w-[1280px] mx-auto px-8 pt-14 pb-16">
+      <div
+        class="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8 pt-14 pb-16"
+      >
         <p
-          class="text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
+          class="fu d1 text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
         >
           Paket & Harga
         </p>
         <h1
-          class="text-[clamp(38px,5.5vw,68px)] font-light text-white leading-[1.08] mb-5"
+          class="fu d2 text-[clamp(38px,5.5vw,68px)] font-light text-white leading-[1.08] mb-5"
           style="letter-spacing: -1.2px"
         >
           Temukan paket<br /><span class="italic text-white/45"
@@ -197,7 +356,7 @@
           >
         </h1>
         <p
-          class="text-[15px] font-light text-white/40 max-w-[420px] leading-[1.85]"
+          class="fu d3 text-[15px] font-light text-white/40 max-w-[420px] leading-[1.85]"
         >
           Dua pilihan dirancang untuk setiap jenis pendaki — via Senaru maupun
           Sembalun dengan harga yang sama.
@@ -205,11 +364,11 @@
       </div>
     </div>
 
-    <!-- PRICE CALCULATOR -->
+    <!-- PRICE CALCULATOR (responsive grid) -->
     <div class="bg-mist border-b border-smoke">
-      <div class="max-w-[1280px] mx-auto px-8 py-8">
+      <div class="max-w-[1280px] mx-auto px-6 sm:px-8 py-8">
         <div class="bg-white border border-smoke p-7">
-          <div class="flex items-center justify-between mb-6">
+          <div class="flex flex-wrap items-center justify-between mb-6 gap-3">
             <div>
               <p
                 class="text-[11px] font-semibold tracking-[.2em] uppercase text-tan mb-1"
@@ -236,21 +395,15 @@
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-4 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
               <label
                 class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
                 >Paket</label
-              >
-              <select
+              ><select
                 id="c-pkt"
                 onchange="calc()"
                 class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                style="
-                  background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                  background-repeat: no-repeat;
-                  background-position: right 14px center;
-                "
               >
                 <option value="deluxe">Paket Deluxe</option>
                 <option value="standard">Paket Standard / Sharing</option>
@@ -260,16 +413,10 @@
               <label
                 class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
                 >Program</label
-              >
-              <select
+              ><select
                 id="c-prog"
                 onchange="calc()"
                 class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                style="
-                  background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                  background-repeat: no-repeat;
-                  background-position: right 14px center;
-                "
               >
                 <option value="2d1n">2D1N — Crater Rim</option>
                 <option value="3d2n_lake" selected>
@@ -293,14 +440,12 @@
                   onclick="chPax(-1)"
                   class="px-4 py-3 text-mid hover:bg-mist text-lg font-light"
                 >
-                  −
-                </button>
-                <span
+                  −</button
+                ><span
                   id="c-pax"
                   class="flex-1 text-center text-[16px] font-semibold text-ink"
                   >3</span
-                >
-                <button
+                ><button
                   onclick="chPax(1)"
                   class="px-4 py-3 text-mid hover:bg-mist text-lg font-light"
                 >
@@ -335,12 +480,12 @@
       </div>
     </div>
 
-    <!-- FILTER BAR -->
+    <!-- FILTER BAR (responsive scroll) -->
     <div
-      class="sticky top-[68px] z-40 bg-white/97 backdrop-blur border-b border-smoke"
+      class="sticky top-[68px] z-40 bg-white/97 backdrop-blur border-b border-smoke overflow-x-auto"
     >
       <div
-        class="max-w-[1280px] mx-auto px-8 py-3.5 flex items-center gap-2 flex-wrap"
+        class="max-w-[1280px] mx-auto px-6 sm:px-8 py-3.5 flex items-center gap-2 flex-nowrap min-w-max"
       >
         <span
           class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mr-1"
@@ -398,7 +543,9 @@
 
     <!-- RUTE INFO BANNER -->
     <div class="bg-forest/5 border-b border-smoke">
-      <div class="max-w-[1280px] mx-auto px-8 py-4 flex items-center gap-4">
+      <div
+        class="max-w-[1280px] mx-auto px-6 sm:px-8 py-4 flex items-center gap-4 flex-wrap"
+      >
         <span class="text-forest text-[18px]">🗺️</span>
         <p class="text-[13px] font-light text-mid leading-[1.7]">
           <span class="font-semibold text-ink">Via Senaru & Via Sembalun</span>
@@ -408,10 +555,10 @@
       </div>
     </div>
 
-    <!-- PAKET CARDS -->
-    <div class="max-w-[1280px] mx-auto px-8 py-14">
-      <div class="grid grid-cols-2 gap-8">
-        <!-- ========== DELUXE ========== -->
+    <!-- PAKET CARDS (responsive grid) -->
+    <div class="max-w-[1280px] mx-auto px-6 sm:px-8 py-14">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Deluxe Card -->
         <div
           class="pcard bg-white border border-smoke lift overflow-hidden"
           data-t="deluxe"
@@ -434,12 +581,10 @@
               <span
                 class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
                 >2D1N</span
-              >
-              <span
+              ><span
                 class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
                 >3D2N</span
-              >
-              <span
+              ><span
                 class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
                 >4D3N</span
               >
@@ -460,9 +605,8 @@
               Pengalaman mendaki paling lengkap — semua kebutuhan terpenuhi
               tanpa kejutan biaya tambahan apapun.
             </p>
-
-            <!-- Fasilitas Deluxe -->
             <ul class="space-y-2 mb-6">
+              <!-- daftar fasilitas -->
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
@@ -532,108 +676,100 @@
                 >Gratis transport jika program tidak selesai dari Sembalun ✓
               </li>
             </ul>
-
-            <!-- Harga Deluxe sesuai gambar -->
-            <div class="bg-mist p-4 mb-5">
+            <div class="bg-mist p-4 mb-5 overflow-x-auto">
               <p
                 class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
               >
                 Harga per orang (USD)
               </p>
-              <div class="overflow-x-auto">
-                <table class="w-full text-[12px]">
-                  <thead>
-                    <tr class="border-b border-smoke">
-                      <th class="text-left font-semibold text-light pb-2">
-                        Program
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        1 org
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        2–4 org
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        5–10 org
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        11+ org
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-smoke">
-                    <tr>
-                      <td class="py-2 font-light text-mid">2D1N Crater Rim</td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $310
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $230
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $180
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $150
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 font-light text-mid">
-                        3D2N Lake & Hot Spring
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $400
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $280
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $255
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $220
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 font-light text-mid">
-                        3D2N Lake & Summit
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $450
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $290
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $265
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $235
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 font-light text-mid">
-                        4D3N Lake & Hot Spring
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $500
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $340
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $315
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $285
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <table class="w-full text-[12px] min-w-[400px]">
+                <thead>
+                  <tr class="border-b border-smoke">
+                    <th class="text-left font-semibold text-light pb-2">
+                      Program
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      1 org
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      2–4 org
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      5–10 org
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      11+ org
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-smoke">
+                  <tr>
+                    <td class="py-2 font-light text-mid">2D1N Crater Rim</td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $310
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $230
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $180
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $150
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-light text-mid">
+                      3D2N Lake & Hot Spring
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $400
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $280
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $255
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $220
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-light text-mid">3D2N Lake & Summit</td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $450
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $290
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $265
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $235
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-light text-mid">
+                      4D3N Lake & Hot Spring
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $500
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $340
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $315
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $285
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-
-            <!-- Testimoni Deluxe -->
             <div class="mb-5">
               <p
                 class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
@@ -712,7 +848,6 @@
                 </div>
               </div>
             </div>
-
             <a
               href="booking.html"
               class="block w-full text-center bg-forest text-white text-[12px] font-semibold tracking-[.06em] py-4 hover:bg-forest/85 transition-colors"
@@ -721,7 +856,7 @@
           </div>
         </div>
 
-        <!-- ========== STANDARD / SHARING ========== -->
+        <!-- Standard Card -->
         <div
           class="pcard bg-white border border-smoke lift overflow-hidden"
           data-t="standard"
@@ -738,12 +873,10 @@
               <span
                 class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
                 >2D1N</span
-              >
-              <span
+              ><span
                 class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
                 >3D2N</span
-              >
-              <span
+              ><span
                 class="text-[9px] font-semibold bg-white/90 text-mid px-2 py-1"
                 >4D3N</span
               >
@@ -764,9 +897,8 @@
               Paket essensial dengan layanan lengkap. Cocok untuk pendaki yang
               ingin pengalaman nyata Rinjani dengan budget lebih hemat.
             </p>
-
-            <!-- Fasilitas Standard -->
             <ul class="space-y-2 mb-6">
+              <!-- fasilitas standard -->
               <li class="flex gap-3 text-[13px] font-light text-mid">
                 <span
                   class="w-1 h-1 rounded-full bg-tan mt-[7px] flex-shrink-0"
@@ -823,111 +955,103 @@
                 >Pilihan makanan lebih terbatas, buah tidak selengkap Deluxe
               </li>
             </ul>
-
-            <!-- Harga Standard sesuai gambar -->
-            <div class="bg-mist p-4 mb-5">
+            <div class="bg-mist p-4 mb-5 overflow-x-auto">
               <p
                 class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
               >
                 Harga per orang (USD)
               </p>
-              <div class="overflow-x-auto">
-                <table class="w-full text-[12px]">
-                  <thead>
-                    <tr class="border-b border-smoke">
-                      <th class="text-left font-semibold text-light pb-2">
-                        Program
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        1 org
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        2–4 org
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        5–10 org
-                      </th>
-                      <th class="text-center font-semibold text-light pb-2">
-                        11+ org
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="divide-y divide-smoke">
-                    <tr>
-                      <td class="py-2 font-light text-mid">2D1N Crater Rim</td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $305
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $220
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $175
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $145
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 font-light text-mid">
-                        3D2N Lake & Hot Spring
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $395
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $270
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $250
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $215
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 font-light text-mid">
-                        3D2N Lake & Summit
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $445
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $285
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $260
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $230
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 font-light text-mid">
-                        4D3N Lake & Hot Spring
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $495
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $335
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $310
-                      </td>
-                      <td class="py-2 text-center font-semibold text-ink">
-                        $280
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <table class="w-full text-[12px] min-w-[400px]">
+                <thead>
+                  <tr class="border-b border-smoke">
+                    <th class="text-left font-semibold text-light pb-2">
+                      Program
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      1 org
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      2–4 org
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      5–10 org
+                    </th>
+                    <th class="text-center font-semibold text-light pb-2">
+                      11+ org
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-smoke">
+                  <tr>
+                    <td class="py-2 font-light text-mid">2D1N Crater Rim</td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $305
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $220
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $175
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $145
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-light text-mid">
+                      3D2N Lake & Hot Spring
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $395
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $270
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $250
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $215
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-light text-mid">3D2N Lake & Summit</td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $445
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $285
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $260
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $230
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 font-light text-mid">
+                      4D3N Lake & Hot Spring
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $495
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $335
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $310
+                    </td>
+                    <td class="py-2 text-center font-semibold text-ink">
+                      $280
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
               <p class="text-[11px] font-light text-amber-600 mt-2">
                 * Harga tanpa hotel lebih hemat $15–$20 per orang
               </p>
             </div>
-
-            <!-- Testimoni Standard -->
             <div class="mb-5">
               <p
                 class="text-[10px] font-semibold tracking-[.18em] uppercase text-light mb-3"
@@ -1006,7 +1130,6 @@
                 </div>
               </div>
             </div>
-
             <a
               href="booking.html"
               class="block w-full text-center border-2 border-ink text-ink text-[12px] font-semibold tracking-[.06em] py-4 hover:bg-ink hover:text-white transition-all"
@@ -1017,9 +1140,9 @@
       </div>
     </div>
 
-    <!-- COMPARISON TABLE -->
-    <div class="max-w-[1280px] mx-auto px-8 pb-14">
-      <div class="border border-smoke overflow-hidden">
+    <!-- COMPARISON TABLE (responsive scroll) -->
+    <div class="max-w-[1280px] mx-auto px-6 sm:px-8 pb-14 overflow-x-auto">
+      <div class="border border-smoke min-w-[600px]">
         <div class="bg-mist px-8 py-5 border-b border-smoke">
           <h3 class="text-[16px] font-semibold text-ink">Perbandingan Paket</h3>
         </div>
@@ -1183,9 +1306,9 @@
       </div>
     </div>
 
-    <!-- FAQ + CTA -->
+    <!-- FAQ + CTA (responsive grid) -->
     <div
-      class="max-w-[1280px] mx-auto px-8 pb-20 grid grid-cols-[1fr_380px] gap-6"
+      class="max-w-[1280px] mx-auto px-6 sm:px-8 pb-20 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6"
     >
       <div class="bg-white border border-smoke p-10">
         <p
@@ -1208,7 +1331,7 @@
               <span class="text-[14px] font-medium text-ink"
                 >Apa perbedaan Deluxe dan Standard/Sharing?</span
               ><span
-                class="fq text-light text-2xl font-light ml-4 flex-shrink-0 transition-transform"
+                class="fq text-light text-2xl font-light ml-4 flex-shrink-0"
                 >+</span
               >
             </button>
@@ -1349,8 +1472,7 @@
             target="_blank"
             class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white text-[12px] font-semibold py-4 hover:bg-[#1fbd5c] transition-colors"
             >💬 Chat WhatsApp</a
-          >
-          <a
+          ><a
             href="booking.html"
             class="flex items-center justify-center w-full border border-white/15 text-white/45 text-[12px] font-medium py-3.5 hover:bg-white/8 hover:text-white/70 transition-all"
             >Langsung Booking →</a
@@ -1360,18 +1482,17 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-white border-t border-smoke py-10 px-8">
+    <footer class="bg-white border-t border-smoke py-10 px-6 sm:px-8">
       <div
-        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-6"
+        class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
       >
-        <a href="index.html" class="inline-block">
-          <img
-            src="images/loegoe.png"
+        <a href="index.html" class="inline-block"
+          ><img
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
-          />
-        </a>
-        <div class="flex gap-8">
+        /></a>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-8">
           <a
             href="index.html"
             class="text-[12px] font-light text-mid hover:text-ink"
@@ -1392,13 +1513,17 @@
             class="text-[12px] font-light text-mid hover:text-ink"
             >Galeri</a
           >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Kontak</a
+          >
         </div>
         <p class="text-[12px] font-light text-light">
           Dibuat dengan ❤️ dari Lombok
         </p>
       </div>
     </footer>
-
     <a
       href="https://wa.me/628123456789"
       target="_blank"
@@ -1407,7 +1532,7 @@
     >
 
     <script>
-      // Pricing data USD — Via Senaru = Via Sembalun
+      // Pricing data
       const PRICE = {
         deluxe: {
           "2d1n": { 1: 310, 4: 230, 10: 180, 99: 150 },
@@ -1485,6 +1610,58 @@
           i.textContent = "×";
         }
       }
+      calc();
+
+      // Mobile menu toggle & active page highlight
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        mobileMenu.classList.add("open");
+        menuOverlay.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+      closeMenuBtn.addEventListener("click", closeMenu);
+      menuOverlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open"))
+          closeMenu();
+      });
+
+      // Highlight active page in mobile menu
+      const currentPath =
+        window.location.pathname.split("/").pop() || "index.html";
+      const mobileLinks = document.querySelectorAll("#mobileMenuLinks a");
+      mobileLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === currentPath) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          // also add a subtle left border to indicate active (optional)
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else {
+          link.classList.remove("font-semibold", "text-forest");
+          if (link.classList.contains("text-ink"))
+            link.classList.add("font-medium");
+          else link.classList.add("font-medium", "text-mid");
+          link.style.borderLeft = "";
+          link.style.paddingLeft = "";
+        }
+      });
     </script>
   </body>
 </html>
