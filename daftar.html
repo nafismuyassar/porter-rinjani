@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Daftar Akun — Porter Rinjani</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            },
+            colors: {
+              forest: "#1B3A2D",
+              tan: "#C4A882",
+              mist: "#F7F6F3",
+              smoke: "#EFEFEC",
+              ink: "#1A1A1A",
+              mid: "#6B6B6B",
+              light: "#A8A8A4",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background: #f7f6f3;
+        color: #1a1a1a;
+        overflow-x: hidden;
+      }
+      input:focus {
+        outline: none;
+        border-color: #1b3a2d !important;
+        box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
+      }
+      .err-msg {
+        display: none;
+        font-size: 11px;
+        color: #ef4444;
+        margin-top: 4px;
+      }
+      .err-msg.show {
+        display: block;
+      }
+      .step-done .sn {
+        background: #1b3a2d !important;
+        border-color: #1b3a2d !important;
+        color: #fff !important;
+      }
+      .step-active .sn {
+        background: #1a1a1a !important;
+        border-color: #1a1a1a !important;
+        color: #fff !important;
+      }
+      .step-active .sl {
+        color: #1a1a1a !important;
+        font-weight: 600 !important;
+      }
+
+      /* Mobile menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: white;
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        right: 0;
+      }
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        background: transparent;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #6b6b6b;
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: absolute;
+      }
+      .hamburger span:nth-child(1) {
+        transform: translateY(-6px);
+      }
+      .hamburger span:nth-child(2) {
+        transform: translateY(0);
+      }
+      .hamburger span:nth-child(3) {
+        transform: translateY(6px);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR RESPONSIF -->
+    <nav
+      class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+    >
+      <div
+        class="max-w-[1280px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between"
+      >
+        <a href="index.html" class="inline-block">
+          <img
+            src="/images/loegoe.png"
+            alt="Porter Rinjani"
+            class="h-[35px] w-auto"
+          />
+        </a>
+        <div class="hidden md:flex items-center gap-9">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Kontak</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
+          >
+            N
+          </div>
+          <a
+            href="profil.html"
+            class="hidden sm:inline-block text-[13px] font-semibold text-forest"
+            >Nafis Muyassar</a
+          >
+          <a
+            href="status.html"
+            class="hidden sm:inline-block text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+          <button
+            id="hamburgerBtn"
+            class="md:hidden hamburger"
+            aria-label="Menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu (slide-in) -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="p-6 border-b border-smoke flex justify-between items-center">
+        <span class="text-[18px] font-semibold text-ink">Menu</span>
+        <button id="closeMenuBtn" class="text-2xl text-mid hover:text-ink">
+          &times;
+        </button>
+      </div>
+      <div class="flex flex-col p-6 gap-5">
+        <a
+          href="index.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Beranda</a
+        >
+        <a
+          href="paket.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Paket</a
+        >
+        <a
+          href="rute.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Rute</a
+        >
+        <a
+          href="galeri.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Galeri</a
+        >
+        <a
+          href="kontak.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Kontak</a
+        >
+        <div class="pt-4">
+          <a
+            href="profil.html"
+            class="block w-full text-center bg-forest/10 text-forest text-[13px] font-semibold py-3 mb-3 hover:bg-forest/20 transition-colors rounded-none"
+            >Profil Saya</a
+          >
+          <a
+            href="status.html"
+            class="block w-full text-center bg-forest text-white text-[13px] font-semibold py-3 rounded-none hover:bg-forest/90 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <div
+      class="min-h-[calc(100vh-68px)] flex items-start justify-center py-12 px-5"
+    >
+      <div class="w-full max-w-[500px]">
+        <!-- Progress -->
+        <div class="mb-8">
+          <div
+            class="flex justify-between text-[11px] font-medium text-mid mb-2.5"
+          >
+            <span>Langkah <span id="scur">1</span> dari 2</span>
+            <span id="slbl">Informasi Akun</span>
+          </div>
+          <div class="h-[2px] bg-smoke">
+            <div
+              id="prog"
+              class="h-full bg-forest transition-all duration-500"
+              style="width: 50%"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Card -->
+        <div class="bg-white border border-smoke p-6 sm:p-10">
+          <a
+            href="index.html"
+            class="text-[17px] font-semibold text-ink block mb-2"
+            >Porter <span class="font-light text-mid">Rinjani</span></a
+          >
+          <h2
+            id="ftitle"
+            class="text-[22px] font-semibold text-ink mb-1"
+            style="letter-spacing: -0.3px"
+          >
+            Buat Akun
+          </h2>
+          <p class="text-[13px] font-light text-mid mb-7">
+            Daftar gratis dan mulai rencanakan pendakian impian Anda.
+          </p>
+
+          <!-- STEP 1 -->
+          <div id="s1">
+            <button
+              class="w-full flex items-center justify-center gap-3 border border-smoke py-3.5 text-[13px] font-medium text-mid hover:bg-mist hover:border-mid transition-all mb-1"
+            >
+              <span>🔵</span> Daftar dengan Google
+            </button>
+            <div class="flex items-center gap-4 my-5 text-[12px] text-light">
+              <div class="flex-1 h-px bg-smoke"></div>
+              atau
+              <div class="flex-1 h-px bg-smoke"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label
+                  class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                  >Nama Depan *</label
+                ><input
+                  id="fn"
+                  type="text"
+                  placeholder="Nama depan"
+                  class="w-full px-4 py-2.5 border border-smoke text-[14px] font-light placeholder-light transition-all"
+                />
+                <p class="err-msg" id="efn">Wajib diisi</p>
+              </div>
+              <div>
+                <label
+                  class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                  >Nama Belakang *</label
+                ><input
+                  id="ln"
+                  type="text"
+                  placeholder="Nama belakang"
+                  class="w-full px-4 py-2.5 border border-smoke text-[14px] font-light placeholder-light transition-all"
+                />
+                <p class="err-msg" id="eln">Wajib diisi</p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >Email *</label
+              ><input
+                id="em"
+                type="email"
+                placeholder="email@domain.com"
+                class="w-full px-4 py-2.5 border border-smoke text-[14px] font-light placeholder-light transition-all"
+              />
+              <p class="err-msg" id="eem">Masukkan email yang valid</p>
+            </div>
+            <div class="mb-6">
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >No. WhatsApp *</label
+              ><input
+                id="wa"
+                type="tel"
+                placeholder="08xx-xxxx-xxxx"
+                class="w-full px-4 py-2.5 border border-smoke text-[14px] font-light placeholder-light transition-all"
+              />
+              <p class="text-[11px] font-light text-light mt-1.5">
+                Untuk notifikasi status booking
+              </p>
+              <p class="err-msg" id="ewa">Wajib diisi</p>
+            </div>
+            <button
+              onclick="goS2()"
+              class="w-full bg-forest text-white text-[13px] font-semibold py-3.5 hover:bg-forest/85 transition-colors"
+            >
+              Lanjut →
+            </button>
+          </div>
+
+          <!-- STEP 2 -->
+          <div id="s2" class="hidden">
+            <div class="mb-4">
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >Password *</label
+              >
+              <div class="relative">
+                <input
+                  id="pw"
+                  type="password"
+                  placeholder="Minimal 8 karakter"
+                  oninput="updStr(this.value)"
+                  class="w-full px-4 py-2.5 border border-smoke text-[14px] font-light placeholder-light transition-all pr-11"
+                /><button
+                  type="button"
+                  onclick="tp('pw', 'e1')"
+                  id="e1"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-light hover:text-mid text-[14px]"
+                >
+                  👁
+                </button>
+              </div>
+              <div class="h-[2px] bg-smoke mt-2">
+                <div
+                  id="sb"
+                  class="h-full transition-all duration-300"
+                  style="width: 0; background: #ddd"
+                ></div>
+              </div>
+              <p class="text-[11px] font-light text-light mt-1">
+                Kekuatan: <span id="sl2" class="font-medium">—</span>
+              </p>
+              <p class="err-msg" id="epw">Minimal 8 karakter</p>
+            </div>
+            <div class="mb-6">
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >Konfirmasi Password *</label
+              >
+              <div class="relative">
+                <input
+                  id="pw2"
+                  type="password"
+                  placeholder="Ulangi password"
+                  class="w-full px-4 py-2.5 border border-smoke text-[14px] font-light placeholder-light transition-all pr-11"
+                /><button
+                  type="button"
+                  onclick="tp('pw2', 'e2')"
+                  id="e2"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-light hover:text-mid text-[14px]"
+                >
+                  👁
+                </button>
+              </div>
+              <p class="err-msg" id="epw2">Password tidak cocok</p>
+            </div>
+            <div class="flex items-start gap-3 mb-7">
+              <input
+                id="tos"
+                type="checkbox"
+                class="mt-0.5 accent-forest w-4 h-4 flex-shrink-0"
+              /><span class="text-[12px] font-light text-mid leading-[1.75]"
+                >Saya setuju dengan
+                <a
+                  href="#"
+                  class="text-forest font-semibold underline underline-offset-2"
+                  >Syarat & Ketentuan</a
+                >
+                serta
+                <a
+                  href="#"
+                  class="text-forest font-semibold underline underline-offset-2"
+                  >Kebijakan Privasi</a
+                >
+                Porter Rinjani</span
+              >
+            </div>
+            <div class="flex gap-3">
+              <button
+                onclick="goS1()"
+                class="border border-smoke text-mid text-[12px] font-medium px-6 py-3 hover:bg-mist transition-all"
+              >
+                ← Kembali</button
+              ><button
+                onclick="doReg()"
+                id="rbtn"
+                class="flex-1 bg-forest text-white text-[13px] font-semibold py-3 hover:bg-forest/85 transition-colors"
+              >
+                Buat Akun Gratis
+              </button>
+            </div>
+          </div>
+
+          <p class="text-center text-[12px] font-light text-mid mt-5">
+            Sudah punya akun?
+            <a
+              href="login.html"
+              class="text-forest font-semibold hover:underline underline-offset-2"
+              >Masuk di sini</a
+            >
+          </p>
+        </div>
+
+        <!-- Benefits (responsive grid) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
+          <div class="text-center bg-white border border-smoke p-4">
+            <div class="text-xl mb-2">🆓</div>
+            <div class="text-[11px] font-semibold text-ink mb-0.5">Gratis</div>
+            <div class="text-[10px] font-light text-mid">
+              Tidak ada biaya pendaftaran
+            </div>
+          </div>
+          <div class="text-center bg-white border border-smoke p-4">
+            <div class="text-xl mb-2">🔔</div>
+            <div class="text-[11px] font-semibold text-ink mb-0.5">
+              Notifikasi
+            </div>
+            <div class="text-[10px] font-light text-mid">
+              Update booking real-time
+            </div>
+          </div>
+          <div class="text-center bg-white border border-smoke p-4">
+            <div class="text-xl mb-2">🔒</div>
+            <div class="text-[11px] font-semibold text-ink mb-0.5">Aman</div>
+            <div class="text-[10px] font-light text-mid">
+              Data Anda terlindungi
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function goS2() {
+        let ok = true;
+        [
+          { id: "fn", e: "efn" },
+          { id: "ln", e: "eln" },
+          { id: "em", e: "eem" },
+          { id: "wa", e: "ewa" },
+        ].forEach((f) => {
+          const el = document.getElementById(f.id),
+            er = document.getElementById(f.e),
+            v = el.value.trim();
+          const bad =
+            !v || (f.id === "em" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+          if (bad) {
+            el.classList.add("!border-red-300");
+            er.classList.add("show");
+            ok = false;
+          } else {
+            el.classList.remove("!border-red-300");
+            er.classList.remove("show");
+          }
+        });
+        if (!ok) return;
+        document.getElementById("s1").classList.add("hidden");
+        document.getElementById("s2").classList.remove("hidden");
+        document.getElementById("prog").style.width = "100%";
+        document.getElementById("scur").textContent = "2";
+        document.getElementById("slbl").textContent = "Buat Password";
+        document.getElementById("ftitle").textContent = "Satu Langkah Lagi";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      function goS1() {
+        document.getElementById("s2").classList.add("hidden");
+        document.getElementById("s1").classList.remove("hidden");
+        document.getElementById("prog").style.width = "50%";
+        document.getElementById("scur").textContent = "1";
+        document.getElementById("slbl").textContent = "Informasi Akun";
+        document.getElementById("ftitle").textContent = "Buat Akun";
+      }
+      function doReg() {
+        const pw = document.getElementById("pw").value,
+          pw2 = document.getElementById("pw2").value,
+          tos = document.getElementById("tos").checked;
+        let ok = true;
+        if (pw.length < 8) {
+          document.getElementById("pw").classList.add("!border-red-300");
+          document.getElementById("epw").classList.add("show");
+          ok = false;
+        } else {
+          document.getElementById("pw").classList.remove("!border-red-300");
+          document.getElementById("epw").classList.remove("show");
+        }
+        if (pw !== pw2) {
+          document.getElementById("pw2").classList.add("!border-red-300");
+          document.getElementById("epw2").classList.add("show");
+          ok = false;
+        } else {
+          document.getElementById("pw2").classList.remove("!border-red-300");
+          document.getElementById("epw2").classList.remove("show");
+        }
+        if (!tos) {
+          alert("Silakan setujui syarat & ketentuan terlebih dahulu");
+          return;
+        }
+        if (!ok) return;
+        const b = document.getElementById("rbtn");
+        b.textContent = "Membuat akun...";
+        b.disabled = true;
+        setTimeout(() => (window.location.href = "status.html"), 1200);
+      }
+      function updStr(v) {
+        const b = document.getElementById("sb"),
+          l = document.getElementById("sl2"),
+          n = v.length;
+        if (!n) {
+          b.style.width = "0";
+          b.style.background = "#ddd";
+          l.textContent = "—";
+          l.style.color = "#A8A8A4";
+        } else if (n < 6) {
+          b.style.width = "25%";
+          b.style.background = "#ef4444";
+          l.textContent = "Lemah";
+          l.style.color = "#ef4444";
+        } else if (n < 10) {
+          b.style.width = "60%";
+          b.style.background = "#C4A882";
+          l.textContent = "Sedang";
+          l.style.color = "#C4A882";
+        } else {
+          b.style.width = "100%";
+          b.style.background = "#1B3A2D";
+          l.textContent = "Kuat";
+          l.style.color = "#1B3A2D";
+        }
+      }
+      function tp(id, btnId) {
+        const i = document.getElementById(id),
+          b = document.getElementById(btnId);
+        if (i.type === "password") {
+          i.type = "text";
+          b.textContent = "🙈";
+        } else {
+          i.type = "password";
+          b.textContent = "👁";
+        }
+      }
+
+      // Mobile menu toggle & active page highlight
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        mobileMenu.classList.add("open");
+        menuOverlay.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+      closeMenuBtn.addEventListener("click", closeMenu);
+      menuOverlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open"))
+          closeMenu();
+      });
+
+      const currentPath =
+        window.location.pathname.split("/").pop() || "index.html";
+      const mobileLinks = document.querySelectorAll(
+        "#mobileMenu .flex.flex-col a",
+      );
+      mobileLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === currentPath) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else {
+          link.classList.remove("font-semibold", "text-forest");
+          if (!link.classList.contains("text-ink"))
+            link.classList.add("font-medium", "text-mid");
+          link.style.borderLeft = "";
+          link.style.paddingLeft = "";
+        }
+      });
+    </script>
+  </body>
+</html>
