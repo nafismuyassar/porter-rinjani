@@ -2,7 +2,7 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>Edit Profil — Porter Rinjani</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
@@ -42,12 +42,7 @@
         -webkit-font-smoothing: antialiased;
         background: #f7f6f3;
         color: #1a1a1a;
-      }
-      ::-webkit-scrollbar {
-        width: 4px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #ddd;
+        overflow-x: hidden;
       }
       input:focus,
       select:focus,
@@ -56,88 +51,133 @@
         border-color: #1b3a2d !important;
         box-shadow: 0 0 0 3px rgba(27, 58, 45, 0.08);
       }
-      input[type="file"] {
+      input,
+      select,
+      textarea {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #efefec;
+        background: #fff;
+        font-size: 13px;
+        font-weight: 400;
+        transition: all 0.2s;
+      }
+      .err-msg {
         display: none;
+        font-size: 11px;
+        color: #ef4444;
+        margin-top: 4px;
       }
-      .menu-item {
-        transition: all 0.18s;
-      }
-      .menu-item:hover {
-        background: #f0f5f2;
-        color: #1b3a2d;
-      }
-      .menu-item.active {
-        background: #f0f5f2;
-        color: #1b3a2d;
-        font-weight: 600;
-      }
-      /* Tab */
-      .etab {
-        display: none;
-      }
-      .etab.active {
+      .err-msg.show {
         display: block;
       }
-      .etbtn {
-        transition: all 0.2s;
-        border-bottom: 2px solid transparent;
+      .success-toast {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background: #1b3a2d;
+        color: white;
+        padding: 12px 20px;
+        font-size: 13px;
+        border-radius: 0;
+        z-index: 200;
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
       }
-      .etbtn.on {
-        border-bottom-color: #1b3a2d;
-        color: #1a1a1a;
-        font-weight: 600;
+      .success-toast.show {
+        transform: translateX(0);
       }
-      /* Avatar hover */
-      .avatar-wrap:hover .avatar-edit-overlay {
-        opacity: 1;
+
+      /* Mobile menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: white;
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
       }
-      .avatar-edit-overlay {
+      .mobile-menu.open {
+        right: 0;
+      }
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
         opacity: 0;
-        transition: opacity 0.2s;
-      }
-      /* Unsaved indicator */
-      .unsaved-dot {
-        display: none;
-      }
-      .dirty .unsaved-dot {
-        display: inline-block;
-      }
-      /* Toast */
-      #toast {
-        transform: translateY(80px);
-        opacity: 0;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      #toast.show {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      /* Password strength */
-      .str-bar {
-        height: 3px;
-        border-radius: 2px;
+        visibility: hidden;
         transition:
-          width 0.3s,
-          background 0.3s;
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        background: transparent;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #6b6b6b;
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: absolute;
+      }
+      .hamburger span:nth-child(1) {
+        transform: translateY(-6px);
+      }
+      .hamburger span:nth-child(2) {
+        transform: translateY(0);
+      }
+      .hamburger span:nth-child(3) {
+        transform: translateY(6px);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
       }
     </style>
   </head>
   <body>
-    <!-- NAV -->
+    <!-- NAVBAR RESPONSIF -->
     <nav
       class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
     >
       <div
-        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+        class="max-w-[1280px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between"
       >
         <a href="index.html" class="inline-block">
           <img
-            src="images/loegoe.png"
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
           />
         </a>
-        <div class="flex items-center gap-9">
+        <div class="hidden md:flex items-center gap-9">
           <a
             href="index.html"
             class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
@@ -171,831 +211,298 @@
           >
             N
           </div>
-          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+          <a
+            href="profil.html"
+            class="hidden sm:inline-block text-[13px] font-semibold text-forest"
             >Nafis Muyassar</a
           >
           <a
             href="status.html"
-            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            class="hidden sm:inline-block text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
             >Status Booking</a
           >
+          <button
+            id="hamburgerBtn"
+            class="md:hidden hamburger"
+            aria-label="Menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </div>
     </nav>
 
-    <!-- BREADCRUMB -->
-    <div class="bg-white border-b border-smoke">
-      <div
-        class="max-w-[1280px] mx-auto px-8 py-3 flex items-center gap-2 text-[12px] font-light text-light"
-      >
-        <a href="profil.html" class="hover:text-ink transition-colors"
-          >Profil</a
+    <!-- Mobile Menu (slide-in) -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="p-6 border-b border-smoke flex justify-between items-center">
+        <span class="text-[18px] font-semibold text-ink">Menu</span>
+        <button id="closeMenuBtn" class="text-2xl text-mid hover:text-ink">
+          &times;
+        </button>
+      </div>
+      <div class="flex flex-col p-6 gap-5">
+        <a
+          href="index.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Beranda</a
         >
-        <span>/</span>
-        <span class="text-ink font-medium">Edit Profil</span>
-        <span
-          class="unsaved-dot ml-2 w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"
-          id="udot"
-        ></span>
-        <span
-          class="text-[11px] text-amber-500 font-medium"
-          id="utxt"
-          style="display: none"
-          >Ada perubahan belum disimpan</span
+        <a
+          href="paket.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Paket</a
         >
+        <a
+          href="rute.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Rute</a
+        >
+        <a
+          href="galeri.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Galeri</a
+        >
+        <a
+          href="kontak.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Kontak</a
+        >
+        <div class="pt-4">
+          <a
+            href="profil.html"
+            class="block w-full text-center bg-forest/10 text-forest text-[13px] font-semibold py-3 mb-3 hover:bg-forest/20 transition-colors rounded-none"
+            >Profil Saya</a
+          >
+          <a
+            href="status.html"
+            class="block w-full text-center bg-forest text-white text-[13px] font-semibold py-3 rounded-none hover:bg-forest/90 transition-colors"
+            >Status Booking</a
+          >
+        </div>
       </div>
     </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
 
-    <div class="max-w-[1280px] mx-auto px-8 py-10">
-      <div class="grid grid-cols-[280px_1fr] gap-7 items-start">
-        <!-- ═══ SIDEBAR ═══ -->
-        <div class="space-y-4">
-          <!-- Avatar card -->
-          <div class="bg-white border border-smoke p-7 text-center">
+    <div class="max-w-[720px] mx-auto px-6 sm:px-8 py-12">
+      <div class="bg-white border border-smoke p-6 sm:p-8">
+        <a
+          href="profil.html"
+          class="text-[13px] text-mid hover:text-forest mb-4 inline-block"
+          >← Kembali ke Profil</a
+        >
+        <h2
+          class="text-[24px] font-semibold text-ink mb-1"
+          style="letter-spacing: -0.3px"
+        >
+          Edit Profil
+        </h2>
+        <p class="text-[13px] font-light text-mid mb-7">
+          Perbarui informasi pribadi Anda
+        </p>
+
+        <form id="editForm" onsubmit="return handleSubmit(event);">
+          <!-- Avatar -->
+          <div
+            class="flex flex-col sm:flex-row items-start gap-5 mb-8 pb-6 border-b border-smoke"
+          >
             <div
-              class="relative inline-block mb-4 avatar-wrap cursor-pointer"
-              onclick="document.getElementById('av-fi').click()"
+              class="w-20 h-20 rounded-full bg-forest/10 flex items-center justify-center text-2xl font-bold text-forest flex-shrink-0"
             >
-              <div
-                id="avatar-preview"
-                class="w-20 h-20 rounded-full bg-gradient-to-br from-forest to-forest/60 flex items-center justify-center text-[28px] font-bold text-white mx-auto overflow-hidden"
-                style="
-                  box-shadow:
-                    0 0 0 3px #fff,
-                    0 0 0 5px rgba(27, 58, 45, 0.15);
-                "
-              >
-                R
-              </div>
-              <div
-                class="avatar-edit-overlay absolute inset-0 rounded-full bg-black/50 flex items-center justify-center"
-              >
-                <span class="text-white text-[11px] font-semibold">Ganti</span>
-              </div>
+              N
             </div>
-            <input
-              type="file"
-              id="av-fi"
-              accept="image/*"
-              onchange="prevAv(this)"
-            />
-            <p class="text-[13px] font-medium text-ink mb-0.5">
-              Nafis Muyassar
-            </p>
-            <p class="text-[11px] font-light text-light mb-4">
-              Klik foto untuk ganti
-            </p>
-            <button
-              onclick="document.getElementById('av-fi').click()"
-              class="w-full border border-smoke text-mid text-[12px] font-medium py-2.5 hover:bg-mist transition-colors"
-            >
-              📷 Upload Foto
-            </button>
-            <p class="text-[10px] font-light text-light mt-2">
-              JPG / PNG · Maks. 2 MB
-            </p>
-          </div>
-
-          <!-- Sidebar nav -->
-          <div class="bg-white border border-smoke overflow-hidden">
-            <p
-              class="text-[10px] font-semibold tracking-[.18em] uppercase text-light px-5 pt-5 pb-3"
-            >
-              Menu Akun
-            </p>
-            <div class="divide-y divide-smoke">
-              <a
-                href="profil.html"
-                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-mid"
-              >
-                <span class="w-5 text-center text-[15px]">👤</span> Profil Saya
-              </a>
-              <a
-                href="status.html"
-                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-mid"
-              >
-                <span class="w-5 text-center text-[15px]">📋</span> Riwayat
-                Booking
-              </a>
-              <a
-                href="edit-profil.html"
-                class="menu-item active flex items-center gap-3 px-5 py-3.5 text-[13px]"
-              >
-                <span class="w-5 text-center text-[15px]">✏️</span> Edit Profil
-              </a>
-              <a
-                href="kontak.html"
-                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-mid"
-              >
-                <span class="w-5 text-center text-[15px]">💬</span> Bantuan
-              </a>
-              <a
-                href="#"
-                onclick="return confirm('Yakin ingin keluar?');"
-                class="menu-item flex items-center gap-3 px-5 py-3.5 text-[13px] text-red-400 hover:bg-red-50 hover:text-red-500"
-              >
-                <span class="w-5 text-center text-[15px]">🚪</span> Keluar
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- ═══ FORM UTAMA ═══ -->
-        <div class="bg-white border border-smoke">
-          <!-- Tab header -->
-          <div class="border-b border-smoke px-8 pt-7 pb-0 flex gap-7">
-            <button
-              onclick="showTab('pribadi')"
-              id="t-pribadi"
-              class="etbtn on text-[13px] font-medium text-ink pb-4"
-            >
-              Data Pribadi
-            </button>
-            <button
-              onclick="showTab('kesehatan')"
-              id="t-kesehatan"
-              class="etbtn text-[13px] font-medium text-mid pb-4"
-            >
-              Kesehatan & Darurat
-            </button>
-            <button
-              onclick="showTab('password')"
-              id="t-password"
-              class="etbtn text-[13px] font-medium text-mid pb-4"
-            >
-              Password
-            </button>
-            <button
-              onclick="showTab('notif')"
-              id="t-notif"
-              class="etbtn text-[13px] font-medium text-mid pb-4"
-            >
-              Notifikasi
-            </button>
-          </div>
-
-          <!-- ── TAB: DATA PRIBADI ── -->
-          <div id="tab-pribadi" class="etab active p-8">
-            <p
-              class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-1"
-            >
-              Data Pribadi
-            </p>
-            <h3
-              class="text-[22px] font-light text-ink mb-7"
-              style="letter-spacing: -0.3px"
-            >
-              Informasi <span class="italic">dasar akun</span>
-            </h3>
-
-            <div class="grid grid-cols-2 gap-5 mb-5">
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Nama Lengkap *</label
-                >
-                <input
-                  type="text"
-                  value="Nafis Muyassar"
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Tanggal Lahir</label
-                >
-                <input
-                  type="date"
-                  value="1995-03-12"
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-5 mb-5">
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Email *</label
-                >
-                <input
-                  type="email"
-                  value="nafis@email.com"
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-                <p class="text-[11px] font-light text-light mt-1.5">
-                  📄 Invoice dikirim ke email ini
-                </p>
-              </div>
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >No. WhatsApp *</label
-                >
-                <input
-                  type="tel"
-                  value="08123456789"
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-5 mb-5">
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Kota Asal</label
-                >
-                <input
-                  type="text"
-                  value="Jakarta Selatan"
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Jenis Kelamin</label
-                >
-                <select
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                  style="
-                    background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                    background-repeat: no-repeat;
-                    background-position: right 14px center;
-                  "
-                >
-                  <option>Perempuan</option>
-                  <option>Laki-laki</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="mb-7">
-              <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >No. Identitas (KTP / Passport)</label
-              >
-              <input
-                type="text"
-                value="317111111111111"
-                oninput="markDirty()"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-              />
-              <p class="text-[11px] font-light text-light mt-1.5">
-                Digunakan untuk keperluan administrasi & asuransi pendakian.
+            <div>
+              <p class="text-[13px] font-semibold text-ink mb-1">Foto Profil</p>
+              <p class="text-[11px] font-light text-light mb-3">
+                JPG, PNG. Maks. 2MB.
               </p>
-            </div>
-
-            <div id="err-pribadi" class="hidden text-[13px] text-red-400 mb-4">
-              ⚠ Nama, Email, dan No. WhatsApp wajib diisi.
-            </div>
-            <div
-              class="flex items-center justify-between pt-5 border-t border-smoke"
-            >
-              <a
-                href="profil.html"
-                class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
-                >← Batal, kembali ke profil</a
-              >
-              <button
-                onclick="saveTab('pribadi')"
-                class="bg-forest text-white text-[13px] font-semibold px-8 py-3 hover:bg-forest/85 transition-colors"
-              >
-                Simpan Perubahan
-              </button>
-            </div>
-          </div>
-
-          <!-- ── TAB: KESEHATAN & DARURAT ── -->
-          <div id="tab-kesehatan" class="etab p-8">
-            <p
-              class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-1"
-            >
-              Kesehatan & Darurat
-            </p>
-            <h3
-              class="text-[22px] font-light text-ink mb-2"
-              style="letter-spacing: -0.3px"
-            >
-              Data <span class="italic">medis & kontak darurat</span>
-            </h3>
-            <p class="text-[13px] font-light text-mid leading-[1.8] mb-7">
-              Informasi ini digunakan oleh tim porter kami untuk penanganan
-              darurat selama pendakian.
-            </p>
-
-            <div
-              class="bg-amber-50 border border-amber-200 p-4 mb-7 flex gap-3"
-            >
-              <span class="text-lg flex-shrink-0">⚠️</span>
-              <p class="text-[13px] font-light text-amber-700 leading-[1.75]">
-                Data kesehatan dan kontak darurat
-                <strong>sangat penting</strong> untuk keselamatan Anda. Pastikan
-                selalu diperbarui sebelum pendakian.
-              </p>
-            </div>
-
-            <p
-              class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-4"
-            >
-              Informasi Kesehatan
-            </p>
-            <div class="grid grid-cols-3 gap-5 mb-7">
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Golongan Darah</label
-                >
-                <select
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                  style="
-                    background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                    background-repeat: no-repeat;
-                    background-position: right 14px center;
-                  "
-                >
-                  <option>A+</option>
-                  <option>A-</option>
-                  <option>B+</option>
-                  <option>B-</option>
-                  <option>AB+</option>
-                  <option>AB-</option>
-                  <option>O+</option>
-                  <option>O-</option>
-                  <option>Tidak tahu</option>
-                </select>
-              </div>
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Tinggi Badan (cm)</label
-                >
-                <input
-                  type="number"
-                  value="163"
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Berat Badan (kg)</label
-                >
-                <input
-                  type="number"
-                  value="55"
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-5 mb-7">
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Alergi
-                  <span class="font-normal text-light/60"
-                    >(opsional)</span
-                  ></label
-                >
-                <input
-                  type="text"
-                  placeholder="Cth: kacang, seafood, debu..."
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Kondisi Medis Khusus
-                  <span class="font-normal text-light/60"
-                    >(opsional)</span
-                  ></label
-                >
-                <input
-                  type="text"
-                  placeholder="Cth: asma, hipertensi, diabetes..."
-                  oninput="markDirty()"
-                  class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                />
-              </div>
-            </div>
-
-            <div class="mb-7">
               <label
-                class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                >Obat Rutin
-                <span class="font-normal text-light/60">(opsional)</span></label
+                class="cursor-pointer text-[12px] font-medium text-forest border border-forest/20 px-4 py-2 hover:bg-forest hover:text-white transition-all inline-block"
               >
-              <textarea
-                rows="2"
-                placeholder="Daftar obat yang dikonsumsi secara rutin..."
-                oninput="markDirty()"
-                class="w-full px-4 py-3 border border-smoke text-[14px] font-light resize-none"
-              ></textarea>
-            </div>
-
-            <div class="border-t border-smoke pt-7 mb-5">
-              <div class="flex items-center justify-between mb-4">
-                <p
-                  class="text-[11px] font-semibold tracking-[.18em] uppercase text-light"
-                >
-                  Kontak Darurat *
-                </p>
-                <span
-                  class="text-[10px] font-medium text-amber-600 bg-amber-50 border border-amber-200 px-2.5 py-1"
-                  >Wajib diisi</span
-                >
-              </div>
-              <div class="grid grid-cols-3 gap-5">
-                <div>
-                  <label
-                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                    >Nama *</label
-                  >
-                  <input
-                    type="text"
-                    value="Budi Kusuma"
-                    oninput="markDirty()"
-                    class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                  />
-                </div>
-                <div>
-                  <label
-                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                    >Hubungan *</label
-                  >
-                  <select
-                    oninput="markDirty()"
-                    class="w-full px-4 py-3 border border-smoke text-[14px] font-light bg-white appearance-none"
-                    style="
-                      background-image: url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23A8A8A4%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>&quot;);
-                      background-repeat: no-repeat;
-                      background-position: right 14px center;
-                    "
-                  >
-                    <option>Saudara laki-laki</option>
-                    <option>Saudara perempuan</option>
-                    <option>Orang tua</option>
-                    <option>Pasangan</option>
-                    <option>Teman</option>
-                    <option>Lainnya</option>
-                  </select>
-                </div>
-                <div>
-                  <label
-                    class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                    >No. Telepon *</label
-                  >
-                  <input
-                    type="tel"
-                    value="08198765432"
-                    oninput="markDirty()"
-                    class="w-full px-4 py-3 border border-smoke text-[14px] font-light"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div
-              class="flex items-center justify-between pt-5 border-t border-smoke"
-            >
-              <a
-                href="profil.html"
-                class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
-                >← Batal</a
-              >
-              <button
-                onclick="saveTab('kesehatan')"
-                class="bg-forest text-white text-[13px] font-semibold px-8 py-3 hover:bg-forest/85 transition-colors"
-              >
-                Simpan Perubahan
-              </button>
+                Pilih Foto
+                <input
+                  type="file"
+                  class="hidden"
+                  accept=".jpg,.jpeg,.png"
+                  id="avatarInput"
+                />
+              </label>
             </div>
           </div>
 
-          <!-- ── TAB: PASSWORD ── -->
-          <div id="tab-password" class="etab p-8">
-            <p
-              class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-1"
-            >
-              Keamanan
-            </p>
-            <h3
-              class="text-[22px] font-light text-ink mb-7"
-              style="letter-spacing: -0.3px"
-            >
-              Ubah <span class="italic">password</span>
-            </h3>
+          <!-- Nama: grid responsive -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4">
+            <div>
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >Nama Depan *</label
+              ><input type="text" id="firstName" value="Nafis" />
+              <p class="err-msg" id="errFn">Wajib diisi</p>
+            </div>
+            <div>
+              <label
+                class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                >Nama Belakang *</label
+              ><input type="text" id="lastName" value="Muyassar" />
+              <p class="err-msg" id="errLn">Wajib diisi</p>
+            </div>
+          </div>
 
-            <div class="max-w-[460px] space-y-5">
+          <div class="mb-4">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              >Email *</label
+            ><input type="email" id="email" value="nafis@email.com" />
+            <p class="err-msg" id="errEmail">Masukkan email yang valid</p>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              >No. WhatsApp *</label
+            ><input type="tel" id="phone" value="08123456789" />
+            <p class="err-msg" id="errPhone">Wajib diisi</p>
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              >Kota / Domisili</label
+            ><input type="text" id="city" value="Jakarta, Indonesia" />
+          </div>
+          <div class="mb-6">
+            <label
+              class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+              >Alamat Lengkap</label
+            ><textarea rows="3" id="address">
+Jl. Kebon Jeruk No. 123, Jakarta Barat</textarea
+            >
+          </div>
+
+          <!-- Password Change Section (grid responsive) -->
+          <div class="mb-8 border-t border-smoke pt-6">
+            <h4 class="text-[13px] font-semibold text-ink mb-4">
+              Ubah Kata Sandi
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Password Saat Ini *</label
+                  class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                  >Kata Sandi Baru</label
                 >
                 <div class="relative">
                   <input
                     type="password"
-                    id="pw-cur"
-                    placeholder="••••••••"
-                    class="w-full px-4 py-3 border border-smoke text-[14px] font-light pr-12"
-                  />
-                  <button
-                    type="button"
-                    onclick="togglePw('pw-cur', this)"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 text-light text-[13px] hover:text-mid"
-                  >
-                    👁
-                  </button>
-                </div>
-              </div>
-              <div>
-                <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Password Baru *</label
-                >
-                <div class="relative">
-                  <input
-                    type="password"
-                    id="pw-new"
+                    id="newPass"
                     placeholder="Min. 8 karakter"
-                    oninput="checkStr(this.value)"
-                    class="w-full px-4 py-3 border border-smoke text-[14px] font-light pr-12"
-                  />
-                  <button
+                  /><button
                     type="button"
-                    onclick="togglePw('pw-new', this)"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 text-light text-[13px] hover:text-mid"
+                    onclick="togglePass('newPass', 'eye1')"
+                    id="eye1"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-light hover:text-mid"
                   >
                     👁
                   </button>
                 </div>
-                <!-- Strength indicator -->
-                <div class="mt-2">
-                  <div class="flex gap-1 mb-1">
-                    <div class="str-bar flex-1 bg-smoke" id="sb1"></div>
-                    <div class="str-bar flex-1 bg-smoke" id="sb2"></div>
-                    <div class="str-bar flex-1 bg-smoke" id="sb3"></div>
-                    <div class="str-bar flex-1 bg-smoke" id="sb4"></div>
-                  </div>
-                  <p
-                    class="text-[11px] font-medium"
-                    id="str-lbl"
-                    style="color: #a8a8a4"
-                  >
-                    Masukkan password baru
-                  </p>
+                <div class="h-[2px] bg-smoke mt-2">
+                  <div
+                    id="strengthBar"
+                    class="h-full transition-all duration-300"
+                    style="width: 0; background: #ddd"
+                  ></div>
                 </div>
+                <p class="text-[11px] font-light text-light mt-1">
+                  Kekuatan:
+                  <span id="strengthLabel" class="font-medium">—</span>
+                </p>
+                <p class="err-msg" id="errPass">Minimal 8 karakter</p>
               </div>
               <div>
                 <label
-                  class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
-                  >Konfirmasi Password Baru *</label
+                  class="block text-[11px] font-semibold tracking-[0.12em] uppercase text-light mb-2"
+                  >Konfirmasi Sandi Baru</label
                 >
                 <div class="relative">
                   <input
                     type="password"
-                    id="pw-conf"
-                    placeholder="Ulangi password baru"
-                    oninput="checkConf()"
-                    class="w-full px-4 py-3 border border-smoke text-[14px] font-light pr-12"
-                  />
-                  <button
+                    id="confirmPass"
+                    placeholder="Ketik ulang"
+                  /><button
                     type="button"
-                    onclick="togglePw('pw-conf', this)"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 text-light text-[13px] hover:text-mid"
+                    onclick="togglePass('confirmPass', 'eye2')"
+                    id="eye2"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-light hover:text-mid"
                   >
                     👁
                   </button>
                 </div>
-                <p
-                  id="conf-ok"
-                  class="hidden text-[11px] font-medium text-green-600 mt-1"
-                >
-                  ✓ Password cocok
-                </p>
-                <p
-                  id="conf-err"
-                  class="hidden text-[11px] font-medium text-red-400 mt-1"
-                >
-                  ✕ Password tidak cocok
-                </p>
+                <p class="err-msg" id="errConfirm">Password tidak cocok</p>
               </div>
             </div>
-
-            <div id="err-pw" class="hidden text-[13px] text-red-400 mt-4 mb-0">
-              ⚠ Pastikan semua field terisi dan password cocok.
-            </div>
-            <div
-              class="flex items-center justify-between pt-7 mt-7 border-t border-smoke"
-            >
-              <a
-                href="profil.html"
-                class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
-                >← Batal</a
-              >
-              <button
-                onclick="savePw()"
-                class="bg-forest text-white text-[13px] font-semibold px-8 py-3 hover:bg-forest/85 transition-colors"
-              >
-                Ubah Password
-              </button>
-            </div>
-          </div>
-
-          <!-- ── TAB: NOTIFIKASI ── -->
-          <div id="tab-notif" class="etab p-8">
-            <p
-              class="text-[11px] font-semibold tracking-[.22em] uppercase text-tan mb-1"
-            >
-              Preferensi
+            <p class="text-[11px] font-light text-light mt-3">
+              Kosongkan jika tidak ingin mengubah kata sandi.
             </p>
-            <h3
-              class="text-[22px] font-light text-ink mb-7"
-              style="letter-spacing: -0.3px"
-            >
-              Pengaturan <span class="italic">notifikasi</span>
-            </h3>
-
-            <div class="space-y-0 divide-y divide-smoke">
-              <!-- Toggle item helper via function -->
-              <div class="py-5 flex items-start justify-between gap-6">
-                <div>
-                  <p class="text-[14px] font-medium text-ink mb-1">
-                    Konfirmasi Booking via Email
-                  </p>
-                  <p class="text-[12px] font-light text-mid">
-                    Email dikirim otomatis saat booking dikonfirmasi admin
-                  </p>
-                </div>
-                <label
-                  class="relative inline-flex items-center cursor-pointer mt-0.5 flex-shrink-0"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="sr-only peer"
-                    oninput="markDirty()"
-                  />
-                  <div
-                    class="w-11 h-6 bg-smoke peer-checked:bg-forest rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-all peer-checked:after:translate-x-5 relative"
-                  ></div>
-                </label>
-              </div>
-              <div class="py-5 flex items-start justify-between gap-6">
-                <div>
-                  <p class="text-[14px] font-medium text-ink mb-1">
-                    Invoice PDF via Email
-                  </p>
-                  <p class="text-[12px] font-light text-mid">
-                    Invoice otomatis dikirim ke email setelah pembayaran
-                    dikonfirmasi
-                  </p>
-                </div>
-                <label
-                  class="relative inline-flex items-center cursor-pointer mt-0.5 flex-shrink-0"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="sr-only peer"
-                    oninput="markDirty()"
-                  />
-                  <div
-                    class="w-11 h-6 bg-smoke peer-checked:bg-forest rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-all peer-checked:after:translate-x-5 relative"
-                  ></div>
-                </label>
-              </div>
-              <div class="py-5 flex items-start justify-between gap-6">
-                <div>
-                  <p class="text-[14px] font-medium text-ink mb-1">
-                    Update Status via WhatsApp
-                  </p>
-                  <p class="text-[12px] font-light text-mid">
-                    Notif WA saat status booking berubah (dikonfirmasi, lunas,
-                    dll)
-                  </p>
-                </div>
-                <label
-                  class="relative inline-flex items-center cursor-pointer mt-0.5 flex-shrink-0"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="sr-only peer"
-                    oninput="markDirty()"
-                  />
-                  <div
-                    class="w-11 h-6 bg-smoke peer-checked:bg-forest rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-all peer-checked:after:translate-x-5 relative"
-                  ></div>
-                </label>
-              </div>
-              <div class="py-5 flex items-start justify-between gap-6">
-                <div>
-                  <p class="text-[14px] font-medium text-ink mb-1">
-                    Pengingat Keberangkatan
-                  </p>
-                  <p class="text-[12px] font-light text-mid">
-                    WA reminder H-7 dan H-1 sebelum tanggal pendakian
-                  </p>
-                </div>
-                <label
-                  class="relative inline-flex items-center cursor-pointer mt-0.5 flex-shrink-0"
-                >
-                  <input
-                    type="checkbox"
-                    checked
-                    class="sr-only peer"
-                    oninput="markDirty()"
-                  />
-                  <div
-                    class="w-11 h-6 bg-smoke peer-checked:bg-forest rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-all peer-checked:after:translate-x-5 relative"
-                  ></div>
-                </label>
-              </div>
-              <div class="py-5 flex items-start justify-between gap-6">
-                <div>
-                  <p class="text-[14px] font-medium text-ink mb-1">
-                    Promo & Penawaran Spesial
-                  </p>
-                  <p class="text-[12px] font-light text-mid">
-                    Info diskon, jadwal open trip, dan penawaran eksklusif
-                    member
-                  </p>
-                </div>
-                <label
-                  class="relative inline-flex items-center cursor-pointer mt-0.5 flex-shrink-0"
-                >
-                  <input
-                    type="checkbox"
-                    class="sr-only peer"
-                    oninput="markDirty()"
-                  />
-                  <div
-                    class="w-11 h-6 bg-smoke peer-checked:bg-forest rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:w-5 after:h-5 after:rounded-full after:transition-all peer-checked:after:translate-x-5 relative"
-                  ></div>
-                </label>
-              </div>
-            </div>
-
-            <div
-              class="flex items-center justify-between pt-6 border-t border-smoke mt-2"
-            >
-              <a
-                href="profil.html"
-                class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
-                >← Batal</a
-              >
-              <button
-                onclick="saveTab('notif')"
-                class="bg-forest text-white text-[13px] font-semibold px-8 py-3 hover:bg-forest/85 transition-colors"
-              >
-                Simpan Pengaturan
-              </button>
-            </div>
           </div>
-        </div>
+
+          <div class="flex flex-wrap gap-3">
+            <button
+              type="submit"
+              class="bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
+            >
+              Simpan Perubahan
+            </button>
+            <a
+              href="profil.html"
+              class="border border-smoke text-mid text-[13px] font-medium px-8 py-3.5 hover:bg-mist transition-colors"
+              >Batal</a
+            >
+          </div>
+        </form>
       </div>
     </div>
 
-    <!-- TOAST -->
-    <div
-      id="toast"
-      class="fixed bottom-8 left-1/2 -translate-x-1/2 z-[999] bg-forest text-white text-[13px] font-semibold px-7 py-3.5 shadow-xl flex items-center gap-3 pointer-events-none"
-    >
-      <span>✅</span><span id="toast-msg">Perubahan berhasil disimpan!</span>
-    </div>
+    <!-- Toast -->
+    <div id="toast" class="success-toast">✅ Profil berhasil diperbarui!</div>
 
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-smoke py-8 px-8 mt-4">
+    <footer class="bg-white border-t border-smoke py-10 px-6 sm:px-8 mt-8">
       <div
-        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-4"
+        class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
       >
-        <a href="index.html" class="inline-block">
-          <img
-            src="images/loegoe.png"
+        <a href="index.html" class="inline-block"
+          ><img
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
-          />
-        </a>
+        /></a>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+          <a
+            href="index.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Kontak</a
+          >
+        </div>
         <p class="text-[12px] font-light text-light">
           Dibuat dengan ❤️ dari Lombok
         </p>
       </div>
     </footer>
+
     <a
       href="https://wa.me/628123456789"
       target="_blank"
@@ -1004,114 +511,200 @@
     >
 
     <script>
-      let isDirty = false;
-      function markDirty() {
-        isDirty = true;
-        document.getElementById("udot").style.display = "inline-block";
-        document.getElementById("utxt").style.display = "inline";
-      }
-      function showTab(id) {
-        document
-          .querySelectorAll(".etab")
-          .forEach((t) => t.classList.remove("active"));
-        document
-          .querySelectorAll(".etbtn")
-          .forEach((b) => b.classList.remove("on", "text-ink"));
-        document.getElementById("tab-" + id).classList.add("active");
-        const btn = document.getElementById("t-" + id);
-        btn.classList.add("on");
-        btn.classList.remove("text-mid");
-      }
-      function showToast(msg) {
-        const t = document.getElementById("toast");
-        document.getElementById("toast-msg").textContent =
-          msg || "Perubahan berhasil disimpan!";
-        t.classList.add("show");
-        setTimeout(() => t.classList.remove("show"), 3000);
-      }
-      function saveTab(tab) {
-        isDirty = false;
-        document.getElementById("udot").style.display = "none";
-        document.getElementById("utxt").style.display = "none";
-        showToast("Data " + tab + " berhasil disimpan!");
-      }
-      function savePw() {
-        const c = document.getElementById("pw-cur").value;
-        const n = document.getElementById("pw-new").value;
-        const cf = document.getElementById("pw-conf").value;
-        const err = document.getElementById("err-pw");
-        if (!c || !n || n !== cf) {
-          err.classList.remove("hidden");
-          return;
+      // Password strength
+      const newPass = document.getElementById("newPass");
+      const strengthBar = document.getElementById("strengthBar");
+      const strengthLabel = document.getElementById("strengthLabel");
+
+      newPass.addEventListener("input", function () {
+        const val = this.value;
+        const len = val.length;
+        if (!len) {
+          strengthBar.style.width = "0";
+          strengthBar.style.background = "#ddd";
+          strengthLabel.textContent = "—";
+          strengthLabel.style.color = "#A8A8A4";
+        } else if (len < 6) {
+          strengthBar.style.width = "25%";
+          strengthBar.style.background = "#ef4444";
+          strengthLabel.textContent = "Lemah";
+          strengthLabel.style.color = "#ef4444";
+        } else if (len < 10) {
+          strengthBar.style.width = "60%";
+          strengthBar.style.background = "#C4A882";
+          strengthLabel.textContent = "Sedang";
+          strengthLabel.style.color = "#C4A882";
+        } else {
+          strengthBar.style.width = "100%";
+          strengthBar.style.background = "#1B3A2D";
+          strengthLabel.textContent = "Kuat";
+          strengthLabel.style.color = "#1B3A2D";
         }
-        err.classList.add("hidden");
-        showToast("Password berhasil diubah!");
-        document.getElementById("pw-cur").value = "";
-        document.getElementById("pw-new").value = "";
-        document.getElementById("pw-conf").value = "";
-        document.getElementById("conf-ok").classList.add("hidden");
-        resetStr();
+      });
+
+      function togglePass(inputId, btnId) {
+        const input = document.getElementById(inputId);
+        const btn = document.getElementById(btnId);
+        if (input.type === "password") {
+          input.type = "text";
+          btn.textContent = "🙈";
+        } else {
+          input.type = "password";
+          btn.textContent = "👁";
+        }
       }
-      function togglePw(id, btn) {
-        const i = document.getElementById(id);
-        i.type = i.type === "password" ? "text" : "password";
-        btn.textContent = i.type === "password" ? "👁" : "🙈";
+
+      function validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       }
-      function checkStr(v) {
-        let s = 0;
-        if (v.length >= 8) s++;
-        if (/[A-Z]/.test(v)) s++;
-        if (/[0-9]/.test(v)) s++;
-        if (/[^a-zA-Z0-9]/.test(v)) s++;
-        const bars = ["sb1", "sb2", "sb3", "sb4"];
-        const colors = ["#ef4444", "#f59e0b", "#84cc16", "#22c55e"];
-        const labels = ["Sangat lemah", "Lemah", "Cukup kuat", "Kuat"];
-        bars.forEach((b, i) => {
-          const el = document.getElementById(b);
-          el.style.background = i < s ? colors[s - 1] : "#EFEFEC";
-        });
-        const lbl = document.getElementById("str-lbl");
-        lbl.textContent =
-          v.length === 0
-            ? "Masukkan password baru"
-            : labels[s - 1] || "Sangat lemah";
-        lbl.style.color =
-          v.length === 0 ? "#A8A8A4" : colors[s - 1] || "#ef4444";
+
+      function handleSubmit(e) {
+        e.preventDefault();
+
+        let isValid = true;
+
+        const fn = document.getElementById("firstName");
+        const ln = document.getElementById("lastName");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const newPw = document.getElementById("newPass").value;
+        const confirmPw = document.getElementById("confirmPass").value;
+
+        // Validate name
+        if (!fn.value.trim()) {
+          document.getElementById("errFn").classList.add("show");
+          fn.classList.add("!border-red-300");
+          isValid = false;
+        } else {
+          document.getElementById("errFn").classList.remove("show");
+          fn.classList.remove("!border-red-300");
+        }
+
+        if (!ln.value.trim()) {
+          document.getElementById("errLn").classList.add("show");
+          ln.classList.add("!border-red-300");
+          isValid = false;
+        } else {
+          document.getElementById("errLn").classList.remove("show");
+          ln.classList.remove("!border-red-300");
+        }
+
+        // Validate email
+        if (!validateEmail(email.value.trim())) {
+          document.getElementById("errEmail").classList.add("show");
+          email.classList.add("!border-red-300");
+          isValid = false;
+        } else {
+          document.getElementById("errEmail").classList.remove("show");
+          email.classList.remove("!border-red-300");
+        }
+
+        // Validate phone
+        if (!phone.value.trim()) {
+          document.getElementById("errPhone").classList.add("show");
+          phone.classList.add("!border-red-300");
+          isValid = false;
+        } else {
+          document.getElementById("errPhone").classList.remove("show");
+          phone.classList.remove("!border-red-300");
+        }
+
+        // Validate password if changed
+        if (newPw || confirmPw) {
+          if (newPw.length < 8) {
+            document.getElementById("errPass").classList.add("show");
+            document.getElementById("newPass").classList.add("!border-red-300");
+            isValid = false;
+          } else {
+            document.getElementById("errPass").classList.remove("show");
+            document
+              .getElementById("newPass")
+              .classList.remove("!border-red-300");
+          }
+
+          if (newPw !== confirmPw) {
+            document.getElementById("errConfirm").classList.add("show");
+            document
+              .getElementById("confirmPass")
+              .classList.add("!border-red-300");
+            isValid = false;
+          } else {
+            document.getElementById("errConfirm").classList.remove("show");
+            document
+              .getElementById("confirmPass")
+              .classList.remove("!border-red-300");
+          }
+        }
+
+        if (!isValid) return false;
+
+        // Show toast and redirect
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          window.location.href = "profil.html";
+        }, 1500);
+
+        return false;
       }
-      function resetStr() {
-        ["sb1", "sb2", "sb3", "sb4"].forEach(
-          (b) => (document.getElementById(b).style.background = "#EFEFEC"),
-        );
-        const l = document.getElementById("str-lbl");
-        l.textContent = "Masukkan password baru";
-        l.style.color = "#A8A8A4";
+
+      // Mobile menu toggle & active page highlight
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        mobileMenu.classList.add("open");
+        menuOverlay.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
       }
-      function checkConf() {
-        const n = document.getElementById("pw-new").value;
-        const c = document.getElementById("pw-conf").value;
-        document
-          .getElementById("conf-ok")
-          .classList.toggle("hidden", n !== c || !c);
-        document
-          .getElementById("conf-err")
-          .classList.toggle("hidden", n === c || !c);
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
       }
-      function prevAv(inp) {
-        if (!inp.files[0]) return;
-        const r = new FileReader();
-        r.onload = (ev) => {
-          const el = document.getElementById("avatar-preview");
-          el.innerHTML = `<img src="${ev.target.result}" class="w-full h-full object-cover" />`;
-        };
-        r.readAsDataURL(inp.files[0]);
-      }
-      // Check hash on load (e.g., edit-profil.html#password)
-      if (window.location.hash === "#password") showTab("password");
-      // Warn on unsaved changes
-      window.addEventListener("beforeunload", (e) => {
-        if (isDirty) {
-          e.preventDefault();
-          e.returnValue = "";
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+      closeMenuBtn.addEventListener("click", closeMenu);
+      menuOverlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open"))
+          closeMenu();
+      });
+
+      const currentPath =
+        window.location.pathname.split("/").pop() || "index.html";
+      const mobileLinks = document.querySelectorAll(
+        "#mobileMenu .flex.flex-col a",
+      );
+      mobileLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        // Untuk "Profil Saya", anggap aktif jika berada di profil.html atau edit-profil.html
+        if (
+          href === "profil.html" &&
+          (currentPath === "profil.html" || currentPath === "edit-profil.html")
+        ) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else if (href === currentPath) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else {
+          link.classList.remove("font-semibold", "text-forest");
+          if (!link.classList.contains("text-ink"))
+            link.classList.add("font-medium", "text-mid");
+          link.style.borderLeft = "";
+          link.style.paddingLeft = "";
         }
       });
     </script>
