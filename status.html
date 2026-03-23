@@ -30,18 +30,16 @@
       };
     </script>
     <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
       body {
         font-family: "Plus Jakarta Sans", sans-serif;
-        -webkit-font-smoothing: antialiased;
         background: #f7f6f3;
         color: #1a1a1a;
+        overflow-x: hidden;
       }
       ::-webkit-scrollbar {
         width: 4px;
@@ -120,10 +118,6 @@
         border: none;
         box-shadow: none;
       }
-      input[type="range"]:focus {
-        border-color: transparent;
-        box-shadow: none;
-      }
       input[type="range"]::-webkit-slider-thumb {
         -webkit-appearance: none;
         width: 18px;
@@ -132,58 +126,204 @@
         background: #1b3a2d;
         cursor: pointer;
       }
+
+      /* Mobile menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: white;
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        right: 0;
+      }
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        background: transparent;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #6b6b6b;
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: absolute;
+      }
+      .hamburger span:nth-child(1) {
+        transform: translateY(-6px);
+      }
+      .hamburger span:nth-child(2) {
+        transform: translateY(0);
+      }
+      .hamburger span:nth-child(3) {
+        transform: translateY(6px);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
+      }
     </style>
   </head>
   <body>
+    <!-- NAVBAR RESPONSIF -->
     <nav
       class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
     >
       <div
-        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+        class="max-w-[1280px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between"
       >
         <a href="index.html" class="inline-block">
           <img
-            src="images/loegoe.png"
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
           />
         </a>
-        <div class="flex items-center gap-2">
+        <div class="hidden md:flex items-center gap-9">
           <a
             href="index.html"
-            class="text-[12px] font-medium text-mid hover:text-ink transition-colors px-3 py-2"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
             >Beranda</a
           >
           <a
             href="paket.html"
-            class="text-[12px] font-medium text-mid hover:text-ink transition-colors px-3 py-2"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
             >Paket</a
           >
           <a
-            href="booking.html"
-            class="text-[12px] font-semibold text-forest hover:text-forest/70 px-3 py-2"
-            >+ Booking Baru</a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Kontak</a
           >
         </div>
         <div class="flex items-center gap-3">
           <div
-            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest"
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
           >
             N
           </div>
-          <span class="text-[13px] font-medium text-ink">Nafis Muyassar</span>
-          <div class="w-px h-4 bg-smoke ml-1"></div>
           <a
-            href="index.html"
-            class="text-[12px] font-medium text-mid hover:text-red-400 transition-colors"
-            >Keluar</a
+            href="profil.html"
+            class="hidden sm:inline-block text-[13px] font-semibold text-forest"
+            >Nafis Muyassar</a
           >
+          <a
+            href="status.html"
+            class="hidden sm:inline-block text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+          <button
+            id="hamburgerBtn"
+            class="md:hidden hamburger"
+            aria-label="Menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </div>
     </nav>
 
-    <div class="bg-white border-b border-smoke pt-10 pb-10 px-8">
-      <div class="max-w-[1280px] mx-auto flex items-end justify-between">
+    <!-- Mobile Menu (slide-in) -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="p-6 border-b border-smoke flex justify-between items-center">
+        <span class="text-[18px] font-semibold text-ink">Menu</span>
+        <button id="closeMenuBtn" class="text-2xl text-mid hover:text-ink">
+          &times;
+        </button>
+      </div>
+      <div class="flex flex-col p-6 gap-5">
+        <a
+          href="index.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Beranda</a
+        >
+        <a
+          href="paket.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Paket</a
+        >
+        <a
+          href="rute.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Rute</a
+        >
+        <a
+          href="galeri.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Galeri</a
+        >
+        <a
+          href="kontak.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Kontak</a
+        >
+        <div class="pt-4">
+          <a
+            href="profil.html"
+            class="block w-full text-center bg-forest/10 text-forest text-[13px] font-semibold py-3 mb-3 hover:bg-forest/20 transition-colors rounded-none"
+            >Profil Saya</a
+          >
+          <a
+            href="status.html"
+            class="block w-full text-center bg-forest text-white text-[13px] font-semibold py-3 rounded-none hover:bg-forest/90 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <div class="bg-white border-b border-smoke pt-10 pb-10 px-6 sm:px-8">
+      <div
+        class="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4"
+      >
         <div>
           <p
             class="text-[11px] font-semibold tracking-[0.24em] uppercase text-tan mb-3"
@@ -202,17 +342,19 @@
         </div>
         <a
           href="booking.html"
-          class="bg-forest text-white text-[13px] font-semibold px-7 py-3 hover:bg-forest/85 transition-colors mb-1"
+          class="bg-forest text-white text-[13px] font-semibold px-7 py-3 hover:bg-forest/85 transition-colors whitespace-nowrap"
           >+ Booking Baru</a
         >
       </div>
     </div>
 
     <div
-      class="max-w-[1280px] mx-auto px-8 py-10 grid grid-cols-[1fr_300px] gap-8 items-start"
+      class="max-w-[1280px] mx-auto px-6 sm:px-8 py-10 grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 items-start"
     >
       <div>
-        <div class="flex items-center justify-between mb-5">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center justify-between mb-5 gap-3"
+        >
           <h2 class="text-[14px] font-semibold text-ink">Riwayat Booking</h2>
           <select
             onchange="filterBK(this.value)"
@@ -224,31 +366,35 @@
             <option value="done">Selesai</option>
           </select>
         </div>
-
         <div class="space-y-4" id="bk-list">
+          <!-- DT-4 Confirmed -->
           <div
             class="bcard bg-white border border-smoke overflow-hidden"
             data-st="confirmed"
           >
             <div
-              class="flex items-center justify-between px-6 py-4 border-b border-smoke"
+              class="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-smoke gap-2"
             >
               <div>
                 <div class="text-[14px] font-semibold text-ink">
-                  #BK-0042 · Paket Deluxe 3D2N
+                  #DT-4 · Paket Deluxe 3D2N
                 </div>
                 <div class="text-[11px] font-light text-light mt-0.5">
                   Dipesan 10 Mar 2025 · Via Sembalun → Senaru
                 </div>
               </div>
               <span
-                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-forest/8 text-forest border border-forest/15 px-3 py-1.5"
+                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-forest/8 text-forest border border-forest/15 px-3 py-1.5 self-start sm:self-center"
                 >✓ Confirmed</span
               >
             </div>
             <div class="p-6">
-              <div class="grid grid-cols-3 border border-smoke mb-2">
-                <div class="p-4 border-r border-smoke">
+              <div
+                class="grid grid-cols-1 sm:grid-cols-3 border border-smoke mb-2"
+              >
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
@@ -258,7 +404,9 @@
                     15 Apr 2025
                   </div>
                 </div>
-                <div class="p-4 border-r border-smoke">
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
@@ -277,8 +425,12 @@
                   </div>
                 </div>
               </div>
-              <div class="grid grid-cols-3 border border-smoke border-t-0 mb-6">
-                <div class="p-4 border-r border-smoke">
+              <div
+                class="grid grid-cols-1 sm:grid-cols-3 border border-smoke border-t-0 mb-6"
+              >
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
@@ -286,15 +438,18 @@
                   </div>
                   <div class="text-[14px] font-semibold text-ink">USD 840</div>
                 </div>
-                <div class="p-4 border-r border-smoke">
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
                     Sudah Dibayar
                   </div>
                   <div class="text-[14px] font-semibold text-forest">
-                    USD 252
-                    <span class="text-[10px] font-light text-light">(30%)</span>
+                    USD 168<span class="text-[10px] font-light text-light"
+                      >(20%)</span
+                    >
                   </div>
                 </div>
                 <div class="p-4">
@@ -304,11 +459,10 @@
                     Sisa Pelunasan
                   </div>
                   <div class="text-[14px] font-semibold text-amber-500">
-                    USD 588
+                    USD 672
                   </div>
                 </div>
               </div>
-
               <div class="mb-6">
                 <p
                   class="text-[10px] font-semibold tracking-[0.18em] uppercase text-light mb-4"
@@ -339,7 +493,7 @@
                     </div>
                     <div class="pt-0.5">
                       <div class="text-[13px] font-semibold text-ink">
-                        DP 30% dikonfirmasi (USD 252)
+                        DP 20% dikonfirmasi (USD 168)
                       </div>
                       <div class="text-[11px] font-light text-light mt-0.5">
                         10 Mar 2025 · 15.10 WIB
@@ -392,8 +546,7 @@
                   </div>
                 </div>
               </div>
-
-              <div class="flex gap-3 flex-wrap">
+              <div class="flex flex-wrap gap-3">
                 <button
                   onclick="openModal('bayar')"
                   class="bg-amber-500 text-white text-[12px] font-semibold px-6 py-2.5 hover:bg-amber-600 transition-colors"
@@ -401,12 +554,12 @@
                   Bayar Sisa / Tambah Bayar
                 </button>
                 <a
-                  href="detail-booking.html"
+                  href="detail-booking.html?id=DT-4"
                   class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
                   >Lihat Detail</a
                 >
                 <a
-                  href="invoice.html"
+                  href="invoice.html?id=DT-4"
                   class="border border-smoke text-ink text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
                   >📄 Lihat Invoice</a
                 >
@@ -420,29 +573,34 @@
             </div>
           </div>
 
+          <!-- DT-3 Pending -->
           <div
             class="bcard bg-white border border-smoke overflow-hidden"
             data-st="pending"
           >
             <div
-              class="flex items-center justify-between px-6 py-4 border-b border-smoke"
+              class="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-smoke gap-2"
             >
               <div>
                 <div class="text-[14px] font-semibold text-ink">
-                  #BK-0038 · Paket Standard 2D1N
+                  #DT-3 · Paket Standard 2D1N
                 </div>
                 <div class="text-[11px] font-light text-light mt-0.5">
                   Dipesan 5 Mar 2025 · Via Senaru
                 </div>
               </div>
               <span
-                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-amber-50 text-amber-600 border border-amber-200 px-3 py-1.5"
+                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-amber-50 text-amber-600 border border-amber-200 px-3 py-1.5 self-start sm:self-center"
                 >⏳ Pending</span
               >
             </div>
             <div class="p-6">
-              <div class="grid grid-cols-3 border border-smoke mb-5">
-                <div class="p-4 border-r border-smoke">
+              <div
+                class="grid grid-cols-1 sm:grid-cols-3 border border-smoke mb-5"
+              >
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
@@ -450,7 +608,9 @@
                   </div>
                   <div class="text-[14px] font-semibold">20 Apr 2025</div>
                 </div>
-                <div class="p-4 border-r border-smoke">
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
@@ -473,9 +633,9 @@
                   WhatsApp & email dalam <strong>1×24 jam</strong>.
                 </p>
               </div>
-              <div class="flex gap-3">
+              <div class="flex flex-wrap gap-3">
                 <a
-                  href="detail-booking.html"
+                  href="detail-booking.html?id=DT-3"
                   class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
                   >Lihat Detail</a
                 >
@@ -496,29 +656,34 @@
             </div>
           </div>
 
+          <!-- DT-2 Selesai -->
           <div
             class="bcard bg-white border border-smoke overflow-hidden"
             data-st="done"
           >
             <div
-              class="flex items-center justify-between px-6 py-4 border-b border-smoke"
+              class="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-smoke gap-2"
             >
               <div>
                 <div class="text-[14px] font-semibold text-ink">
-                  #BK-0031 · Paket Standard 4D3N
+                  #DT-2 · Paket Standard 4D3N
                 </div>
                 <div class="text-[11px] font-light text-light mt-0.5">
                   Dipesan 5 Nov 2024 · Via Sembalun → Senaru
                 </div>
               </div>
               <span
-                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-smoke text-mid border border-smoke px-3 py-1.5"
+                class="text-[10px] font-semibold tracking-[0.12em] uppercase bg-smoke text-mid border border-smoke px-3 py-1.5 self-start sm:self-center"
                 >✓ Selesai</span
               >
             </div>
             <div class="p-6">
-              <div class="grid grid-cols-3 border border-smoke mb-5">
-                <div class="p-4 border-r border-smoke">
+              <div
+                class="grid grid-cols-1 sm:grid-cols-3 border border-smoke mb-5"
+              >
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
@@ -526,7 +691,9 @@
                   </div>
                   <div class="text-[14px] font-semibold">10 Nov 2024</div>
                 </div>
-                <div class="p-4 border-r border-smoke">
+                <div
+                  class="p-4 border-b sm:border-b-0 sm:border-r border-smoke"
+                >
                   <div
                     class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
                   >
@@ -545,9 +712,9 @@
                   </div>
                 </div>
               </div>
-              <div class="flex gap-3">
+              <div class="flex flex-wrap gap-3">
                 <a
-                  href="detail-booking.html"
+                  href="detail-booking.html?id=DT-2"
                   class="border border-smoke text-mid text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
                   >Lihat Detail</a
                 >
@@ -558,7 +725,7 @@
                   ⭐ Beri Ulasan
                 </button>
                 <a
-                  href="invoice.html"
+                  href="invoice.html?id=DT-2"
                   class="border border-smoke text-ink text-[12px] font-medium px-6 py-2.5 hover:bg-mist transition-all"
                   >📄 Lihat Invoice</a
                 >
@@ -601,14 +768,13 @@
             Sisa Pembayaran
           </h3>
           <p class="text-[12px] font-light text-mid mb-3 leading-[1.75]">
-            Booking <strong>#BK-0042</strong> perlu dilunasi sebelum 12 April
-            2025
+            Booking <strong>#DT-4</strong> perlu dilunasi sebelum 12 April 2025
           </p>
           <div
             class="text-[28px] font-light text-forest mb-4"
             style="letter-spacing: -0.5px"
           >
-            USD 588
+            USD 672
           </div>
           <button
             onclick="openModal('bayar')"
@@ -683,7 +849,7 @@
           </div>
           <div class="bg-mist p-4 mb-5 border border-smoke">
             <div class="text-[12px] font-light text-mid mb-1">
-              #BK-0042 · Paket Deluxe 3D2N · 15 Apr 2025
+              #DT-4 · Paket Deluxe 3D2N · 15 Apr 2025
             </div>
             <div class="flex justify-between text-[13px] mt-2">
               <span class="font-light text-mid">Total</span
@@ -691,14 +857,14 @@
             </div>
             <div class="flex justify-between text-[13px] mt-1">
               <span class="font-light text-mid">Sudah dibayar</span
-              ><span class="font-semibold text-forest">USD 252</span>
+              ><span class="font-semibold text-forest">USD 168</span>
             </div>
             <div
               class="flex justify-between text-[13px] mt-1 pt-2 border-t border-smoke"
             >
               <span class="font-semibold text-ink">Sisa</span
               ><span class="font-semibold text-amber-600 text-[16px]"
-                >USD 588</span
+                >USD 672</span
               >
             </div>
           </div>
@@ -709,16 +875,15 @@
             >
             <div class="grid grid-cols-2 gap-2 mb-3">
               <button
-                onclick="setBayarAmt(294)"
+                onclick="setBayarAmt(336)"
                 class="border border-smoke text-[12px] font-medium py-2.5 hover:border-forest hover:text-forest transition-all text-mid"
               >
-                USD 294 (50% sisa)
-              </button>
-              <button
-                onclick="setBayarAmt(588)"
+                USD 336 (50% sisa)</button
+              ><button
+                onclick="setBayarAmt(672)"
                 class="border border-smoke text-[12px] font-medium py-2.5 hover:border-forest hover:text-forest transition-all text-mid"
               >
-                USD 588 (Lunas)
+                USD 672 (Lunas)
               </button>
             </div>
             <div class="flex items-center gap-3">
@@ -729,13 +894,12 @@
                 <span
                   class="absolute left-3 top-1/2 -translate-y-1/2 text-[12px] font-medium text-mid"
                   >USD</span
-                >
-                <input
+                ><input
                   type="number"
                   id="bayar-input"
-                  value="588"
+                  value="672"
                   min="1"
-                  max="588"
+                  max="672"
                   class="pl-10 pr-3 py-2.5 text-[13px]"
                 />
               </div>
@@ -745,8 +909,7 @@
             <label
               class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
               >Rekening Tujuan</label
-            >
-            <select>
+            ><select>
               <option>BCA — 1234567890 (Porter Rinjani)</option>
               <option>BRI — 0987654321 (Porter Rinjani)</option>
               <option>Mandiri — 1122334455 (Porter Rinjani)</option>
@@ -782,7 +945,6 @@
             Kirim Bukti Pembayaran
           </button>
         </div>
-
         <div id="m-ulasan" class="p-8 hidden">
           <div class="flex justify-between items-center mb-5">
             <h3
@@ -799,7 +961,7 @@
             </button>
           </div>
           <div class="text-[12px] font-light text-mid mb-6">
-            #BK-0031 · Paket Standard 4D3N · Nov 2024
+            #DT-2 · Paket Standard 4D3N · Nov 2024
           </div>
           <div class="mb-5">
             <label
@@ -811,27 +973,23 @@
                 class="star text-[28px] text-smoke hover:text-tan transition-colors"
                 onclick="setStar(1)"
               >
-                ★
-              </button>
-              <button
+                ★</button
+              ><button
                 class="star text-[28px] text-smoke hover:text-tan transition-colors"
                 onclick="setStar(2)"
               >
-                ★
-              </button>
-              <button
+                ★</button
+              ><button
                 class="star text-[28px] text-smoke hover:text-tan transition-colors"
                 onclick="setStar(3)"
               >
-                ★
-              </button>
-              <button
+                ★</button
+              ><button
                 class="star text-[28px] text-smoke hover:text-tan transition-colors"
                 onclick="setStar(4)"
               >
-                ★
-              </button>
-              <button
+                ★</button
+              ><button
                 class="star text-[28px] text-smoke hover:text-tan transition-colors"
                 onclick="setStar(5)"
               >
@@ -846,8 +1004,7 @@
             <label
               class="block text-[11px] font-semibold tracking-[.12em] uppercase text-light mb-2"
               >Ceritakan Pengalaman Anda *</label
-            >
-            <textarea
+            ><textarea
               rows="4"
               class="w-full px-4 py-3 border border-smoke text-[14px] font-light resize-none"
               placeholder="Ceritakan pengalaman pendakian Anda..."
@@ -907,6 +1064,56 @@
       function setBayarAmt(amt) {
         document.getElementById("bayar-input").value = amt;
       }
+
+      // Mobile menu toggle & active page highlight
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        mobileMenu.classList.add("open");
+        menuOverlay.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+      closeMenuBtn.addEventListener("click", closeMenu);
+      menuOverlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open"))
+          closeMenu();
+      });
+
+      const currentPath =
+        window.location.pathname.split("/").pop() || "index.html";
+      const mobileLinks = document.querySelectorAll(
+        "#mobileMenu .flex.flex-col a",
+      );
+      mobileLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === currentPath) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else {
+          link.classList.remove("font-semibold", "text-forest");
+          if (!link.classList.contains("text-ink"))
+            link.classList.add("font-medium", "text-mid");
+          link.style.borderLeft = "";
+          link.style.paddingLeft = "";
+        }
+      });
     </script>
   </body>
 </html>
