@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Invoice #BK-0042 — Porter Rinjani</title>
+    <title>Invoice #DT-4 — Porter Rinjani</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap"
       rel="stylesheet"
@@ -30,18 +30,16 @@
       };
     </script>
     <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
+      * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
       body {
         font-family: "Plus Jakarta Sans", sans-serif;
-        -webkit-font-smoothing: antialiased;
         background: #f7f6f3;
         color: #1a1a1a;
+        overflow-x: hidden;
       }
       ::-webkit-scrollbar {
         width: 4px;
@@ -49,11 +47,9 @@
       ::-webkit-scrollbar-thumb {
         background: #ddd;
       }
-
-      /* Area cetak / Simpan PDF */
       @media print {
         body {
-          background: #fff !important;
+          background: #fff;
         }
         .no-print {
           display: none !important;
@@ -63,47 +59,289 @@
           border: none !important;
         }
         @page {
-          margin: 14mm;
+          margin: 1.5cm;
           size: A4;
         }
+        .print-page-break {
+          page-break-before: always;
+        }
+        /* Prevent orphan content within blocks */
+        .invoice-section {
+          page-break-inside: avoid;
+        }
+        /* Ensure the table doesn't break badly */
+        table {
+          page-break-inside: auto;
+        }
+        tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+        }
+      }
+
+      /* Mobile menu (sama seperti sebelumnya) */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: white;
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        right: 0;
+      }
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        background: transparent;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #6b6b6b;
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: absolute;
+      }
+      .hamburger span:nth-child(1) {
+        transform: translateY(-6px);
+      }
+      .hamburger span:nth-child(2) {
+        transform: translateY(0);
+      }
+      .hamburger span:nth-child(3) {
+        transform: translateY(6px);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
       }
     </style>
   </head>
   <body>
+    <!-- NAVBAR (tidak dicetak) -->
+    <nav
+      class="no-print sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
+    >
+      <div
+        class="max-w-[1280px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between"
+      >
+        <a href="index.html" class="inline-block">
+          <img
+            src="/images/loegoe.png"
+            alt="Porter Rinjani"
+            class="h-[35px] w-auto"
+          />
+        </a>
+        <div class="hidden md:flex items-center gap-9">
+          <a
+            href="index.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Beranda</a
+          >
+          <a
+            href="paket.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Paket</a
+          >
+          <a
+            href="rute.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Rute</a
+          >
+          <a
+            href="galeri.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
+            >Kontak</a
+          >
+        </div>
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 rounded-full bg-forest/10 flex items-center justify-center text-[11px] font-bold text-forest cursor-pointer"
+            onclick="window.location = 'profil.html'"
+          >
+            N
+          </div>
+          <a
+            href="profil.html"
+            class="hidden sm:inline-block text-[13px] font-semibold text-forest"
+            >Nafis Muyassar</a
+          >
+          <a
+            href="status.html"
+            class="hidden sm:inline-block text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+          <button
+            id="hamburgerBtn"
+            class="md:hidden hamburger"
+            aria-label="Menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu (tidak dicetak) -->
+    <div id="mobileMenu" class="mobile-menu no-print">
+      <div class="p-6 border-b border-smoke flex justify-between items-center">
+        <span class="text-[18px] font-semibold text-ink">Menu</span>
+        <button id="closeMenuBtn" class="text-2xl text-mid hover:text-ink">
+          &times;
+        </button>
+      </div>
+      <div class="flex flex-col p-6 gap-5">
+        <a
+          href="index.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Beranda</a
+        >
+        <a
+          href="paket.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Paket</a
+        >
+        <a
+          href="rute.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Rute</a
+        >
+        <a
+          href="galeri.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Galeri</a
+        >
+        <a
+          href="kontak.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Kontak</a
+        >
+        <div class="pt-4">
+          <a
+            href="profil.html"
+            class="block w-full text-center bg-forest/10 text-forest text-[13px] font-semibold py-3 mb-3 hover:bg-forest/20 transition-colors rounded-none"
+            >Profil Saya</a
+          >
+          <a
+            href="status.html"
+            class="block w-full text-center bg-forest text-white text-[13px] font-semibold py-3 rounded-none hover:bg-forest/90 transition-colors"
+            >Status Booking</a
+          >
+        </div>
+      </div>
+    </div>
+    <div id="menuOverlay" class="menu-overlay no-print"></div>
+
+    <!-- Invoice Header (print top bar) -->
     <div
-      class="no-print sticky top-0 z-50 h-[60px] bg-white border-b border-smoke flex items-center px-6 justify-between"
+      class="no-print sticky top-[68px] z-40 bg-white border-b border-smoke flex items-center justify-between px-4 sm:px-6 py-3"
     >
       <button
         onclick="history.back()"
-        class="flex items-center gap-1.5 text-[12px] font-medium text-mid hover:text-ink transition-colors"
+        class="flex items-center justify-center w-8 h-8 text-mid hover:text-ink transition-colors"
+        aria-label="Kembali"
       >
-        ← Kembali
-      </button>
-      <div class="text-[16px] font-semibold text-ink">
-        Porter <span class="font-light text-mid">Rinjani</span>
-        <span class="text-[12px] font-light text-light ml-1">— Invoice</span>
-      </div>
-      <div class="flex gap-2">
-        <button
-          onclick="window.print()"
-          class="flex items-center gap-1.5 bg-forest text-white text-[12px] font-semibold px-5 py-2 hover:bg-forest/85 transition-colors"
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
         >
-          🖨 Cetak / Simpan PDF
-        </button>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+      </button>
+      <div class="flex-1 flex justify-center">
+        <img
+          src="/images/loegoe.png"
+          alt="Porter Rinjani"
+          class="h-[32px] sm:h-[35px] w-auto"
+        />
       </div>
+      <button
+        onclick="window.print()"
+        class="flex items-center justify-center w-8 h-8 text-mid hover:text-forest transition-colors"
+        aria-label="Cetak / Simpan PDF"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"
+          />
+        </svg>
+      </button>
     </div>
 
-    <div class="max-w-[800px] mx-auto px-5 py-8">
+    <div class="max-w-[800px] mx-auto px-4 sm:px-5 py-8">
       <div
         class="invoice-card bg-white shadow-sm border border-smoke"
         id="invoice"
       >
-        <div class="p-10 border-b border-smoke">
-          <div class="flex items-start justify-between mb-8">
+        <!-- ========== HALAMAN 1 ========== -->
+        <!-- Header Perusahaan & Invoice -->
+        <div class="p-5 sm:p-10 border-b border-smoke">
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+          >
             <div>
-              <div class="text-[22px] font-semibold text-ink mb-1">
-                Porter <span class="font-light text-mid">Rinjani</span>
-              </div>
+              <img
+                src="/images/loegoe.png"
+                alt="Porter Rinjani"
+                class="h-[40px] sm:h-[45px] w-auto mb-3"
+              />
               <div class="text-[12px] font-light text-mid space-y-1 mt-2">
                 <div>Desa Sembalun Lawang, Kecamatan Sembalun</div>
                 <div>Lombok Timur, Nusa Tenggara Barat 83662</div>
@@ -111,7 +349,7 @@
                 <div>✉️ info@porterrinjani.com</div>
               </div>
             </div>
-            <div class="text-right">
+            <div class="text-left sm:text-right w-full sm:w-auto">
               <div
                 class="text-[10px] font-semibold tracking-[0.22em] uppercase text-light mb-2"
               >
@@ -121,7 +359,7 @@
                 class="text-[28px] font-light text-ink mb-1"
                 style="letter-spacing: -0.5px"
               >
-                #BK-0042
+                #INV-DT-4
               </div>
               <div
                 class="inline-flex items-center gap-1.5 bg-forest/8 text-forest border border-forest/15 text-[11px] font-bold tracking-[0.1em] uppercase px-3 py-1.5 mt-1"
@@ -130,9 +368,8 @@
               </div>
             </div>
           </div>
-
-          <div class="grid grid-cols-3 border border-smoke">
-            <div class="p-4 border-r border-smoke">
+          <div class="grid grid-cols-1 sm:grid-cols-3 border border-smoke mt-6">
+            <div class="p-4 border-b sm:border-b-0 sm:border-r border-smoke">
               <div
                 class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
               >
@@ -140,7 +377,7 @@
               </div>
               <div class="text-[13px] font-medium text-ink">10 Maret 2025</div>
             </div>
-            <div class="p-4 border-r border-smoke">
+            <div class="p-4 border-b sm:border-b-0 sm:border-r border-smoke">
               <div
                 class="text-[9px] font-bold tracking-[0.16em] uppercase text-light mb-1.5"
               >
@@ -163,8 +400,9 @@
           </div>
         </div>
 
-        <div class="p-10 border-b border-smoke">
-          <div class="grid grid-cols-2 gap-10">
+        <!-- Customer & Detail Pendakian (tetap di halaman 1) -->
+        <div class="p-5 sm:p-10 border-b border-smoke">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
               <div
                 class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-4"
@@ -187,31 +425,31 @@
                 Detail Pendakian
               </div>
               <div class="space-y-1.5 text-[13px]">
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                   <span class="font-light text-mid w-24 flex-shrink-0"
                     >Paket</span
                   ><span class="font-semibold text-ink">Paket Deluxe</span>
                 </div>
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                   <span class="font-light text-mid w-24 flex-shrink-0"
                     >Program</span
                   ><span class="font-medium text-ink"
                     >3D2N — Lake & Hot Spring</span
                   >
                 </div>
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                   <span class="font-light text-mid w-24 flex-shrink-0"
                     >Rute</span
                   ><span class="font-medium text-ink"
                     >Via Sembalun → Senaru</span
                   >
                 </div>
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                   <span class="font-light text-mid w-24 flex-shrink-0"
                     >Peserta</span
                   ><span class="font-medium text-ink">3 orang</span>
                 </div>
-                <div class="flex gap-3">
+                <div class="flex gap-3 flex-wrap">
                   <span class="font-light text-mid w-24 flex-shrink-0"
                     >Titik Jemput</span
                   ><span class="font-medium text-ink"
@@ -221,7 +459,6 @@
               </div>
             </div>
           </div>
-
           <div class="mt-5 p-4 bg-forest/5 border border-forest/15">
             <p class="text-[11px] font-semibold text-forest mb-1">
               🗺️ Via Sembalun → Senaru (One Way)
@@ -236,13 +473,16 @@
           </div>
         </div>
 
-        <div class="p-10 border-b border-smoke">
+        <!-- ========== HALAMAN 2 ========== -->
+        <div class="print-page-break"></div>
+        <!-- Rincian Layanan (dengan scroll horizontal di mobile, untuk print di halaman 2) -->
+        <div class="p-5 sm:p-10 border-b border-smoke overflow-x-auto">
           <div
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-5"
           >
             Rincian Layanan
           </div>
-          <table class="w-full border-collapse">
+          <table class="w-full border-collapse min-w-[560px]">
             <thead>
               <tr class="border-b border-smoke">
                 <th
@@ -296,7 +536,6 @@
               </tr>
             </tbody>
           </table>
-
           <div class="mt-5 ml-auto max-w-[280px] space-y-2">
             <div class="flex justify-between text-[13px] py-1.5">
               <span class="font-light text-mid">Subtotal</span
@@ -315,7 +554,8 @@
           </div>
         </div>
 
-        <div class="p-10 border-b border-smoke">
+        <!-- Status Pembayaran (masih di halaman 2) -->
+        <div class="p-5 sm:p-10 border-b border-smoke">
           <div
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-5"
           >
@@ -323,7 +563,7 @@
           </div>
           <div class="space-y-3">
             <div
-              class="flex items-center justify-between p-4 bg-forest/5 border border-forest/15"
+              class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-forest/5 border border-forest/15 gap-3"
             >
               <div class="flex items-center gap-3">
                 <div
@@ -333,17 +573,17 @@
                 </div>
                 <div>
                   <div class="text-[13px] font-semibold text-ink">
-                    DP 30% — Dikonfirmasi
+                    DP 20% — Dikonfirmasi
                   </div>
                   <div class="text-[11px] font-light text-mid">
                     Dibayar 10 Mar 2025 · via BCA
                   </div>
                 </div>
               </div>
-              <div class="text-[16px] font-semibold text-forest">USD 252</div>
+              <div class="text-[16px] font-semibold text-forest">USD 168</div>
             </div>
             <div
-              class="flex items-center justify-between p-4 bg-amber-50 border border-amber-200"
+              class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-amber-50 border border-amber-200 gap-3"
             >
               <div class="flex items-center gap-3">
                 <div
@@ -361,18 +601,17 @@
                 </div>
               </div>
               <div class="text-[16px] font-semibold text-amber-600">
-                USD 588
+                USD 672
               </div>
             </div>
           </div>
-
           <div class="mt-5 p-4 bg-mist border border-smoke">
             <div
               class="text-[10px] font-semibold tracking-[0.14em] uppercase text-light mb-3"
             >
               Rekening Pelunasan
             </div>
-            <div class="grid grid-cols-3 gap-4 text-[12px]">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-[12px]">
               <div>
                 <div class="font-light text-mid mb-0.5">Bank BCA</div>
                 <div class="font-semibold text-ink">1234567890</div>
@@ -392,7 +631,10 @@
           </div>
         </div>
 
-        <div class="p-10 border-b border-smoke">
+        <!-- ========== HALAMAN 3 ========== -->
+        <div class="print-page-break"></div>
+        <!-- Syarat & Ketentuan -->
+        <div class="p-5 sm:p-10 border-b border-smoke">
           <div
             class="text-[10px] font-semibold tracking-[0.2em] uppercase text-light mb-4"
           >
@@ -432,7 +674,10 @@
           </div>
         </div>
 
-        <div class="p-10 flex items-center justify-between">
+        <!-- Footer (tetap di halaman 3) -->
+        <div
+          class="p-5 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+        >
           <div>
             <div class="text-[13px] font-semibold text-ink mb-1">
               Terima kasih telah mempercayai Porter Rinjani!
@@ -448,7 +693,7 @@
               >
             </div>
           </div>
-          <div class="text-right">
+          <div class="text-left sm:text-right">
             <div
               class="text-[10px] font-semibold tracking-[0.14em] uppercase text-light mb-1"
             >
@@ -463,28 +708,78 @@
       </div>
     </div>
 
-    <div class="no-print max-w-[800px] mx-auto px-5 pb-10">
-      <div class="flex gap-3 justify-center flex-wrap">
+    <div class="no-print max-w-[800px] mx-auto px-4 sm:px-5 pb-10">
+      <div class="flex flex-wrap gap-3 justify-center">
         <button
           onclick="window.print()"
-          class="flex items-center gap-2 bg-forest text-white text-[13px] font-semibold px-8 py-3.5 hover:bg-forest/85 transition-colors"
+          class="flex items-center gap-2 bg-forest text-white text-[13px] font-semibold px-6 py-3 hover:bg-forest/85 transition-colors"
         >
           🖨 Cetak / Simpan PDF
         </button>
         <a
           href="index.html"
-          class="flex items-center border border-smoke text-mid text-[13px] font-medium px-8 py-3.5 hover:bg-mist transition-all"
+          class="flex items-center border border-smoke text-mid text-[13px] font-medium px-6 py-3 hover:bg-mist transition-all"
+          >← Kembali ke Beranda</a
         >
-          ← Kembali ke Beranda
-        </a>
         <a
           href="https://wa.me/628123456789"
           target="_blank"
-          class="flex items-center gap-2 bg-[#25D366] text-white text-[13px] font-semibold px-6 py-3.5 hover:bg-[#1fbd5c] transition-colors"
+          class="flex items-center gap-2 bg-[#25D366] text-white text-[13px] font-semibold px-6 py-3 hover:bg-[#1fbd5c] transition-colors"
+          >💬 WhatsApp</a
         >
-          💬 WhatsApp
-        </a>
       </div>
     </div>
+
+    <script>
+      // Mobile menu toggle & active page highlight
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        mobileMenu.classList.add("open");
+        menuOverlay.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+      closeMenuBtn.addEventListener("click", closeMenu);
+      menuOverlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open"))
+          closeMenu();
+      });
+
+      const currentPath =
+        window.location.pathname.split("/").pop() || "index.html";
+      const mobileLinks = document.querySelectorAll(
+        "#mobileMenu .flex.flex-col a",
+      );
+      mobileLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === currentPath) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else {
+          link.classList.remove("font-semibold", "text-forest");
+          if (!link.classList.contains("text-ink"))
+            link.classList.add("font-medium", "text-mid");
+          link.style.borderLeft = "";
+          link.style.paddingLeft = "";
+        }
+      });
+    </script>
   </body>
 </html>
