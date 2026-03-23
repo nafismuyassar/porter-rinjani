@@ -42,6 +42,7 @@
         -webkit-font-smoothing: antialiased;
         background: #fff;
         color: #1a1a1a;
+        overflow-x: hidden;
       }
       ::-webkit-scrollbar {
         width: 4px;
@@ -85,24 +86,122 @@
         color: #fff;
         border-color: #1b3a2d;
       }
+      @keyframes fadeup {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .fu {
+        opacity: 0;
+        animation: fadeup 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .d1 {
+        animation-delay: 0.08s;
+      }
+      .d2 {
+        animation-delay: 0.2s;
+      }
+      .d3 {
+        animation-delay: 0.35s;
+      }
+      .d4 {
+        animation-delay: 0.5s;
+      }
+
+      /* Mobile menu */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100%;
+        background: white;
+        z-index: 1000;
+        transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        right: 0;
+      }
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        cursor: pointer;
+        position: relative;
+        background: transparent;
+        border: none;
+      }
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background-color: #6b6b6b;
+        border-radius: 2px;
+        transition: all 0.25s ease;
+        position: absolute;
+      }
+      .hamburger span:nth-child(1) {
+        transform: translateY(-6px);
+      }
+      .hamburger span:nth-child(2) {
+        transform: translateY(0);
+      }
+      .hamburger span:nth-child(3) {
+        transform: translateY(6px);
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg);
+      }
     </style>
   </head>
   <body>
-    <!-- NAV -->
+    <!-- NAVBAR (sama dengan paket.html) -->
     <nav
       class="sticky top-0 z-50 h-[68px] bg-white/97 backdrop-blur border-b border-smoke flex items-center"
     >
       <div
-        class="max-w-[1280px] mx-auto w-full px-8 flex items-center justify-between"
+        class="max-w-[1280px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between"
       >
         <a href="index.html" class="inline-block">
           <img
-            src="images/loegoe.png"
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
           />
         </a>
-        <div class="flex items-center gap-9">
+        <div class="hidden md:flex items-center gap-9">
           <a
             href="index.html"
             class="text-[12px] font-medium text-mid hover:text-ink transition-colors"
@@ -136,31 +235,92 @@
           >
             N
           </div>
-          <a href="profil.html" class="text-[13px] font-semibold text-forest"
+          <a
+            href="profil.html"
+            class="hidden sm:inline-block text-[13px] font-semibold text-forest"
             >Nafis Muyassar</a
           >
           <a
             href="status.html"
-            class="ml-2 text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            class="hidden sm:inline-block text-[12px] font-semibold bg-forest text-white px-4 py-2 hover:bg-forest/85 transition-colors"
+            >Status Booking</a
+          >
+          <button
+            id="hamburgerBtn"
+            class="md:hidden hamburger"
+            aria-label="Menu"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu (slide-in) -->
+    <div id="mobileMenu" class="mobile-menu">
+      <div class="p-6 border-b border-smoke flex justify-between items-center">
+        <span class="text-[18px] font-semibold text-ink">Menu</span>
+        <button id="closeMenuBtn" class="text-2xl text-mid hover:text-ink">
+          &times;
+        </button>
+      </div>
+      <div class="flex flex-col p-6 gap-5">
+        <a
+          href="index.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Beranda</a
+        >
+        <a
+          href="paket.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Paket</a
+        >
+        <a
+          href="rute.html"
+          class="text-[14px] font-medium text-ink border-b border-smoke pb-2 hover:bg-mist hover:pl-2 transition-all"
+          >Rute</a
+        >
+        <a
+          href="galeri.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Galeri</a
+        >
+        <a
+          href="kontak.html"
+          class="text-[14px] font-medium text-mid hover:text-ink hover:bg-mist hover:pl-2 transition-all pb-2 border-b border-smoke"
+          >Kontak</a
+        >
+        <div class="pt-4">
+          <a
+            href="profil.html"
+            class="block w-full text-center bg-forest/10 text-forest text-[13px] font-semibold py-3 mb-3 hover:bg-forest/20 transition-colors rounded-none"
+            >Profil Saya</a
+          >
+          <a
+            href="status.html"
+            class="block w-full text-center bg-forest text-white text-[13px] font-semibold py-3 rounded-none hover:bg-forest/90 transition-colors"
             >Status Booking</a
           >
         </div>
       </div>
-    </nav>
+    </div>
+    <div id="menuOverlay" class="menu-overlay"></div>
 
     <!-- HERO -->
     <div class="relative bg-forest overflow-hidden">
       <div
         class="absolute inset-0 bg-gradient-to-br from-[#0f2219] to-[#1B3A2D]/80"
       ></div>
-      <div class="relative z-10 max-w-[1280px] mx-auto px-8 pt-14 pb-16">
+      <div
+        class="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8 pt-14 pb-16"
+      >
         <p
-          class="text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
+          class="fu d1 text-[11px] font-semibold tracking-[.24em] uppercase text-white/30 mb-4"
         >
           Rute & Itinerary
         </p>
         <h1
-          class="text-[clamp(38px,5.5vw,68px)] font-light text-white leading-[1.08] mb-5"
+          class="fu d2 text-[clamp(38px,5.5vw,68px)] font-light text-white leading-[1.08] mb-5"
           style="letter-spacing: -1.2px"
         >
           Kenali jalur<br /><span class="italic text-white/45"
@@ -168,7 +328,7 @@
           >
         </h1>
         <p
-          class="text-[15px] font-light text-white/40 max-w-[420px] leading-[1.85]"
+          class="fu d3 text-[15px] font-light text-white/40 max-w-[420px] leading-[1.85]"
         >
           Informasi lengkap rute, itinerary per hari, elevasi, dan tips penting
           untuk setiap jalur pendakian Rinjani.
@@ -176,24 +336,24 @@
       </div>
     </div>
 
-    <!-- STATS BAR -->
+    <!-- STATS BAR (responsive grid) -->
     <div class="bg-mist border-b border-smoke">
       <div
-        class="max-w-[1280px] mx-auto px-8 py-5 grid grid-cols-4 gap-0 divide-x divide-smoke"
+        class="max-w-[1280px] mx-auto px-6 sm:px-8 py-5 grid grid-cols-2 sm:grid-cols-4 gap-4 divide-x divide-smoke"
       >
-        <div class="px-6 first:pl-0">
+        <div class="px-4 first:pl-0">
           <div class="text-[22px] font-light text-forest mb-0.5">3.726 m</div>
           <div class="text-[11px] font-light text-light">Ketinggian puncak</div>
         </div>
-        <div class="px-6">
+        <div class="px-4">
           <div class="text-[22px] font-light text-forest mb-0.5">2 jalur</div>
           <div class="text-[11px] font-light text-light">Rute tersedia</div>
         </div>
-        <div class="px-6">
+        <div class="px-4">
           <div class="text-[22px] font-light text-forest mb-0.5">2–4 hari</div>
           <div class="text-[11px] font-light text-light">Durasi pendakian</div>
         </div>
-        <div class="px-6">
+        <div class="px-4">
           <div class="text-[22px] font-light text-forest mb-0.5">
             Sedang–Sulit
           </div>
@@ -202,9 +362,13 @@
       </div>
     </div>
 
-    <!-- ROUTE TABS -->
-    <div class="sticky top-[68px] z-40 bg-white border-b border-smoke">
-      <div class="max-w-[1280px] mx-auto px-8 py-4 flex gap-3">
+    <!-- ROUTE TABS (responsive scroll) -->
+    <div
+      class="sticky top-[68px] z-40 bg-white border-b border-smoke overflow-x-auto"
+    >
+      <div
+        class="max-w-[1280px] mx-auto px-6 sm:px-8 py-4 flex gap-3 flex-nowrap min-w-max"
+      >
         <button
           onclick="showR('snr')"
           class="rtbtn on text-[12px] font-semibold px-6 py-2.5 border border-forest"
@@ -223,34 +387,32 @@
     </div>
 
     <!-- ROUTE: SEMBALUN-SENARU -->
-    <div id="r-snr" class="rtab active max-w-[1280px] mx-auto px-8 py-12">
-      <div class="grid grid-cols-[1fr_380px] gap-10">
+    <div
+      id="r-snr"
+      class="rtab active max-w-[1280px] mx-auto px-6 sm:px-8 py-12"
+    >
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10">
         <div>
-          <div class="flex items-center gap-4 mb-2">
+          <div class="flex items-center gap-4 mb-2 flex-wrap">
             <span
               class="text-[10px] font-semibold tracking-[.2em] uppercase text-tan"
               >Rute Terpopuler</span
-            >
-            <span
+            ><span
               class="bg-forest/8 text-forest text-[10px] font-semibold px-3 py-1"
               >2D1N / 3D2N / 4D3N</span
             >
           </div>
           <h2
-            class="text-[30px] font-light text-ink mb-3"
+            class="text-[28px] sm:text-[30px] font-light text-ink mb-3"
             style="letter-spacing: -0.5px"
           >
             Sembalun <span class="italic text-mid">ke</span> Senaru
           </h2>
-          <p
-            class="text-[14px] font-light text-mid leading-[1.9] mb-8 max-w-[560px]"
-          >
+          <p class="text-[14px] font-light text-mid leading-[1.9] mb-8">
             Rute paling ikonik Rinjani. Dimulai dari padang sabana Sembalun yang
             luas, melewati Plawangan Sembalun, puncak 3.726 mdpl, danau Segara
             Anak, lalu turun via hutan hujan tropis Senaru.
           </p>
-
-          <!-- Itinerary 3D2N -->
           <div class="mb-8">
             <p
               class="text-[11px] font-semibold tracking-[.18em] uppercase text-light mb-5"
@@ -258,7 +420,7 @@
               Itinerary 3D2N (Contoh)
             </p>
             <div class="space-y-0">
-              <!-- Day 1 -->
+              <!-- itinerary day 1,2,3 (sama seperti asli) -->
               <div class="relative tl pb-6 pl-9">
                 <div
                   class="absolute left-0 top-1 w-7 h-7 rounded-full bg-forest text-white flex items-center justify-center text-[11px] font-bold z-10"
@@ -301,7 +463,6 @@
                   </div>
                 </div>
               </div>
-              <!-- Day 2 -->
               <div class="relative tl pb-6 pl-9">
                 <div
                   class="absolute left-0 top-1 w-7 h-7 rounded-full bg-forest text-white flex items-center justify-center text-[11px] font-bold z-10"
@@ -343,7 +504,6 @@
                   </div>
                 </div>
               </div>
-              <!-- Day 3 -->
               <div class="relative pb-0 pl-9">
                 <div
                   class="absolute left-0 top-1 w-7 h-7 rounded-full bg-tan text-white flex items-center justify-center text-[11px] font-bold"
@@ -387,8 +547,6 @@
             </div>
           </div>
         </div>
-
-        <!-- SIDEBAR INFO -->
         <div class="space-y-4">
           <div class="bg-mist border border-smoke p-6">
             <p
@@ -539,28 +697,25 @@
     </div>
 
     <!-- ROUTE: TOREAN -->
-    <div id="r-tor" class="rtab max-w-[1280px] mx-auto px-8 py-12">
-      <div class="grid grid-cols-[1fr_380px] gap-10">
+    <div id="r-tor" class="rtab max-w-[1280px] mx-auto px-6 sm:px-8 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10">
         <div>
-          <div class="flex items-center gap-4 mb-2">
+          <div class="flex items-center gap-4 mb-2 flex-wrap">
             <span
               class="text-[10px] font-semibold tracking-[.2em] uppercase text-tan"
               >Rute Menantang</span
-            >
-            <span
+            ><span
               class="bg-amber-50 text-amber-700 text-[10px] font-semibold px-3 py-1 border border-amber-200"
               >4D3N</span
             >
           </div>
           <h2
-            class="text-[30px] font-light text-ink mb-3"
+            class="text-[28px] sm:text-[30px] font-light text-ink mb-3"
             style="letter-spacing: -0.5px"
           >
             Sembalun <span class="italic text-mid">ke</span> Torean
           </h2>
-          <p
-            class="text-[14px] font-light text-mid leading-[1.9] mb-8 max-w-[560px]"
-          >
+          <p class="text-[14px] font-light text-mid leading-[1.9] mb-8">
             Rute alternatif yang lebih menantang dan jarang dilalui. Turun via
             jalur Torean yang melewati air terjun spektakuler dan pemandangan
             tebing curam. Pengalaman berbeda yang tak terlupakan.
@@ -694,18 +849,17 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-white border-t border-smoke py-10 px-8">
+    <footer class="bg-white border-t border-smoke py-10 px-6 sm:px-8">
       <div
-        class="max-w-[1280px] mx-auto flex flex-wrap justify-between items-center gap-6"
+        class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
       >
-        <a href="index.html" class="inline-block">
-          <img
-            src="images/loegoe.png"
+        <a href="index.html" class="inline-block"
+          ><img
+            src="/images/loegoe.png"
             alt="Porter Rinjani"
             class="h-[35px] w-auto"
-          />
-        </a>
-        <div class="flex gap-8">
+        /></a>
+        <div class="flex flex-wrap justify-center gap-6 md:gap-8">
           <a
             href="index.html"
             class="text-[12px] font-light text-mid hover:text-ink"
@@ -725,6 +879,11 @@
             href="galeri.html"
             class="text-[12px] font-light text-mid hover:text-ink"
             >Galeri</a
+          >
+          <a
+            href="kontak.html"
+            class="text-[12px] font-light text-mid hover:text-ink"
+            >Kontak</a
           >
         </div>
         <p class="text-[12px] font-light text-light">
@@ -758,6 +917,57 @@
         const btn = document.getElementById("btn-" + id);
         btn.classList.add("on");
       }
+
+      // Mobile menu toggle & active page highlight
+      const hamburger = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const closeMenuBtn = document.getElementById("closeMenuBtn");
+      function openMenu() {
+        mobileMenu.classList.add("open");
+        menuOverlay.classList.add("open");
+        hamburger.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuOverlay.classList.remove("open");
+        hamburger.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+      hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (mobileMenu.classList.contains("open")) closeMenu();
+        else openMenu();
+      });
+      closeMenuBtn.addEventListener("click", closeMenu);
+      menuOverlay.addEventListener("click", closeMenu);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && mobileMenu.classList.contains("open"))
+          closeMenu();
+      });
+
+      // Highlight active page in mobile menu
+      const currentPath =
+        window.location.pathname.split("/").pop() || "index.html";
+      const mobileLinks = document.querySelectorAll(
+        "#mobileMenu .flex.flex-col a",
+      );
+      mobileLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === currentPath) {
+          link.classList.add("font-semibold", "text-forest");
+          link.classList.remove("font-medium", "text-mid", "text-ink");
+          link.style.borderLeft = "3px solid #1B3A2D";
+          link.style.paddingLeft = "12px";
+        } else {
+          link.classList.remove("font-semibold", "text-forest");
+          if (!link.classList.contains("text-ink"))
+            link.classList.add("font-medium", "text-mid");
+          link.style.borderLeft = "";
+          link.style.paddingLeft = "";
+        }
+      });
     </script>
   </body>
 </html>
